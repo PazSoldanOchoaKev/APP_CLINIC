@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{0568B0C7-919A-4130-A916-E7B69B049CB5}|Default">
+  <MonoDevelop.Ide.ItemProperties.AppointmentManager.Android FirstBuild="True" PreferredExecutionTarget="Android.pixel_2_r_11_0_-_api_30" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.pixel_2_r_11_0_-_api_30" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AppointmentManager/MainPage.xaml">
+    <Files>
+      <File FileName="AppointmentManager/MainPage.xaml.cs" Line="1" Column="1" />
+      <File FileName="AppointmentManager/MainPage.xaml" Line="16" Column="44" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="AppointmentManager" expanded="True" selected="True">
+            <Node name="AppointmentManager" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="AppointmentManager.iOS" expanded="True">
+              <Node name="Packages" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.AppointmentManager.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.3D17BB7B-3B21-40BF-89AE-E1E8C357203A" />
+</Properties>

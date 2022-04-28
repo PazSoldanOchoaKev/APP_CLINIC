@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "xG7yR9NhJLt+ojpuij40s88QIIpMtqxxqEvbl5fDBa+oWAOHQwfBCvxnBOb6qPBEYqL6hQaFlgoNVx79r5c/kQ==",
+  "success": true,
+  "projectFilePath": "/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager.iOS/AppointmentManager.iOS.csproj",
+  "expectedPackageFiles": [
+    "/Users/stalinpazsoldanochoa/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/stalinpazsoldanochoa/.nuget/packages/xamarin.essentials/1.7.2/xamarin.essentials.1.7.2.nupkg.sha512",
+    "/Users/stalinpazsoldanochoa/.nuget/packages/xamarin.forms/5.0.0.2401/xamarin.forms.5.0.0.2401.nupkg.sha512"
+  ],
+  "logs": []
+}

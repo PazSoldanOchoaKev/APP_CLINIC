@@ -1,0 +1,15 @@
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/bin/Debug/netstandard2.0/AppointmentManager.deps.json
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/bin/Debug/netstandard2.0/AppointmentManager.dll
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/bin/Debug/netstandard2.0/ref/AppointmentManager.dll
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/bin/Debug/netstandard2.0/AppointmentManager.pdb
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/AppointmentManager.GeneratedMSBuildEditorConfig.editorconfig
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/MainPage.xaml.g.cs
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/AppointmentManager.AssemblyInfoInputs.cache
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/AppointmentManager.AssemblyInfo.cs
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/AppointmentManager.csproj.CoreCompileInputs.cache
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/AppointmentManager.dll
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/ref/AppointmentManager.dll
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/AppointmentManager.pdb
+/Users/stalinpazsoldanochoa/Documents/STALIN/github/APP/AppointmentManager/AppointmentManager/obj/Debug/netstandard2.0/AppointmentManager.csproj.AssemblyReference.cache
