@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:icon="clr-namespace:Netcos.Xamarin.Forms.Icons.MaterialDesignIcons;assembly=Netcos.Xamarin.Forms.Icons.MaterialDesignIcons"
+    xmlns:views="clr-namespace:AppointmentManager.Views"
+    xmlns:access="clr-namespace:AppointmentManager.Views.Access"
+    xmlns:register="clr-namespace:AppointmentManager.Views.Register"
+    Visual="Material"
+    FlyoutHeaderBehavior="CollapseOnScroll"
+    Shell.NavBarHasShadow="False"
+    Shell.TabBarIsVisible="False"
+    x:Class="AppointmentManager.Views.AppShellView">
+
+    <TabBar>
+        <ShellContent Route="SingIn"
+                  ContentTemplate="{DataTemplate access:SingInView}"/>
+    </TabBar>
+
+    <FlyoutItem icon:Font.Icon="HomeOutline"
+                icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
+                Title="Inicio">
+        <ShellContent Route="Main"
+                      ContentTemplate="{DataTemplate views:MainView}"/>
+    </FlyoutItem>
+    <FlyoutItem icon:Font.Icon="Plus"
+                icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
+                Title="Registro">
+        <ShellContent Route="New"
+                      ContentTemplate="{DataTemplate register:NewAppoinmentView}"/>
+    </FlyoutItem>
+</Shell>

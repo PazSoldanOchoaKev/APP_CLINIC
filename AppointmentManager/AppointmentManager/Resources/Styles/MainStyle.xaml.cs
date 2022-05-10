@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 
-namespace AppointmentManager.Views
+namespace AppointmentManager.Resources.Styles
 {	
-	public partial class PagePrincipal : ContentPage
+	public partial class MainStyle
 	{	
-		public PagePrincipal ()
+		public MainStyle ()
 		{
 			InitializeComponent ();
 		}

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AppointmentManager.Views.Access.SingInView">
+
+    <Grid RowDefinitions="*, Auto" class="Body">
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*"
+              HorizontalOptions="Fill"
+              ColumnSpacing="10">
+            <Button Text="Ingresar" class="Primary"/>
+            <Button Text="Registrarse" Grid.Column="1" class="Secondary"/>
+        </Grid>
+    </Grid>
+</ContentPage>

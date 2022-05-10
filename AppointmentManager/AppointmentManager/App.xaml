@@ -2,8 +2,13 @@
 <netcos:Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:netcos="clr-namespace:Netcos.Xamarin.Forms;assembly=Netcos.Xamarin.Forms"
+             xmlns:resources="clr-namespace:AppointmentManager.Resources.Styles"
              x:Class="AppointmentManager.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:MainStyle/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </netcos:Application>
