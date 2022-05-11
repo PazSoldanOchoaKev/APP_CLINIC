@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AppointmentManager.Resources.Themes.LightTheme">
+
+    <Color x:Key="PrimaryColor">#f9c558</Color>
+    <Color x:Key="SecondaryColor">#3e4d90</Color>
+
+    <Color x:Key="BackgroundColor">#e3e0e3</Color>
+    <Color x:Key="TextColor">#202b34</Color>
+</ResourceDictionary>

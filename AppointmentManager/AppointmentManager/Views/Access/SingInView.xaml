@@ -10,7 +10,9 @@
               HorizontalOptions="Fill"
               ColumnSpacing="10">
             <Button Text="Ingresar" class="Primary"/>
-            <Button Text="Registrarse" Grid.Column="1" class="Secondary"/>
+            <Button Text="Registrarse" Grid.Column="1"
+                    Command="{Binding SingUp}"
+                    class="Secondary"/>
         </Grid>
     </Grid>
 </ContentPage>

@@ -30,6 +30,7 @@
     <None Remove="Resources\Styles\" />
     <None Remove="Views\Login\" />
     <None Remove="ViewModels\Access\" />
+    <None Remove="Resources\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -43,5 +44,6 @@
     <Folder Include="Resources\Styles\" />
     <Folder Include="Views\Access\" />
     <Folder Include="ViewModels\Access\" />
+    <Folder Include="Resources\Controls\" />
   </ItemGroup>
 </Project>
