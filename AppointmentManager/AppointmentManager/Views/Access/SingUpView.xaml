@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage
+<ctrls:PageBase
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Shell.BackgroundColor="{DynamicResource PrimaryColor}"
-    Shell.ForegroundColor="{DynamicResource TextColor}"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
     x:Class="AppointmentManager.Views.Access.SingUpView">
 
 
-</ContentPage>
+</ctrls:PageBase>

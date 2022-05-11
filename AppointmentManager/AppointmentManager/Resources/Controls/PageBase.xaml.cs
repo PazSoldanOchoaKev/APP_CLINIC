@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace AppointmentManager.Resources.Controls
 {
-    public partial class MainLayout : ContentPage
+    public partial class PageBase : ContentPage
     {
-        public MainLayout()
+        public PageBase()
         {
             InitializeComponent();
         }

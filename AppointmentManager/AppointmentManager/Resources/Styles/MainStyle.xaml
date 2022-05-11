@@ -2,6 +2,7 @@
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pckv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     x:Class="AppointmentManager.Resources.Styles.MainStyle">
 
 
@@ -36,15 +37,30 @@
     </Style>
 
     <Style TargetType="Button" BaseResourceKey="BaseButton" Class="Primary">
-        <Setter Property="BackgroundColor" Value="DarkBlue"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}"/>
     </Style>
 
     <Style TargetType="Button" BaseResourceKey="BaseButton" Class="Secondary">
-        <Setter Property="BackgroundColor" Value="PaleVioletRed"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}"/>
     </Style>
 
     <Style TargetType="Grid" Class="Body">
         <Setter Property="Margin" Value="{StaticResource Margin}"/>
+    </Style>
+
+    <Style TargetType="pckv:PancakeView" Class="Shadow">
+        <Setter Property="BackgroundColor" Value="{DynamicResource ShadowBackgroundColor}"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="CornerRadius" Value="{StaticResource CornerRadiusShadow}"/>
+        <Setter Property="Border" Value="{pckv:BorderMarkup Color=Transparent, Thickness='0'}"/>
+        <Setter Property="Shadow" Value="{pckv:ShadowMarkup Color={DynamicResource ShadowMarkupColor}, Offset='8,8', Opacity=.1}"/>
+    </Style>
+    <Style TargetType="pckv:PancakeView" Class="ShadowBody">
+        <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource CornerRadiusShadowBody}"/>
+        <Setter Property="Margin" Value="{OnPlatform Android='0,10,0,0', iOS='0,15,0,0'}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Border" Value="{pckv:BorderMarkup Color=Transparent, Thickness='0'}"/>
     </Style>
 </ResourceDictionary>
 
