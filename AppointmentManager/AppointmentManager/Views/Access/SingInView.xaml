@@ -9,8 +9,8 @@
 
     <Grid RowDefinitions="*, *, *">
         <StackLayout Grid.Row="1">
-            <input:Entry/>
-            <input:Entry IsPassword="True"/>
+            <input:Entry Hint="Usuario"/>
+            <input:Entry Hint="Contraseña" IsPassword="True"/>
         </StackLayout>
     </Grid>
     <ctrls:PageBase.Fotter>

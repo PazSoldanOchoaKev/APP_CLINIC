@@ -20,6 +20,7 @@ namespace AppointmentManager.ViewModels.Access
 
         #region Properties
 
+
         public ICommand SingUp => new Command(NavigateToSingUp);
 
         #endregion
