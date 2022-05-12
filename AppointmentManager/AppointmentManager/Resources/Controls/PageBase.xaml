@@ -16,7 +16,8 @@
             <pckv:PancakeView StyleClass="ShadowBody">
                 <Grid RowDefinitions="Auto, *, Auto">
                     <Grid Grid.Row="0" StyleClass="Body">
-                        <Label Text="{Binding HeaderTitle, Source={Reference Base}}"/>
+                        <Label Text="{Binding HeaderTitle, Source={Reference Base}}"
+                               StyleClass="TitleBold"/>
                     </Grid>
                     <ScrollView Grid.Row="1">
                         <Grid StyleClass="Body">
@@ -24,7 +25,7 @@
                         </Grid>
                     </ScrollView>
                     <Grid StyleClass="Body" Grid.Row="2">
-                        <ContentView/>
+                        <ContentView Content="{Binding Fotter, Source={Reference Base}}"/>
                     </Grid>
                 </Grid>
             </pckv:PancakeView>

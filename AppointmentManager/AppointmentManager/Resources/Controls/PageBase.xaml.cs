@@ -31,5 +31,14 @@ namespace AppointmentManager.Resources.Controls
             get => (View)GetValue(ContentBodyProperty);
             set => SetValue(ContentBodyProperty, value);
         }
+
+        public static readonly BindableProperty FotterProperty =
+             BindableProperty.Create(nameof(Fotter), typeof(View), typeof(PageBase));
+
+        public View Fotter
+        {
+            get => (View)GetValue(FotterProperty);
+            set => SetValue(FotterProperty, value);
+        }
     }
 }

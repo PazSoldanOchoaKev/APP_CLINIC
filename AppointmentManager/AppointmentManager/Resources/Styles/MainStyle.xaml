@@ -62,5 +62,23 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Border" Value="{pckv:BorderMarkup Color=Transparent, Thickness='0'}"/>
     </Style>
+
+    <Style TargetType="Label" x:Key="BaseLabel">
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}"/>
+    </Style>
+    <Style TargetType="Label" BaseResourceKey="BaseLabel" Class="Header">
+        <Setter Property="FontSize" Value="{StaticResource HeaderSize}"/>
+    </Style>
+
+    <Style TargetType="Label" BaseResourceKey="BaseLabel" x:Key="TitleBase">
+        <Setter Property="FontSize" Value="{StaticResource TitleSize}"/>
+    </Style>
+    <Style TargetType="Label" BaseResourceKey="TitleBase" Class="Title">
+    </Style>
+    <Style TargetType="Label" BaseResourceKey="TitleBase" Class="TitleBold">
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+
 </ResourceDictionary>
 

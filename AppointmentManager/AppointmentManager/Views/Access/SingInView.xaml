@@ -10,10 +10,15 @@
         <Grid Grid.Row="1" ColumnDefinitions="*,*"
               HorizontalOptions="Fill"
               ColumnSpacing="10">
+
+        </Grid>
+    </Grid>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
             <Button Text="Ingresar" class="Primary"/>
             <Button Text="Registrarse" Grid.Column="1"
                     Command="{Binding SingUp}"
                     class="Secondary"/>
         </Grid>
-    </Grid>
+    </ctrls:PageBase.Fotter>
 </ctrls:PageBase>
