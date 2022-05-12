@@ -8,12 +8,25 @@
     BackgroundColor="{DynamicResource BackgroundColor}"
     Shell.BackgroundColor="{DynamicResource PrimaryColor}"
     Shell.ForegroundColor="{DynamicResource PrimaryTextColor}"
+    x:Name="Base"
     x:Class="AppointmentManager.Resources.Controls.PageBase">
 
     <ContentPage.Content>
         <Grid BackgroundColor="{DynamicResource PrimaryColor}">
             <pckv:PancakeView StyleClass="ShadowBody">
-
+                <Grid RowDefinitions="Auto, *, Auto">
+                    <Grid Grid.Row="0" StyleClass="Body">
+                        <Label Text="{Binding HeaderTitle, Source={Reference Base}}"/>
+                    </Grid>
+                    <ScrollView Grid.Row="1">
+                        <Grid StyleClass="Body">
+                            <ContentView Content="{Binding ContentBody, Source={Reference Base}}"/>
+                        </Grid>
+                    </ScrollView>
+                    <Grid StyleClass="Body" Grid.Row="2">
+                        <ContentView/>
+                    </Grid>
+                </Grid>
             </pckv:PancakeView>
         </Grid>
     </ContentPage.Content>
