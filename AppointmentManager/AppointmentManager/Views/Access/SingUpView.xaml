@@ -13,5 +13,9 @@
         <input:Entry Hint="Apellidos" StyleClass="Text"/>
         <input:ComboBox Hint="Tipo de documento"/>
         <input:Masked Hint="Número de documento"/>
+        <input:Numeric Hint="Numero de telefono"/>
+        <input:Entry Hint="Direccion"/>
+        <input:Entry Hint="Correo"/>
+        <input:Entry Hint="Contraseña" IsPassword="True"/>
     </StackLayout>
 </ctrls:PageBase>
