@@ -11,6 +11,14 @@
     x:Name="Base"
     x:Class="AppointmentManager.Resources.Controls.PageBase">
 
+    <Shell.TitleView>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Start" Orientation="Horizontal">
+            <Label Text="{Binding Title, Source={Reference Base}}"
+                   VerticalOptions="Center"
+               StyleClass="LabelLigthBold"/>
+        </StackLayout>
+    </Shell.TitleView>
+
     <ContentPage.Content>
         <Grid BackgroundColor="{DynamicResource PrimaryColor}">
             <pckv:PancakeView StyleClass="ShadowBody">

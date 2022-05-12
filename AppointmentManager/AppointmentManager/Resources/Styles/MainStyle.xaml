@@ -79,6 +79,16 @@
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 
+    <Style TargetType="Label" x:Key="LabelLight">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+    </Style>
 
+    <Style TargetType="Label" BaseResourceKey="LabelLight" Class="LabelLigth">
+        <Setter Property="FontSize" Value="{StaticResource LabelSize}"/>
+    </Style>
+    <Style TargetType="Label" BaseResourceKey="LabelLight" Class="LabelLigthBold">
+        <Setter Property="FontSize" Value="{StaticResource LabelSize}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
 </ResourceDictionary>
 

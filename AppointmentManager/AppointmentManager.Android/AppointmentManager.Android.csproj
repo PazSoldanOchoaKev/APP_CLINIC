@@ -63,6 +63,9 @@
     <PackageReference Include="Netcos.Xamarin.Forms">
       <Version>3.0.0-preview-20211214.1</Version>
     </PackageReference>
+    <PackageReference Include="Netcos.Xamarin.Forms.InputLayout">
+      <Version>3.0.0-preview-20211214.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

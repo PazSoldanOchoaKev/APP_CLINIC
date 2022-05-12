@@ -3,15 +3,15 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+    xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+    Title="Inicio de Sesión"
     x:Class="AppointmentManager.Views.Access.SingInView">
 
-    <Grid RowDefinitions="*, Auto" class="Body">
-
-        <Grid Grid.Row="1" ColumnDefinitions="*,*"
-              HorizontalOptions="Fill"
-              ColumnSpacing="10">
-
-        </Grid>
+    <Grid RowDefinitions="*, *, *">
+        <StackLayout Grid.Row="1">
+            <input:Entry/>
+            <input:Entry IsPassword="True"/>
+        </StackLayout>
     </Grid>
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*,*" ColumnSpacing="15">

@@ -2,8 +2,9 @@
 <ctrls:PageBase
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"   
     HeaderTitle="Sing Up"
+    Title="Registrarse"
     x:Class="AppointmentManager.Views.Access.SingUpView">
 
 

@@ -21,6 +21,7 @@ namespace AppointmentManager
             services.AddDarkTheme<DarkTheme>();
             services.AddLightTeme<LightTheme>();
 
+            services.AddInputLayout();
             services.AddViewModel<AppShellViewModel>();
             services.AddViewModelToRoute<SingInViewModel>("SingIn");
             services.AddRoute<SingUpView, SingUpViewModel>();
