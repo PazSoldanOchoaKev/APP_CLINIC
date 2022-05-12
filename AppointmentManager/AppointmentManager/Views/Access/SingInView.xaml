@@ -9,7 +9,7 @@
 
     <Grid RowDefinitions="*, *, *">
         <StackLayout Grid.Row="1">
-            <input:Entry Hint="Usuario"/>
+            <input:Entry Hint="Usuario" Text="{Binding UserName, Mode=TwoWay}"/>
             <input:Entry Hint="Contraseña" IsPassword="True"/>
         </StackLayout>
     </Grid>

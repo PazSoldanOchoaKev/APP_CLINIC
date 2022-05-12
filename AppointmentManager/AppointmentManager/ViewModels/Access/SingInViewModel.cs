@@ -10,6 +10,7 @@ namespace AppointmentManager.ViewModels.Access
     public class SingInViewModel : ViewModelBase
     {
         private readonly IAppNavigation _navigation;
+        private string userName;
 
         public SingInViewModel(
             IAppNavigation navigation)
@@ -20,7 +21,7 @@ namespace AppointmentManager.ViewModels.Access
 
         #region Properties
 
-
+        public string UserName { get => userName; set => SetProperty(ref userName, value); }
         public ICommand SingUp => new Command(NavigateToSingUp);
 
         #endregion
