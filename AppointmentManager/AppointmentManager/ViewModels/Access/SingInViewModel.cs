@@ -11,6 +11,7 @@ namespace AppointmentManager.ViewModels.Access
     {
         private readonly IAppNavigation _navigation;
         private string userName;
+        private string password;
 
         public SingInViewModel(
             IAppNavigation navigation)
@@ -22,17 +23,23 @@ namespace AppointmentManager.ViewModels.Access
         #region Properties
 
         public string UserName { get => userName; set => SetProperty(ref userName, value); }
+        public string Password { get => password; set => SetProperty(ref password, value); }
         public ICommand SingUp => new Command(NavigateToSingUp);
+        public ICommand SingIn => new Command(NavigateToSingIn);
 
         #endregion
 
         #region Methods
 
         public void NavigateToSingUp()
-        {
+                    {
             _navigation.NavigateToAsync<SingUpView>();
         }
 
+        public void NavigateToSingIn()
+        {
+            _navigation.GoToAsync("//Main");
+        }
         #endregion
     }
 }
