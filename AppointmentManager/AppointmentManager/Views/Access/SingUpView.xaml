@@ -2,10 +2,16 @@
 <ctrls:PageBase
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"   
-    HeaderTitle="Sing Up"
+    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+    xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+    HeaderTitle="Crear tu usuario"
     Title="Registrarse"
     x:Class="AppointmentManager.Views.Access.SingUpView">
 
-
+    <StackLayout>
+        <input:Entry Hint="Nombres" StyleClass="Text"/>
+        <input:Entry Hint="Apellidos" StyleClass="Text"/>
+        <input:ComboBox Hint="Tipo de documento"/>
+        <input:Masked Hint="Número de documento"/>
+    </StackLayout>
 </ctrls:PageBase>

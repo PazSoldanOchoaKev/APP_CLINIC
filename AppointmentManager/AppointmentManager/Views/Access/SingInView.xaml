@@ -15,7 +15,8 @@
     </Grid>
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
-            <Button Text="Ingresar" class="Primary"/>
+            <Button Text="Ingresar" class="Primary"
+                    Command="{Binding SingIn}"/>
             <Button Text="Registrarse" Grid.Column="1"
                     Command="{Binding SingUp}"
                     class="Secondary"/>

@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pckv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
     x:Class="AppointmentManager.Resources.Styles.MainStyle">
 
 
@@ -89,6 +90,21 @@
     <Style TargetType="Label" BaseResourceKey="LabelLight" Class="LabelLigthBold">
         <Setter Property="FontSize" Value="{StaticResource LabelSize}"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+    <Style TargetType="input:CustomInputLayout" x:Key="BaseInput">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="OutlineCornerRadius" Value="{StaticResource CornerRadiusInput}"/>
+        <Setter Property="IsHintAlwaysFloated" Value="False"/>
+        <!--<Setter Property="DisabledColor" Value="{DynamicResource EntryDisabledColor}"/>
+        <Setter Property="UnfocusedColor" Value="{DynamicResource EntrySelectColor}"/>
+        <Setter Property="FocusedColor" Value="{DynamicResource EntrySelectColor}"/>-->
+    </Style>
+
+    <Style TargetType="input:CustomInputLayout" BaseResourceKey="BaseInput" Class="Text" ApplyToDerivedTypes="True" CanCascade="True">
+    </Style>
+
+    <Style TargetType="input:ComboBox" BaseResourceKey="BaseInput" Class="Combo">
     </Style>
 </ResourceDictionary>
 

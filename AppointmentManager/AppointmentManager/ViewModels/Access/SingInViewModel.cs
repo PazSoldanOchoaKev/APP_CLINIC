@@ -10,13 +10,16 @@ namespace AppointmentManager.ViewModels.Access
     public class SingInViewModel : ViewModelBase
     {
         private readonly IAppNavigation _navigation;
+        private readonly IDisplay _display;
         private string userName;
         private string password;
 
         public SingInViewModel(
+            IDisplay display,
             IAppNavigation navigation)
         {
             _navigation = navigation;
+            _display = display;
         }
 
 
@@ -31,14 +34,16 @@ namespace AppointmentManager.ViewModels.Access
 
         #region Methods
 
-        public void NavigateToSingUp()
-                    {
-            _navigation.NavigateToAsync<SingUpView>();
+        public async void NavigateToSingUp()
+        {
+            await _navigation.NavigateToAsync<SingUpView>();
         }
 
-        public void NavigateToSingIn()
+        public async void NavigateToSingIn()
         {
-            _navigation.GoToAsync("//Main");
+            //await _display.AlertAsync("Inicio de sesión", "Usuario incorrecto");
+            //await _navigation.GoToAsync("//Main");
+
         }
         #endregion
     }
