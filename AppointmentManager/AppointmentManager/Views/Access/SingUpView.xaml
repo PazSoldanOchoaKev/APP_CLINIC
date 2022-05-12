@@ -11,11 +11,14 @@
     <StackLayout>
         <input:Entry Hint="Nombres" StyleClass="Text"/>
         <input:Entry Hint="Apellidos" StyleClass="Text"/>
-        <input:ComboBox Hint="Tipo de documento"/>
-        <input:Masked Hint="Número de documento"/>
-        <input:Numeric Hint="Numero de telefono"/>
-        <input:Entry Hint="Direccion"/>
-        <input:Entry Hint="Correo"/>
+        <input:ComboBox Hint="Tipo de documento" StyleClass="Combo"
+                        DisplayMemberPath=""
+                        SelectedItem="{Binding TypeDocument, Mode=TwoWay}"
+                        ItemsSource="{Binding TypeDocuments}"/>
+        <input:Masked Hint="Número de documento" StyleClass="Text"/>
+        <input:Numeric Hint="Numero de telefono" StyleClass="Text"/>
+        <input:Entry Hint="Direccion" StyleClass="Text"/>
+        <input:Entry Hint="Correo" StyleClass="Text"/>
         <input:Entry Hint="Contraseña" IsPassword="True"/>
     </StackLayout>
 </ctrls:PageBase>

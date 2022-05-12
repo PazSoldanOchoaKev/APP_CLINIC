@@ -92,7 +92,7 @@
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
     <Style TargetType="input:CustomInputLayout" x:Key="BaseInput">
-        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
         <Setter Property="OutlineCornerRadius" Value="{StaticResource CornerRadiusInput}"/>
         <Setter Property="IsHintAlwaysFloated" Value="False"/>
