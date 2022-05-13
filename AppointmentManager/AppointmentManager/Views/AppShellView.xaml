@@ -15,8 +15,8 @@
     x:Class="AppointmentManager.Views.AppShellView">
 
     <TabBar>
-        <ShellContent Route="SingIn"
-                  ContentTemplate="{DataTemplate access:SingInView}"/>
+        <ShellContent Route="SignIn"
+                  ContentTemplate="{DataTemplate access:SignInView}"/>
     </TabBar>
 
     <FlyoutItem icon:Font.Icon="HomeOutline"

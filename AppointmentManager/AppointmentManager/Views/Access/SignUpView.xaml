@@ -6,26 +6,26 @@
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
     HeaderTitle="Crear tu usuario"
     Title="Registrarse"
-    x:Class="AppointmentManager.Views.Access.SingUpView">
+    x:Class="AppointmentManager.Views.Access.SignUpView">
     <Grid>
         <StackLayout>
-        <input:Entry Hint="Nombres" StyleClass="Text"/>
-        <input:Entry Hint="Apellidos" StyleClass="Text"/>
+        <input:Entry Hint="Nombres" StyleClass="Text" Text="{Binding Names, Mode=TwoWay}"/>
+        <input:Entry Hint="Apellidos" StyleClass="Text" Text="{Binding Apellido, Mode=TwoWay}"/>
         <input:ComboBox Hint="Tipo de documento" StyleClass="Combo"
                         DisplayMemberPath=""
                         SelectedItem="{Binding TypeDocument, Mode=TwoWay}"
                         ItemsSource="{Binding TypeDocuments}"/>
-        <input:Masked Hint="Número de documento" StyleClass="Text"/>
-        <input:Numeric Hint="Numero de telefono" StyleClass="Text"/>
-        <input:Entry Hint="Direccion" StyleClass="Text"/>
-        <input:Entry Hint="Correo" StyleClass="Text"/>
-        <input:Entry Hint="Contraseña" IsPassword="True"/>
+        <input:Masked Hint="Número de documento" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"/>
+        <input:Numeric Hint="Numero de telefono" StyleClass="Text" Text="{Binding Telefono}"/>
+        <input:Entry Hint="Direccion" StyleClass="Text" Text="{Binding Address, Mode=TwoWay}"/>
+        <input:Entry Hint="Correo" StyleClass="Text" Text="{Binding Email, Mode=TwoWay}"/>
+        <input:Entry Hint="Contraseña" IsPassword="True" Text="{Binding Password, Mode=TwoWay}"/>
         </StackLayout>
     </Grid>
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*" ColumnSpacing="15">
             <Button Text="Confirmar" Grid.Column="0"
-                    Command="{Binding SingUp}"
+                    Command="{Binding Confirmar}"
                     class="Secondary"/>
         </Grid>
     </ctrls:PageBase.Fotter>

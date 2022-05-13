@@ -7,14 +7,14 @@ using Xamarin.Forms;
 
 namespace AppointmentManager.ViewModels.Access
 {
-    public class SingInViewModel : ViewModelBase
+    public class SignInViewModel : ViewModelBase
     {
         private readonly IAppNavigation _navigation;
         private readonly IDisplay _display;
         private string userName;
         private string password;
 
-        public SingInViewModel(
+        public SignInViewModel(
             IDisplay display,
             IAppNavigation navigation)
         {
@@ -27,19 +27,18 @@ namespace AppointmentManager.ViewModels.Access
 
         public string UserName { get => userName; set => SetProperty(ref userName, value); }
         public string Password { get => password; set => SetProperty(ref password, value); }
-        public ICommand SingUp => new Command(NavigateToSingUp);
-        public ICommand SingIn => new Command(NavigateToSingIn);
+        public ICommand SignUp => new Command(NavigateToSignUp);
+        public ICommand SignIn => new Command(NavigateToSignIn);
 
         #endregion
 
         #region Methods
 
-        public async void NavigateToSingUp()
+        public async void NavigateToSignUp()
         {
-            await _navigation.NavigateToAsync<SingUpView>();
+            await _navigation.NavigateToAsync<SignUpView>();
         }
-
-        public async void NavigateToSingIn()
+        public async void NavigateToSignIn()
         {
             //await _display.AlertAsync("Inicio de sesión", "Usuario incorrecto");
             //await _navigation.GoToAsync("//Main");
