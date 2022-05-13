@@ -7,8 +7,8 @@
     HeaderTitle="Crear tu usuario"
     Title="Registrarse"
     x:Class="AppointmentManager.Views.Access.SingUpView">
-
-    <StackLayout>
+    <Grid>
+        <StackLayout>
         <input:Entry Hint="Nombres" StyleClass="Text"/>
         <input:Entry Hint="Apellidos" StyleClass="Text"/>
         <input:ComboBox Hint="Tipo de documento" StyleClass="Combo"
@@ -20,5 +20,15 @@
         <input:Entry Hint="Direccion" StyleClass="Text"/>
         <input:Entry Hint="Correo" StyleClass="Text"/>
         <input:Entry Hint="Contraseña" IsPassword="True"/>
-    </StackLayout>
+        </StackLayout>
+    </Grid>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*" ColumnSpacing="15">
+            <Button Text="Confirmar" Grid.Column="0"
+                    Command="{Binding SingUp}"
+                    class="Secondary"/>
+        </Grid>
+    </ctrls:PageBase.Fotter>
+
+
 </ctrls:PageBase>
