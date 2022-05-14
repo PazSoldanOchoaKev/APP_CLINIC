@@ -25,14 +25,17 @@ namespace AppointmentManager.ViewModels.Access
         public string Apellido { get => apellido; set => SetProperty(ref apellido, value); }
         public ObservableCollection<string> TypeDocuments { get => typeDocuments; set => SetProperty(ref typeDocuments, value); }
         public string TypeDocument { get => typeDocument; set => SetProperty(ref typeDocument, value); }
-        //public 
         public string Address { get => address; set => SetProperty(ref address, value); }
         public string Email { get => email; set => SetProperty(ref email, value); }
         public string Password { get => password; set => SetProperty(ref password, value); }
+
+        #endregion
+
+        #region Methods
+
         public void OnNavigated()
         {
-            var documents = new List<string> { "DNI", "CARNET DE EXTRANJERIA" };
-            TypeDocuments = new ObservableCollection<string>(documents);
+            TypeDocuments = new ObservableCollection<string>(new string[] { "DNI", "CARNET DE EXTRANJERIA" });
         }
 
         #endregion

@@ -7,7 +7,7 @@
     <Color x:Key="BackgroundColor">#fafafa</Color>
 
     <Color x:Key="PrimaryColor">#0a365d</Color>
-    <Color x:Key="SecondaryColor">#f9b94d</Color> 
+    <Color x:Key="SecondaryColor">#d55749</Color> 
     <Color x:Key="PrimaryTextColor">#fafafa</Color>
     <Color x:Key="SecondaryTextColor">#202b34</Color>
 </ResourceDictionary>
