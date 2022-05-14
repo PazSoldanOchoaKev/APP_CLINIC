@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ctrls:PageBase
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+    xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+    HeaderTitle="Crear tu usuario"
+    Title="Registrarse"
+    x:Class="AppointmentManager.Views.Access.SignUpView">
+    <Grid>
+        <StackLayout >
+            <input:Entry Hint="Correo" StyleClass="Text" Text="{Binding Email, Mode=TwoWay}"/>
+            <input:Entry Hint="Contraseña" IsPassword="True" Text="{Binding Password, Mode=TwoWay}"/>
+            <input:Entry Hint="Repetir contraseña" IsPassword="True" Text="{Binding RepeatPassword, Mode=TwoWay}"/>
+        </StackLayout>
+    </Grid>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*" ColumnSpacing="15">
+            <Button Text="Confirmar" Grid.Column="0"
+                    Command="{Binding Confirmar}"
+                    class="Secondary"/>
+        </Grid>
+    </ctrls:PageBase.Fotter>
+
+
+</ctrls:PageBase>
