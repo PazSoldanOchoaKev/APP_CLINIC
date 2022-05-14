@@ -23,8 +23,8 @@ namespace AppointmentManager
 
             services.AddInputLayout();
             services.AddViewModel<AppShellViewModel>();
-            services.AddViewModelToRoute<SingInViewModel>("SingIn");
-            services.AddRoute<SingUpView, SingUpViewModel>();
+            services.AddViewModelToRoute<SignInViewModel>("SignIn");
+            services.AddRoute<SignUpView, SignUpViewModel>();
             
         }
     }

@@ -35,8 +35,6 @@
     <None Remove="Netcos.Xamarin.Forms.InputLayout" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Views\Appoinments\" />
@@ -44,8 +42,14 @@
     <Folder Include="Resources\" />
     <Folder Include="Resources\Themes\" />
     <Folder Include="Resources\Styles\" />
-    <Folder Include="Views\Access\" />
-    <Folder Include="ViewModels\Access\" />
     <Folder Include="Resources\Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Access\SignInView.xaml.cs">
+      <DependentUpon>SignInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Access\SignUpView.xaml.cs">
+      <DependentUpon>SignUpView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
