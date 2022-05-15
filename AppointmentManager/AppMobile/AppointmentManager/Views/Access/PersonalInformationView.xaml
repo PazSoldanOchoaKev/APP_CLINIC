@@ -10,14 +10,14 @@
 
     <Grid>
         <StackLayout>
-            <input:Entry Hint="Nombres" StyleClass="Text" Text="{Binding Names, Mode=TwoWay}"/>
+            <input:Entry Hint="Nombres" StyleClass="Text" Text="{Binding Name, Mode=TwoWay}"/>
             <input:Entry Hint="Apellidos" StyleClass="Text" Text="{Binding Apellido, Mode=TwoWay}"/>
             <input:ComboBox Hint="Tipo de documento" StyleClass="Combo"
                         DisplayMemberPath=""
                         SelectedItem="{Binding TypeDocument, Mode=TwoWay}"
                         ItemsSource="{Binding TypeDocuments}"/>
             <input:Masked Hint="Número de documento" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"/>
-            <input:Numeric Hint="Numero de telefono" StyleClass="Text" Text="{Binding Telefono}"/>
+            <input:Numeric Hint="Numero de telefono" StyleClass="Text" Text="{Binding Telefono, Mode=TwoWay}"/>
             <input:Entry Hint="Direccion" StyleClass="Text" Text="{Binding Address, Mode=TwoWay}"/>
         </StackLayout>
     </Grid>

@@ -27,6 +27,9 @@ namespace AppointmentManager.ViewModels.Access
 
         public string UserName { get => userName; set => SetProperty(ref userName, value); }
         public string Password { get => password; set => SetProperty(ref password, value); }
+        #endregion
+        
+        #region Commands
         public ICommand SignUp => new Command(NavigateToSignUp);
         public ICommand SignIn => new Command(NavigateToSignIn);
 
