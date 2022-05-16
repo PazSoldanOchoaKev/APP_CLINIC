@@ -14,15 +14,8 @@ namespace AppointmentManager.ViewModels.Access
     {
         private readonly IAppNavigation _navigation;
         private readonly IDisplay _display;
-        private string names;
-        private ObservableCollection<string> typeDocuments;
-        private string typeDocument;
-        private string apellido;
-        private string address;
         private string email;
         private string password;
-        private string telefono;
-        private string document;
         private string repeatPassword;
 
         public SignUpViewModel(

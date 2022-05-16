@@ -43,7 +43,7 @@ namespace AppointmentManager.ViewModels.Access
         }
         public async void NavigateToSignIn()
         {
-            //await _display.AlertAsync("Inicio de sesión", "Usuario incorrecto");
+            await _display.AlertAsync("Inicio de sesión", "Usuario incorrecto");
             //await _navigation.GoToAsync("//Main");
 
         }
