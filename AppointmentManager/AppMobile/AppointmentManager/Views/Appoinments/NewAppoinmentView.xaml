@@ -1,11 +1,31 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage
+<ctrls:PageBase
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+    xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+    HeaderTitle="Reserva de cita"
+    Title="Reserva"
     x:Class="AppointmentManager.Views.Register.NewAppoinmentView">
 
-    <StackLayout>
-        <Label Text="Nuevo" StyleClass="LabelRed" />
-
-    </StackLayout>
-</ContentPage>
+    <Grid RowDefinitions="*, *, *">
+        <StackLayout Grid.Row="1">
+            <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
+                        DisplayMemberPath=""
+                        SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
+                        ItemsSource="{Binding TypeProcedures}"/>
+            <input:DatePicker Hint="Fechas disponibles"/>
+            <input:ComboBox Hint="Escoger tamaño" StyleClass="Combo"
+                        DisplayMemberPath=""
+                        SelectedItem="{Binding ListSize, Mode=TwoWay}"
+                        ItemsSource="{Binding  ListSizes}"/>
+        </StackLayout>
+    </Grid>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*" ColumnSpacing="15">
+            <Button Text="Realizar reservar" Grid.Column="0"
+                    Command="{Binding Reservar}"
+                    class="Secondary"/>
+        </Grid>
+    </ctrls:PageBase.Fotter>
+</ctrls:PageBase>
