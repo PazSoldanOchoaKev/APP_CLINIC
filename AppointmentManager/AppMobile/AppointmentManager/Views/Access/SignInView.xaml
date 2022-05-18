@@ -16,8 +16,10 @@
                     <input:Entry Hint="Contraseña" IsPassword="True" StyleClass="Text"/>
                 </StackLayout>
                 <Grid Grid.Row="2" RowDefinitions="*,*" Margin="0,0,0,10">
-                    <Button StyleClass="Primary" Grid.Row="0" Text="Ingresar"/>
-                    <Button StyleClass="Secondary" Grid.Row="1" Text="Registrarse"/>
+                    <Button StyleClass="Primary" Grid.Row="0" Text="Ingresar"
+                            Command="{Binding SignIn}"/>
+                    <Button StyleClass="Secondary" Grid.Row="1" Text="Registrarse"
+                            Command="{Binding SignUp}"/>
                 </Grid>
             </Grid>
         </pckv:PancakeView>
