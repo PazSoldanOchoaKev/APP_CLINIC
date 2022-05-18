@@ -15,7 +15,7 @@
         <StackLayout VerticalOptions="Center" HorizontalOptions="Start" Orientation="Horizontal">
             <Label Text="{Binding Title, Source={Reference Base}}"
                    VerticalOptions="Center"
-               StyleClass="LabelLigthBold"/>
+                   StyleClass="LabelLigthBold"/>
         </StackLayout>
     </Shell.TitleView>
 
@@ -25,10 +25,11 @@
                 <Grid RowDefinitions="Auto, *, Auto">
                     <Grid Grid.Row="0" StyleClass="Body">
                         <Label Text="{Binding HeaderTitle, Source={Reference Base}}"
-                               StyleClass="TitleBold"/>
+                               Margin="0,10,0,0"
+                               StyleClass="SubTitleBold"/>
                     </Grid>
                     <ScrollView Grid.Row="1">
-                        <Grid StyleClass="Body">
+                        <Grid Margin="{StaticResource MarginHorizontal}">
                             <ContentView Content="{Binding ContentBody, Source={Reference Base}}"/>
                         </Grid>
                     </ScrollView>

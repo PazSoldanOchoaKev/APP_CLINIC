@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
-    HeaderTitle="Crear tu usuario"
-    Title="Registrarse"
+    HeaderTitle="Crear Usuario"
+    Title="REGISTRARSE"
     x:Class="AppointmentManager.Views.Access.SignUpView">
     <Grid>
         <StackLayout >
@@ -16,7 +16,7 @@
     </Grid>
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*" ColumnSpacing="15">
-            <Button Text="Confirmar" Grid.Column="0"
+            <Button Text="Continuar" Grid.Column="0"
                     Command="{Binding Confirmar}"
                     class="Secondary"/>
         </Grid>
