@@ -2,6 +2,7 @@
 using AppointmentManager.Resources.Themes;
 using AppointmentManager.ViewModels;
 using AppointmentManager.ViewModels.Access;
+using AppointmentManager.ViewModels.Register;
 using AppointmentManager.Views.Access;
 using Microsoft.Extensions.DependencyInjection;
 using Netcos.Xamarin.Forms;
@@ -24,6 +25,7 @@ namespace AppointmentManager
             services.AddInputLayout();
             services.AddViewModel<AppShellViewModel>();
             services.AddViewModelToRoute<SignInViewModel>("SignIn");
+            services.AddViewModelToRoute<NewAppoinmentViewModel>("New");
             services.AddRoute<SignUpView, SignUpViewModel>();
 
             services.AddRoute<PersonalInformationView,PersonalInformationViewModel>();

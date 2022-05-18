@@ -16,6 +16,7 @@ namespace AppointmentManager.ViewModels.Register
         public NewAppoinmentViewModel()
         {
         }
+
         #region Properties
         public ObservableCollection<string> TypeProcedures { get => typeProcedures; set => SetProperty(ref typeProcedures, value); }
         public string TypeProcedure { get => typeProcedure; set => SetProperty(ref typeProcedure, value); }
