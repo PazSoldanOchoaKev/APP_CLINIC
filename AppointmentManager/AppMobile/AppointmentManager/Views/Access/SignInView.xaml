@@ -1,25 +1,27 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ctrls:PageBase
+<ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+    xmlns:pckv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
-    Title="Inicio de Sesión"
+    BackgroundColor="{DynamicResource BackgroundColor}"
+    Shell.BackgroundColor="{DynamicResource PrimaryColor}"
     x:Class="AppointmentManager.Views.Access.SignInView">
-
-    <Grid RowDefinitions="*, *, *">
-        <StackLayout Grid.Row="1">
-            <input:Entry Hint="Usuario" Text="{Binding UserName, Mode=TwoWay}"/>
-            <input:Entry Hint="Contraseña" IsPassword="True"/>
-        </StackLayout>
+    <Grid BackgroundColor="{DynamicResource PrimaryColor}" RowDefinitions="*,1.5*">
+        <pckv:PancakeView Grid.Row="1" StyleClass="ShadowBody">
+            <Grid RowDefinitions="*,3*,Auto" StyleClass="Body">
+                <Label Text="Iniciar Sesión" StyleClass="TitleBold" VerticalOptions="Center"/>
+                <StackLayout VerticalOptions="Start" Grid.Row="1">
+                    <input:Entry Hint="Usuario" Text="{Binding UserName, Mode=TwoWay}" StyleClass="Text"/>
+                    <input:Entry Hint="Contraseña" IsPassword="True" StyleClass="Text"/>
+                </StackLayout>
+                <Grid Grid.Row="2" RowDefinitions="*,*" Margin="0,0,0,10">
+                    <Button StyleClass="Primary" Grid.Row="0" Text="Ingresar"
+                            Command="{Binding SignIn}"/>
+                    <Button StyleClass="Secondary" Grid.Row="1" Text="Registrarse"
+                            Command="{Binding SignUp}"/>
+                </Grid>
+            </Grid>
+        </pckv:PancakeView>
     </Grid>
-    <ctrls:PageBase.Fotter>
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
-            <Button Text="Ingresar" class="Primary"
-                    Command="{Binding SignIn}"/>
-            <Button Text="Registrarse" Grid.Column="1"
-                    Command="{Binding SignUp}"
-                    class="Secondary"/>
-        </Grid>
-    </ctrls:PageBase.Fotter>
-</ctrls:PageBase>
+</ContentPage>

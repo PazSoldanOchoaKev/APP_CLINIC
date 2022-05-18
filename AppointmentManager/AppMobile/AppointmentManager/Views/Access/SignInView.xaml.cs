@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace AppointmentManager.Views.Access
 {
-    public partial class SignUpView : PageBase
+    public partial class SignInView : ContentPage
     {
-        public SignUpView()
+        public SignInView()
         {
             InitializeComponent();
         }
