@@ -35,8 +35,8 @@
     <FlyoutItem icon:Font.Icon="Plus"
                 icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
                 Title="Registro de mascota">
-        <ShellContent Route="NewAppoinment"
-                      ContentTemplate="{DataTemplate register:NewAppoinmentView}"/>
+        <ShellContent Route="Registration"
+                      ContentTemplate="{DataTemplate access:AnimalInformationView}"/>
     </FlyoutItem>
     
 </Shell>
