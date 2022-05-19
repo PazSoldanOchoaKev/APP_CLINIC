@@ -6,8 +6,12 @@
 
   <ItemGroup>
     <None Remove="Entities\" />
+    <None Remove="Netcos.Data" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Netcos.Data" Version="3.0.0-preview-20211216.3" />
   </ItemGroup>
 </Project>
