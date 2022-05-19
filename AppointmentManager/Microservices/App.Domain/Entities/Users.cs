@@ -18,6 +18,15 @@ namespace App.Domain.Entities
         public int AccessId { get; set; }
         [Required]
         public DocumentType DocumentType { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string Document { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string PhoneNumber { get; set; }
+        [Required]
+        public string Address { get; set; }
+
 
         [ForeignKey(nameof(AccessId))]
         public Access Access { get; set; }

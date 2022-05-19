@@ -13,8 +13,9 @@
             <input:Entry Hint="Foto referencial" StyleClass="Text" Text="{Binding Photo, Mode=TwoWay}"/>
             <input:ComboBox Hint="Seleccionar sexo" StyleClass="Combo"
                         DisplayMemberPath=""
-                        SelectedItem="{Binding Genders, Mode=TwoWay}"
+                        SelectedItem="{Binding Gender, Mode=TwoWay}"
                         ItemsSource="{Binding Genders}"/>
+            <Label Text="Especificacion del animal" StyleClass="Text"/>
             <input:Entry Hint="Color de la mascota" StyleClass="Text" Text="{Binding ColorAnimal, Mode=TwoWay}"/>
             <input:Entry Hint="Señas particulares" StyleClass="Text" Text="{Binding ParticularSigns, Mode=TwoWay}"/>
             <input:Entry Hint="Raza" StyleClass="Text" Text="{Binding Breeds, Mode=TwoWay}"/>
