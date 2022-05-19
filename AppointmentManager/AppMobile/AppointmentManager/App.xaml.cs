@@ -26,7 +26,9 @@ namespace AppointmentManager
             services.AddViewModel<AppShellViewModel>();
             services.AddViewModelToRoute<SignInViewModel>("SignIn");
             services.AddViewModelToRoute<NewAppoinmentViewModel>("New");
+            services.AddViewModelToRoute<AnimalInformationViewModel>("Registration");
             services.AddRoute<SignUpView, SignUpViewModel>();
+            
 
             services.AddRoute<PersonalInformationView,PersonalInformationViewModel>();
             

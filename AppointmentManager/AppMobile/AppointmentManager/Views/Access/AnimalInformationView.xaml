@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ctrls:PageBase 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+    xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+    HeaderTitle="Registar Datos"
+    Title="Registrar Mascota"
+    x:Class="AppointmentManager.Views.Access.AnimalInformationView">
+    <Grid>
+        <StackLayout>
+            <input:Entry Hint="Nombres Mascota" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"/>
+            <input:Entry Hint="Foto referencial" StyleClass="Text" Text="{Binding Photo, Mode=TwoWay}"/>
+            <input:ComboBox Hint="Seleccionar sexo" StyleClass="Combo"
+                        DisplayMemberPath=""
+                        SelectedItem="{Binding Genders, Mode=TwoWay}"
+                        ItemsSource="{Binding Genders}"/>
+            <input:Entry Hint="Color de la mascota" StyleClass="Text" Text="{Binding ColorAnimal, Mode=TwoWay}"/>
+            <input:Entry Hint="Señas particulares" StyleClass="Text" Text="{Binding ParticularSigns, Mode=TwoWay}"/>
+            <input:Entry Hint="Raza" StyleClass="Text" Text="{Binding Breeds, Mode=TwoWay}"/>
+        </StackLayout>
+    </Grid>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*" ColumnSpacing="15">
+            <Button Text="Confirmar" Grid.Column="0"
+                    Command="{Binding Confirmar}"
+                    class="Secondary"/>
+        </Grid>
+    </ctrls:PageBase.Fotter>
+</ctrls:PageBase>
