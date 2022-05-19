@@ -7,9 +7,11 @@
   <ItemGroup>
     <None Remove="Entities\" />
     <None Remove="Netcos.Data" />
+    <None Remove="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Netcos.Data" Version="3.0.0-preview-20211216.3" />
