@@ -4,14 +4,16 @@ using App.Infraestructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace App.Infraestructure.Migrations
 {
     [DbContext(typeof(AppoinmentContext))]
-    partial class AppoinmentContextModelSnapshot : ModelSnapshot
+    [Migration("20220524070718_PetsForeingkey")]
+    partial class PetsForeingkey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

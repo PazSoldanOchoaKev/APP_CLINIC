@@ -14,11 +14,6 @@
     <None Remove="Netcos.Security.Cryptography" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Common\" />
-    <Folder Include="Common\Interfaces\" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Netcos.Extensions.DependencyInjection.ConfigurationExtensions" Version="3.0.0-preview-20211215.1" />
     <PackageReference Include="Netcos.Data.SqlServer" Version="3.0.0-preview-20211216.3" />
     <PackageReference Include="Netcos.EntityFrameworkCore.Abstractions" Version="3.0.0-preview-20211215.1" />

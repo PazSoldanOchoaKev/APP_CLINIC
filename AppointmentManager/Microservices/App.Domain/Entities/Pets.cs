@@ -3,6 +3,7 @@ using Netcos.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace App.Domain.Entities
@@ -29,5 +30,10 @@ namespace App.Domain.Entities
         public string Breed { get; set; }
 
         public byte[] Photo { get; set; }
+
+        public string UserId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public Users Users { get; set; }
     }
 }

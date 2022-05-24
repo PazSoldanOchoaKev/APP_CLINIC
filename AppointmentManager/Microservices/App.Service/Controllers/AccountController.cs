@@ -27,5 +27,11 @@ namespace App.Service.Controllers
         {
             return _accountManager.RegisterAccountAsync(model);
         }
+
+        [HttpPost("SignIn")]
+        public Result SignIn([FromBody] AuthModel model) 
+        {
+            return _accountManager.Authenticate(model);
+        }
     }
 }

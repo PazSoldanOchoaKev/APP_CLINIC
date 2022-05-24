@@ -49,7 +49,7 @@ namespace App.Application.Services
             return result;
         }
 
-        public Result<Users> AuthenticateAsync(AuthModel model)
+        public Result<Users> Authenticate(AuthModel model)
         {
             var access = _accesses.FirstOrDefault(a => a.User == model.User);
             if (access != null)

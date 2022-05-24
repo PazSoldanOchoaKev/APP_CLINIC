@@ -9,6 +9,7 @@ namespace App.Application
         public static IServiceCollection AddAppoinmentApplication(this IServiceCollection services)
         {
             services.AddScoped<IAccountManager, AccountManager>();
+            services.AddScoped<IPetsManager, PetsManager>();
             return services;
         }
     }
