@@ -14,6 +14,14 @@ namespace App.Infraestructure.Data
         public DbSet<Access> Access { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Pets> Pets { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Access>()
+                .HasIndex(u => u.User)
+                .IsUnique();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 
     public class AppoinmentContexttFactory : IDesignTimeDbContextFactory<AppoinmentContext>

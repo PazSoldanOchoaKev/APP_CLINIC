@@ -8,8 +8,12 @@
     <None Remove="Entities\" />
     <None Remove="Netcos.Data" />
     <None Remove="Enums\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Netcos.Data" Version="3.0.0-preview-20211216.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

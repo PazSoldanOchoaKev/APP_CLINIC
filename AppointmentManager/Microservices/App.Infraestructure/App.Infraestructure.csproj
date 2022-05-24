@@ -8,9 +8,11 @@
     <None Remove="Data\" />
     <None Remove="Netcos.EntityFrameworkCore.SqlServer" />
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Netcos.EntityFrameworkCore.SqlServer" Version="3.0.0-preview-20211215.1" />

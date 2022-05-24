@@ -6,7 +6,7 @@ using Netcos.Data;
 
 namespace App.Domain.Entities
 {
-    public class Users : Entity<int>
+    public class Users : Entity
     {
         [Required]
         [MaxLength(200)]
@@ -15,7 +15,7 @@ namespace App.Domain.Entities
         [MaxLength(200)]
         public string LastName { get; set; }
         [Required]
-        public int AccessId { get; set; }
+        public string AccessId { get; set; }
         [Required]
         public DocumentType DocumentType { get; set; }
         [Required]

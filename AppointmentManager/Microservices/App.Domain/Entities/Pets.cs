@@ -7,7 +7,7 @@ using System.Text;
 
 namespace App.Domain.Entities
 {
-    public class Pets : Entity<int>
+    public class Pets : Entity
     {
         [Required]
         [MaxLength(100)]
@@ -27,5 +27,7 @@ namespace App.Domain.Entities
         [Required]
         [MaxLength(100)]
         public string Breed { get; set; }
+
+        public byte[] Photo { get; set; }
     }
 }

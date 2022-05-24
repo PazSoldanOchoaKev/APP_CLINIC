@@ -4,7 +4,7 @@ using Netcos.Data;
 
 namespace App.Domain.Entities
 {
-    public class Access : Entity<int>
+    public class Access : Entity
     {
         [Required]
         [MaxLength(100)]
