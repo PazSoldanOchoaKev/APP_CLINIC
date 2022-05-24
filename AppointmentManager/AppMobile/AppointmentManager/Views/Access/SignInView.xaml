@@ -13,7 +13,7 @@
                 <Label Text="Iniciar Sesión" StyleClass="TitleBold" VerticalOptions="Center"/>
                 <StackLayout VerticalOptions="Start" Grid.Row="1">
                     <input:Entry Hint="Usuario" Text="{Binding UserName, Mode=TwoWay}" StyleClass="Text"/>
-                    <input:Entry Hint="Contraseña" IsPassword="True" StyleClass="Text"/>
+                    <input:Entry Hint="Contraseña" IsPassword="True" Text="{Binding Password, Mode=TwoWay}" StyleClass="Text"/>
                 </StackLayout>
                 <Grid Grid.Row="2" RowDefinitions="*,*" Margin="0,0,0,10">
                     <Button StyleClass="Primary" Grid.Row="0" Text="Ingresar"

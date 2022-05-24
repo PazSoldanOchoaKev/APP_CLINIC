@@ -28,10 +28,18 @@ namespace AppointmentManager
             services.AddViewModelToRoute<NewAppoinmentViewModel>("New");
             services.AddViewModelToRoute<AnimalInformationViewModel>("Registration");
             services.AddRoute<SignUpView, SignUpViewModel>();
-            
 
-            services.AddRoute<PersonalInformationView,PersonalInformationViewModel>();
-            
+            services
+                .AddApiClient()
+                .AcceptAnyServerCertificate()
+                .ConfigureApiClient(options =>
+                {
+                    options.Url = "https://192.168.18.4:45455/api";
+                });
+
+
+            services.AddRoute<PersonalInformationView, PersonalInformationViewModel>();
+
         }
     }
 }

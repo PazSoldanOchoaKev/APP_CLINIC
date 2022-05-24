@@ -1,4 +1,5 @@
 ﻿using AppointmentManager.Models;
+using Netcos.Extensions.Http;
 using Netcos.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,24 @@ namespace AppointmentManager.ViewModels.Access
     {
         private string name;
         private string apellido;
-        private ObservableCollection<string> typeDocuments;
-        private string typeDocument;
+        private ObservableCollection<DocumentTypeModel> typeDocuments;
+        private DocumentTypeModel typeDocument;
         private string document;
         private string telefono;
         private string address;
+        private readonly IApiClientFactory _apiClientFactory;
 
-        public PersonalInformationViewModel()
+        public PersonalInformationViewModel(
+            IApiClientFactory apiClientFactory)
         {
+            _apiClientFactory = apiClientFactory;
         }
+
         #region Properties
         public string Name { get => name; set => SetProperty(ref name, value); }
         public string Apellido { get => apellido; set => SetProperty(ref apellido, value); }
-        public ObservableCollection<string> TypeDocuments { get => typeDocuments; set => SetProperty(ref typeDocuments, value); }
-        public string TypeDocument { get => typeDocument; set => typeDocument = value; }
+        public ObservableCollection<DocumentTypeModel> TypeDocuments { get => typeDocuments; set => SetProperty(ref typeDocuments, value); }
+        public DocumentTypeModel TypeDocument { get => typeDocument; set => typeDocument = value; }
         public string Document { get => document; set => SetProperty(ref document, value); }
         public string Telefono { get => telefono; set => SetProperty(ref telefono, value); }
         public string Address { get => address; set => SetProperty(ref address, value); }
@@ -43,17 +48,28 @@ namespace AppointmentManager.ViewModels.Access
         #region Methodos
         public void OnNavigated()
         {
-            TypeDocuments = new ObservableCollection<string>(new string[] { "DNI", "CARNET DE EXTRANJERIA" });
+            TypeDocuments = new ObservableCollection<DocumentTypeModel>(new DocumentTypeModel[] {
+                new DocumentTypeModel { Type = DocumentType.DNI, Name =  "DNI" },
+                new DocumentTypeModel { Type = DocumentType.CE, Name = "CARNET DE EXTRANJERIA" }
+            });
         }
 
-        public void Confirm()
+        public async void Confirm()
         {
-            Model.Name = Name;
-            Model.Apellido = Apellido;
-            Model.TypeDocument = TypeDocument;
+            Model.FirstName = Name;
+            Model.LastName = Apellido;
+            Model.TypeDocument = TypeDocument.Type;
             Model.Document = Document;
-            Model.Telefono = Telefono;
+            Model.PhoneNumber = Telefono;
             Model.Address = Address;
+
+            using (var client = _apiClientFactory.CreateClient())
+            {
+                var result = await client
+                    .AppendPath("account")
+                    .AddJsonBody(Model)
+                    .PostAsync();
+            }
         }
 
         public void OnNotify(SignUpModel model)

@@ -1,6 +1,8 @@
 ﻿using System;
 using AppointmentManager.ViewModels;
 using AppointmentManager.Views;
+using Netcos.Extensions.Http;
+using Netcos.Net.Http;
 using Netcos.Xamarin.Forms;
 
 namespace AppointmentManager
@@ -9,7 +11,8 @@ namespace AppointmentManager
     {
         private readonly IAppNavigation _navigation;
 
-        public ApplicationLife(IAppNavigation navigation)
+        public ApplicationLife(
+            IAppNavigation navigation)
         {
             _navigation = navigation;
         }
@@ -24,7 +27,7 @@ namespace AppointmentManager
 
         }
 
-        public void OnStart()
+        public async void OnStart()
         {
             _navigation.SetMain<AppShellView, AppShellViewModel>();
             _navigation.GoToAsync("//SingIn");
