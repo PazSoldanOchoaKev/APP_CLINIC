@@ -21,7 +21,6 @@ namespace App.Service
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                        .UseUrls("https://192.168.18.3:6000")
                         .UseStartup<Startup>()
                         .UseDefaultBuilder();
                 });
