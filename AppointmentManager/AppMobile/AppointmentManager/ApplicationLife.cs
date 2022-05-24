@@ -27,7 +27,7 @@ namespace AppointmentManager
 
         }
 
-        public async void OnStart()
+        public void OnStart()
         {
             _navigation.SetMain<AppShellView, AppShellViewModel>();
             _navigation.GoToAsync("//SingIn");

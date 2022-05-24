@@ -59,11 +59,13 @@ namespace AppointmentManager.ViewModels.Access
                 var result = await client
                     .AppendPath("account/SignIn")
                     .AddJsonBody(model)
-                    .PostAsync();
+                    .PostAsAsync<UserModel>();
 
                 if (result)
                 {
-                    await _navigation.GoToAsync("//Main");
+                    await _navigation
+                        .GoToAsync("//Main")
+                        .NotifyAsync(result.Value);
                 }
                 else
                 {

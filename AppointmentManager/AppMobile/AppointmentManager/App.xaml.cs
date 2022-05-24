@@ -2,6 +2,7 @@
 using AppointmentManager.Resources.Themes;
 using AppointmentManager.ViewModels;
 using AppointmentManager.ViewModels.Access;
+using AppointmentManager.ViewModels.Pets;
 using AppointmentManager.ViewModels.Register;
 using AppointmentManager.Views.Access;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,7 @@ namespace AppointmentManager
 
             services.AddInputLayout();
             services.AddViewModel<AppShellViewModel>();
+            services.AddViewModelToRoute<MainViewModel>("Main");
             services.AddViewModelToRoute<SignInViewModel>("SignIn");
             services.AddViewModelToRoute<NewAppoinmentViewModel>("New");
             services.AddViewModelToRoute<AnimalInformationViewModel>("Registration");
@@ -39,6 +41,7 @@ namespace AppointmentManager
 
 
             services.AddRoute<PersonalInformationView, PersonalInformationViewModel>();
+            services.AddViewModelToRoute<PetsViewModel>;
 
         }
     }
