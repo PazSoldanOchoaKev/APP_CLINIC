@@ -6,6 +6,7 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:views="clr-namespace:AppointmentManager.Views"
     xmlns:access="clr-namespace:AppointmentManager.Views.Access"
+    xmlns:pets="clr-namespace:AppointmentManager.Views.Pets"
     xmlns:register="clr-namespace:AppointmentManager.Views.Register"
     Visual="Material"
     ios:Page.UseSafeArea="True"
@@ -34,9 +35,9 @@
     </FlyoutItem>
     <FlyoutItem icon:Font.Icon="Plus"
                 icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
-                Title="Registro de mascota">
-        <ShellContent Route="Registration"
-                      ContentTemplate="{DataTemplate access:AnimalInformationView}"/>
+                Title="Mis Mascotas">
+        <ShellContent Route="Pets"
+                      ContentTemplate="{DataTemplate pets:PetsView}"/>
     </FlyoutItem>
     
 </Shell>

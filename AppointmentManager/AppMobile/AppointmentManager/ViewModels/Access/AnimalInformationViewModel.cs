@@ -28,13 +28,17 @@ namespace AppointmentManager.ViewModels.Access
         private readonly IApiClientFactory _apiClientFactory;
         private readonly IDisplay _display;
         private readonly ISecureStorage _storage;
+        private readonly IAppNavigation _navigation;
         public AnimalInformationViewModel(
             IApiClientFactory apiClientFactory,
             ISecureStorage storage,
+            IAppNavigation navigation,
             IDisplay display)
         {
             _apiClientFactory = apiClientFactory;
             _storage = storage;
+            _display = display;
+            _navigation = navigation;
         }
 
         #region Properties
@@ -101,6 +105,10 @@ namespace AppointmentManager.ViewModels.Access
                 if (!result)
                 {
                     await _display.AlertAsync("Registro Mascota", result.ErrorMessage);
+                }
+                else
+                {
+                    await _navigation.BackAsync();
                 }
             }
 

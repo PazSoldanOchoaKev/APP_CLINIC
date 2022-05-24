@@ -28,9 +28,10 @@ namespace AppointmentManager
             services.AddViewModelToRoute<MainViewModel>("Main");
             services.AddViewModelToRoute<SignInViewModel>("SignIn");
             services.AddViewModelToRoute<NewAppoinmentViewModel>("New");
-            services.AddViewModelToRoute<AnimalInformationViewModel>("Registration");
+            //services.AddViewModelToRoute<AnimalInformationViewModel>("Registration");
             services.AddRoute<SignUpView, SignUpViewModel>();
-
+            services.AddViewModelToRoute<PetsViewModel>("Pets");
+            services.AddRoute<AnimalInformationView, AnimalInformationViewModel>();
             services
                 .AddApiClient()
                 .AcceptAnyServerCertificate()
@@ -41,7 +42,7 @@ namespace AppointmentManager
 
 
             services.AddRoute<PersonalInformationView, PersonalInformationViewModel>();
-            services.AddViewModelToRoute<PetsViewModel>;
+
 
         }
     }
