@@ -26,7 +26,7 @@
         <ShellContent Route="Main"
                       ContentTemplate="{DataTemplate views:MainView}"/>
     </FlyoutItem>
-   
+
     <FlyoutItem icon:Font.Icon="Plus"
                 icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
                 Title="Reserva">
@@ -39,5 +39,5 @@
         <ShellContent Route="Pets"
                       ContentTemplate="{DataTemplate pets:PetsView}"/>
     </FlyoutItem>
-    
+
 </Shell>
