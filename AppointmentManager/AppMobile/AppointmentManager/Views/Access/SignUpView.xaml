@@ -11,7 +11,7 @@
         <StackLayout >
             <input:Entry Hint="Correo" StyleClass="Text" Text="{Binding Email, Mode=TwoWay}"/>
             <input:Entry Hint="Contraseña" IsPassword="True" Text="{Binding Password, Mode=TwoWay}"/>
-            <input:Entry Hint="Repetir contraseña" IsPassword="True" Text="{Binding RepeatPassword, Mode=TwoWay}"/>
+            
         </StackLayout>
     </Grid>
     <ctrls:PageBase.Fotter>
