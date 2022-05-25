@@ -61,7 +61,6 @@ namespace AppointmentManager.ViewModels.Access
             using (await _loadingFactory.ShowAsync("Inicio de sesión", "Espera un momento estamos validando tu usuario"))
             using (var client = _apiClientFactory.CreateClient())
             {
-                await Task.Delay(10000);
                 var result = await client
                     .AppendPath("account/SignIn")
                     .AddJsonBody(model)
