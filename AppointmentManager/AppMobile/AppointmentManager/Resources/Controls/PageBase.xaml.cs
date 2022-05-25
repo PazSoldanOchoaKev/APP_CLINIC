@@ -40,5 +40,14 @@ namespace AppointmentManager.Resources.Controls
             get => (View)GetValue(FotterProperty);
             set => SetValue(FotterProperty, value);
         }
+
+        public static readonly BindableProperty ScrollModeProperty =
+             BindableProperty.Create(nameof(ScrollMode), typeof(ScrollOrientation), typeof(PageBase), defaultValue: ScrollOrientation.Vertical);
+
+        public ScrollOrientation ScrollMode
+        {
+            get => (ScrollOrientation)GetValue(ScrollModeProperty);
+            set => SetValue(ScrollModeProperty, value);
+        }
     }
 }

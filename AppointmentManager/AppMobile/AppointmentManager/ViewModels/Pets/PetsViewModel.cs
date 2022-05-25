@@ -42,15 +42,19 @@ namespace AppointmentManager.ViewModels.Pets
 
 
         #region Commands
+
         public ICommand Confirmar => new Command(NavegateToRegistration);
         public ICommand RefreshCommand => new Command(OnNavigated);
+
+        #endregion
+
+        #region Methodos
+
         private async void NavegateToRegistration()
         {
             await _navigation.NavigateToAsync<AnimalInformationView>();
         }
-        #endregion
 
-        #region Methodos
         public async void OnNavigated()
         {
             var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
@@ -67,6 +71,7 @@ namespace AppointmentManager.ViewModels.Pets
                 IsRefresh = false;
             }
         }
+
         #endregion
     }
 }

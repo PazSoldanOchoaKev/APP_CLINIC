@@ -28,7 +28,7 @@
                                Margin="0,10,0,0"
                                StyleClass="SubTitleBold"/>
                     </Grid>
-                    <ScrollView Grid.Row="1">
+                    <ScrollView Grid.Row="1" Orientation="{Binding ScrollMode, Source={Reference Base}}">
                         <Grid Margin="{StaticResource MarginHorizontal}">
                             <ContentView Content="{Binding ContentBody, Source={Reference Base}}"/>
                         </Grid>
