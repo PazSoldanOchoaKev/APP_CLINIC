@@ -8,7 +8,7 @@ namespace App.Application
 {
     public interface IAccountManager
     {
-        Task<Result> RegisterAccountAsync(AccountRequestModel model);
+        Task<Result<Users>> RegisterAccountAsync(AccountRequestModel model);
         Result<Users> Authenticate(AuthModel model);
     }
 }

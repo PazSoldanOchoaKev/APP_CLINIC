@@ -25,10 +25,10 @@ namespace App.Application.Services
             _users = users;
         }
 
-        public async Task<Result> RegisterAccountAsync(AccountRequestModel model)
+        public async Task<Result<Users>> RegisterAccountAsync(AccountRequestModel model)
         {
             var passwordEncrypt = EncryptProvider.AESEncrypt(model.Password, passwordKey);
-            var result = await _users.AddAsync(new Users
+            var user = new Users
             {
                 Address = model.Address,
                 Document = model.Document,
@@ -41,12 +41,13 @@ namespace App.Application.Services
                     User = model.Email,
                     Password = passwordEncrypt
                 }
-            });
+            };
+            var result = await _users.AddAsync(user);
             if (!result)
             {
                 return Fail("Error al crear el usuario");
             }
-            return result;
+            return Ok(user);
         }
 
         public Result<Users> Authenticate(AuthModel model)

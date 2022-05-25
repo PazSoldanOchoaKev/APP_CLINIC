@@ -7,25 +7,26 @@
     HeaderTitle="Registar Datos"
     Title="Registrar Mascota"
     x:Class="AppointmentManager.Views.Access.AnimalInformationView">
-    <Grid>
+    <StackLayout>
         <StackLayout>
             <input:Entry Hint="Nombres Mascota" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"/>
-            <input:Entry Hint="Foto referencial" StyleClass="Text" Text="{Binding Photo, Mode=TwoWay}"/>
+            <input:Entry Hint="Especie" StyleClass="Text" Text="{Binding AnimalSpecie, Mode=TwoWay}"/>
             <input:ComboBox Hint="Seleccionar sexo" StyleClass="Combo"
-                        DisplayMemberPath=""
+                        DisplayMemberPath="Name"
                         SelectedItem="{Binding Gender, Mode=TwoWay}"
                         ItemsSource="{Binding Genders}"/>
             <Label Text="Especificacion del animal" StyleClass="Text"/>
             <input:Entry Hint="Color de la mascota" StyleClass="Text" Text="{Binding ColorAnimal, Mode=TwoWay}"/>
             <input:Entry Hint="Señas particulares" StyleClass="Text" Text="{Binding ParticularSigns, Mode=TwoWay}"/>
             <input:Entry Hint="Raza" StyleClass="Text" Text="{Binding Breeds, Mode=TwoWay}"/>
+            
         </StackLayout>
-    </Grid>
+        <Image Source="{Binding Image}"/>
+    </StackLayout>
     <ctrls:PageBase.Fotter>
-        <Grid ColumnDefinitions="*" ColumnSpacing="15">
-            <Button Text="Confirmar" Grid.Column="0"
-                    Command="{Binding Confirmar}"
-                    class="Secondary"/>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+            <Button Text="Agregar Foto" Grid.Column="0" Command="{Binding AddPhotoCommand}" class="Primary"/>
+            <Button Text="Confirmar" Grid.Column="1" Command="{Binding Confirmar}" class="Secondary"/>
         </Grid>
     </ctrls:PageBase.Fotter>
 </ctrls:PageBase>

@@ -1,6 +1,7 @@
 ﻿using AppointmentManager.Models;
 using Netcos.Extensions.Http;
 using Netcos.Mvvm;
+using Netcos.Xamarin.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,12 +20,16 @@ namespace AppointmentManager.ViewModels.Access
         private string document;
         private string telefono;
         private string address;
+        private readonly IAppNavigation _navigation;
         private readonly IApiClientFactory _apiClientFactory;
-
+        private readonly IDisplay _display;
         public PersonalInformationViewModel(
-            IApiClientFactory apiClientFactory)
+            IApiClientFactory apiClientFactory,
+            IDisplay display,
+            IAppNavigation navigation)
         {
             _apiClientFactory = apiClientFactory;
+            _navigation = navigation;
         }
 
         #region Properties
@@ -68,7 +73,18 @@ namespace AppointmentManager.ViewModels.Access
                 var result = await client
                     .AppendPath("account")
                     .AddJsonBody(Model)
-                    .PostAsync();
+                    .PostAsAsync<UserModel>();
+
+                if (result)
+                {
+                    await _navigation
+                       .GoToAsync("//Main")
+                       .NotifyAsync(result.Value);
+                }
+                else
+                {
+                    //mostrar mensaje de error
+                }
             }
         }
 

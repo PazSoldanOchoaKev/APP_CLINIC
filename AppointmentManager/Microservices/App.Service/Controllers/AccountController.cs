@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Application;
+using App.Domain.Entities;
 using App.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace App.Service.Controllers
         }
 
         [HttpPost]
-        public Task<Result> Resgister([FromBody] AccountRequestModel model)
+        public Task<Result<Users>> Resgister([FromBody] AccountRequestModel model)
         {
             return _accountManager.RegisterAccountAsync(model);
         }
