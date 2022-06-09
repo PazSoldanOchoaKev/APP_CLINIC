@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using AppointmentManager.Models;
 using AppointmentManager.Views.Access;
@@ -16,14 +17,17 @@ namespace AppointmentManager.ViewModels.Access
         private string userName;
         private string password;
         private readonly IApiClientFactory _apiClientFactory;
+        private readonly ILoadingFactory _loadingFactory;
 
         public SignInViewModel(
             IDisplay display,
+            ILoadingFactory loadingFactory,
             IAppNavigation navigation,
             IApiClientFactory apiClientFactory)
         {
             _navigation = navigation;
             _display = display;
+            _loadingFactory = loadingFactory;
             _apiClientFactory = apiClientFactory;
         }
 
@@ -54,6 +58,7 @@ namespace AppointmentManager.ViewModels.Access
                 Password = Password
             };
 
+            using (await _loadingFactory.ShowAsync("Inicio de sesión", "Espera un momento estamos validando tu usuario"))
             using (var client = _apiClientFactory.CreateClient())
             {
                 var result = await client
