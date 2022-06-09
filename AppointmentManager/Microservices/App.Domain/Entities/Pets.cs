@@ -35,5 +35,7 @@ namespace App.Domain.Entities
 
         [ForeignKey(nameof(UserId))]
         public Users Users { get; set; }
+
+        public ICollection<Appointment> Appointments { get; set; }
     }
 }

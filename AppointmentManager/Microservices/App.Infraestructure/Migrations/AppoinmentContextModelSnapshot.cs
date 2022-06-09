@@ -42,6 +42,40 @@ namespace App.Infraestructure.Migrations
                     b.ToTable("Access");
                 });
 
+            modelBuilder.Entity("App.Domain.Entities.Appointment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateAppointment")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("Hour")
+                        .HasColumnType("time");
+
+                    b.Property<int>("ListSizes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PetId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Specificaction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypeProcedures")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("Appointments");
+                });
+
             modelBuilder.Entity("App.Domain.Entities.Pets", b =>
                 {
                     b.Property<string>("Id")
@@ -129,6 +163,17 @@ namespace App.Infraestructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("App.Domain.Entities.Appointment", b =>
+                {
+                    b.HasOne("App.Domain.Entities.Pets", "Pets")
+                        .WithMany("Appointments")
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pets");
+                });
+
             modelBuilder.Entity("App.Domain.Entities.Pets", b =>
                 {
                     b.HasOne("App.Domain.Entities.Users", "Users")
@@ -147,6 +192,11 @@ namespace App.Infraestructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Access");
+                });
+
+            modelBuilder.Entity("App.Domain.Entities.Pets", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("App.Domain.Entities.Users", b =>

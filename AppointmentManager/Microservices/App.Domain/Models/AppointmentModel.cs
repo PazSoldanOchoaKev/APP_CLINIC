@@ -5,7 +5,7 @@ using System.Text;
 
 namespace App.Domain.Models
 {
-    class AppointmentModel: Appointment
+    public class AppointmentModel : Appointment
     {
     }
 }
