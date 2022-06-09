@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Application.Services
+namespace App.Domain.Models
 {
-    class AppointmentManager: Appointment
+    class AppointmentModel: Appointment
     {
     }
 }

@@ -23,13 +23,16 @@ namespace AppointmentManager.ViewModels.Access
         private readonly IAppNavigation _navigation;
         private readonly IApiClientFactory _apiClientFactory;
         private readonly IDisplay _display;
+        private readonly ILoadingFactory _loadingFactory;
         public PersonalInformationViewModel(
             IApiClientFactory apiClientFactory,
             IDisplay display,
-            IAppNavigation navigation)
+            IAppNavigation navigation,
+            ILoadingFactory loadingFactory)
         {
             _apiClientFactory = apiClientFactory;
             _navigation = navigation;
+            _loadingFactory = loadingFactory;
         }
 
         #region Properties
@@ -67,7 +70,7 @@ namespace AppointmentManager.ViewModels.Access
             Model.Document = Document;
             Model.PhoneNumber = Telefono;
             Model.Address = Address;
-
+            using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
             using (var client = _apiClientFactory.CreateClient())
             {
                 var result = await client

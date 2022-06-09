@@ -29,16 +29,20 @@ namespace AppointmentManager.ViewModels.Access
         private readonly IDisplay _display;
         private readonly ISecureStorage _storage;
         private readonly IAppNavigation _navigation;
+        private readonly ILoadingFactory _loadingFactory;
+
         public AnimalInformationViewModel(
             IApiClientFactory apiClientFactory,
             ISecureStorage storage,
             IAppNavigation navigation,
-            IDisplay display)
+            IDisplay display,
+            ILoadingFactory loadingFactory)
         {
             _apiClientFactory = apiClientFactory;
             _storage = storage;
             _display = display;
             _navigation = navigation;
+            _loadingFactory = loadingFactory;
         }
 
         #region Properties
@@ -95,7 +99,7 @@ namespace AppointmentManager.ViewModels.Access
                 Photo = Photo,
                 UserId = user.Id
             };
-
+            using (await _loadingFactory.ShowAsync("Registrando datos", "Espera un momento estamos registrando los datos"))
             using (var client = _apiClientFactory.CreateClient())
             {
                 var result = await client
