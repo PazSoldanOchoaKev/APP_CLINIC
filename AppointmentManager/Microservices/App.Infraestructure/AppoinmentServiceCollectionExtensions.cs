@@ -11,7 +11,7 @@ namespace App.Infraestructure
         {
             services
                 .AddDbContext<AppoinmentContext>("Appoinments")
-                .UseSqlServer(options => options.);
+                .UseSqlServer();
 
             return services;
         }

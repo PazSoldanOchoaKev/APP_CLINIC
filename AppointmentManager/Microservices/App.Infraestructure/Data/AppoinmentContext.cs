@@ -15,7 +15,7 @@ namespace App.Infraestructure.Data
         public DbSet<Users> Users { get; set; }
         public DbSet<Pets> Pets { get; set; }
 
-        public DbSet<Appointment> Appointments { get; set; }
+       public DbSet<Appointment> Appointments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
