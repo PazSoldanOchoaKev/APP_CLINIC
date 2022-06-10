@@ -12,7 +12,7 @@ namespace AppointmentManager.ViewModels.Register
         private string typeProcedure;
         private ObservableCollection<string> listSizes;
         private string listSize;
-        private DateTime dateTime;
+        private TimeSpan hour;
         private DateTime dateAppointment;
 
         public NewAppoinmentViewModel()
@@ -23,7 +23,7 @@ namespace AppointmentManager.ViewModels.Register
         public ObservableCollection<string> TypeProcedures { get => typeProcedures; set => SetProperty(ref typeProcedures, value); }
         public string TypeProcedure { get => typeProcedure; set => SetProperty(ref typeProcedure, value); }
         public DateTime DateAppointment { get => dateAppointment; set =>SetProperty(ref dateAppointment, value); }
-        public DateTime DateTime { get => dateTime; set => SetProperty(ref dateTime, value); }
+        public TimeSpan Hour { get => hour; set => SetProperty(ref hour, value); }
         public ObservableCollection<string> ListSizes { get => listSizes; set => SetProperty(ref listSizes, value); }
         public string ListSize { get => listSize; set => SetProperty(ref listSize, value); }
         #endregion

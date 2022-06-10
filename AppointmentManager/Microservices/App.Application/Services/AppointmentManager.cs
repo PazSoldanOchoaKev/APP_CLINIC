@@ -1,11 +1,52 @@
 ﻿using App.Domain.Entities;
+using App.Domain.Models;
+using Netcos;
+using Netcos.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using static Netcos.Result;
 
 namespace App.Application.Services
 {
-    class AppointmentManager: Appointment
+    internal class AppointmentManager : IAppointmentManager
     {
+        private readonly IRepository<Appointment> _appointments;
+        private readonly IRepository<Pets> _pets;
+
+        public AppointmentManager(
+            IRepository<Pets> pets,
+            IRepository<Appointment> appointment)
+        {
+            _appointments = appointment;
+            _pets = pets;
+        }
+        public async Task<Result> CreatAppointmentAsync(AppointmentModel model)
+        {
+            var result = await _appointments.AddAsync(model);
+            if (!result)
+            {
+                return Fail("Error al reservar");
+            }
+            return result;
+        }
+
+        public Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId)
+        {
+            return _appointments
+                .Join(_pets.AsEnumerable(), a => a.PetId, p => p.Id, (a, p) => new { a, p })
+                .Where(i => i.p.UserId == userId)
+                .Select(i => new Appointment
+                {
+                    DateAppointment = i.a.DateAppointment,
+                    Hour = i.a.Hour,
+                    Pets = i.p,
+                    Status = i.a.Status,
+                    Specificaction = i.a.Specificaction,
+                })
+                .ToList();
+        }
     }
 }
