@@ -52,7 +52,7 @@ namespace App.Application.Services
 
         public Result<Users> Authenticate(AuthModel model)
         {
-            var access = _accesses.FirstOrDefault(a => a.User == model.User);
+            var access = _accesses.FirstOrDefault(a => a.User.ToUpper() == model.User.ToUpper());
             if (access != null)
             {
                 var passwordDecrypt = EncryptProvider.AESDecrypt(access.Password, passwordKey);

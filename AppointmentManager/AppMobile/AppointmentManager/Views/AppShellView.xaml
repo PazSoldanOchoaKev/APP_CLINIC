@@ -8,6 +8,7 @@
     xmlns:access="clr-namespace:AppointmentManager.Views.Access"
     xmlns:pets="clr-namespace:AppointmentManager.Views.Pets"
     xmlns:register="clr-namespace:AppointmentManager.Views.Register"
+    xmlns:appoinment="clr-namespace:AppointmentManager.Views.Appoinments"
     Visual="Material"
     ios:Page.UseSafeArea="True"
     FlyoutHeaderBehavior="CollapseOnScroll"
@@ -43,7 +44,7 @@
                 icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
                 Title="Historial de reservas">
         <ShellContent Route="HistoryAppointment"
-                      ContentTemplate="{DataTemplate  register:}"/>
+                      ContentTemplate="{DataTemplate  appoinment:HistoryAppointmentView}"/>
     </FlyoutItem>
     
 </Shell>
