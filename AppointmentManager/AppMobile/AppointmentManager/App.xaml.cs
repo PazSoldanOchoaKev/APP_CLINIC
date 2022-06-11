@@ -30,6 +30,7 @@ namespace AppointmentManager
             services.AddViewModelToRoute<NewAppoinmentViewModel>("New");
             services.AddRoute<SignUpView, SignUpViewModel>();
             services.AddViewModelToRoute<PetsViewModel>("Pets");
+            services.AddViewModelToRoute<HistoryAppointmentViewModel>("HistoryAppointment");
             services.AddRoute<AnimalInformationView, AnimalInformationViewModel>();
             services.AddRoute<PersonalInformationView, PersonalInformationViewModel>();
             services

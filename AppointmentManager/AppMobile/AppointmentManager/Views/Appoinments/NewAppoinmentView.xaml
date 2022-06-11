@@ -14,6 +14,10 @@
                         DisplayMemberPath=""
                         SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
                         ItemsSource="{Binding TypeProcedures}"/>
+            <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
+                        DisplayMemberPath=""
+                        SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
+                        ItemsSource="{Binding TypeProcedures}"/>
             <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"/>
             <input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>
             <input:ComboBox Hint="Escoger tamaño" StyleClass="Combo"

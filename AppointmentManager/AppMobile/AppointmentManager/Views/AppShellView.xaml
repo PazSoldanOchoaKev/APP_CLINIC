@@ -39,5 +39,11 @@
         <ShellContent Route="Pets"
                       ContentTemplate="{DataTemplate pets:PetsView}"/>
     </FlyoutItem>
-
+    <FlyoutItem icon:Font.Icon="Plus"
+                icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
+                Title="Historial de reservas">
+        <ShellContent Route="HistoryAppointment"
+                      ContentTemplate="{DataTemplate  register:}"/>
+    </FlyoutItem>
+    
 </Shell>

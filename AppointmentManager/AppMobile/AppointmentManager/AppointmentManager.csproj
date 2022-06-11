@@ -38,8 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="Views\Appoinments\" />
-    <Folder Include="ViewModels\Register\" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\Themes\" />
     <Folder Include="Resources\Styles\" />
@@ -64,6 +62,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Access\PersonalInformationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Appoinments\HistoryAppointmentView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pets\PetsView.xaml">
