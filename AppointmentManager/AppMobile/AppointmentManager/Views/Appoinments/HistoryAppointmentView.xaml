@@ -11,22 +11,30 @@
 
     <Grid>
         <StackLayout>
-            <input:Entry Hint="Nombres" StyleClass="Text" Text="{Binding Name, Mode=TwoWay}"/>
-            <input:Entry Hint="Apellidos" StyleClass="Text" Text="{Binding Apellido, Mode=TwoWay}"/>
-            <input:ComboBox Hint="Tipo de documento" StyleClass="Combo"
-                            DisplayMemberPath="Name"
-                            SelectedItem="{Binding TypeDocument, Mode=TwoWay}"
-                            ItemsSource="{Binding TypeDocuments}"/>
-            <input:Masked Hint="Número de documento" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"/>
-            <input:Masked Hint="Numero de telefono" StyleClass="Text" Text="{Binding Telefono, Mode=TwoWay}"/>
-            <input:Entry Hint="Direccion" StyleClass="Text" Text="{Binding Address, Mode=TwoWay}"/>
-         </StackLayout>
+            <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
+                <CollectionView ItemsSource="{Binding Pets}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="60, *">
+                                <Image Grid.Column="0" Source="{Binding Image}"/>
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="{Binding PetName}" StyleClass="Title"/>
+                                    <Label Text="{Binding TypeProcedure}" StyleClass="Title"/>
+                                    <Label Text="{Binding DateTime}" StyleClass="Title"/>
+                                    <Label Text="{Binding Hour}"/>
+                                    <Label Text="{Binding Status}"/>
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
     </Grid>
+    
     <ctrls:PageBase.Fotter>
             <Grid ColumnDefinitions="*" ColumnSpacing="15">
-                <Button Text="Confirmar" Grid.Column="0"
-                    Command="{Binding Confirmar}"
-                    class="Secondary"/>
+                
             </Grid>
       </ctrls:PageBase.Fotter>
 

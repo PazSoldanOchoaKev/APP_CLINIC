@@ -8,6 +8,7 @@ namespace AppointmentManager.Models
 {
     public class AnimalInformationModel
     {
+        public string Id { get; set; }
         public string PetName { get; set; }
         public string AninalSpecie { get; set; }
         public GenderType Gender { get; set; }
