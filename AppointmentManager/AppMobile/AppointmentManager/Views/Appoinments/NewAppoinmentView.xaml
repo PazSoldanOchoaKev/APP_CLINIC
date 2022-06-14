@@ -10,10 +10,10 @@
 
     <Grid RowDefinitions="*, *, *">
         <StackLayout Grid.Row="1">
-            <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
-                        DisplayMemberPath=""
-                        SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
-                        ItemsSource="{Binding TypeProcedures}"/>
+            <input:ComboBox Hint="Seleccionar Animal" StyleClass="Combo"
+                        DisplayMemberPath="PetName"
+                        SelectedItem="{Binding Pet, Mode=TwoWay}"
+                        ItemsSource="{Binding Pets}"/>
             <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
                         DisplayMemberPath=""
                         SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
