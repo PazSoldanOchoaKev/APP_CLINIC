@@ -9,29 +9,28 @@
     ScrollMode="Neither"
     x:Class="AppointmentManager.Views.Appoinments.HistoryAppointmentView">
 
-    <Grid>
-        <StackLayout>
-            <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
-                <CollectionView ItemsSource="{Binding Pets}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid ColumnDefinitions="60, *">
-                                <Image Grid.Column="0" Source="{Binding Image}"/>
-                                <StackLayout Grid.Column="1">
-                                    <Label Text="{Binding PetName}" StyleClass="Title"/>
-                                    <Label Text="{Binding TypeProcedure}" StyleClass="Title"/>
-                                    <Label Text="{Binding DateTime}" StyleClass="Title"/>
-                                    <Label Text="{Binding Hour}"/>
-                                    <Label Text="{Binding Status}"/>
-                                </StackLayout>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
-        </StackLayout>
-    </Grid>
-    
+
+    <StackLayout>
+        <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Appointment}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="60, *">
+                            <Image Grid.Column="0" Source="{Binding Pets.Image}"/>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="{Binding Pets.PetName}" StyleClass="Title"/>
+                                <Label Text="{Binding TypeProcedure}" StyleClass="Title"/>
+                                <Label Text="{Binding DateTime}" StyleClass="Title"/>
+                                <Label Text="{Binding Hour}"/>
+                                <Label Text="{Binding Status}"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+
     <ctrls:PageBase.Fotter>
             <Grid ColumnDefinitions="*" ColumnSpacing="15">
                 
