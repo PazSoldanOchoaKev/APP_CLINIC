@@ -10,7 +10,7 @@
     <Grid>
         <StackLayout>
             <input:Entry Hint="Correo" StyleClass="Text" Text="{Binding Email, Mode=TwoWay}"/>
-            <input:Entry Hint="Contraseña" IsPassword="True" Text="{Binding Password, Mode=TwoWay}"/>
+            <input:Entry Hint="Contraseña" StyleClass="Text" IsPassword="True" Text="{Binding Password, Mode=TwoWay}"/>
             
         </StackLayout>
     </Grid>
