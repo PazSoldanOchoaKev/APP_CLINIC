@@ -13,10 +13,10 @@ namespace AppointmentManager.ViewModels.Register
 {
     public class NewAppoinmentViewModel : ViewModelBase, INavigated
     {
-        private ObservableCollection<string> typeProcedures;
+        private ObservableCollection<TypeProceduresModel> typeProceduresModels;
         private string typeProcedure;
-        private ObservableCollection<string> listSizes;
-        private string listSize;
+        private ObservableCollection<ListSizesModel> listSizes;
+        private string size;
         private TimeSpan hour;
         private DateTime dateAppointment;
         private ObservableCollection<AnimalInformationModel> pets;
@@ -41,13 +41,14 @@ namespace AppointmentManager.ViewModels.Register
         #region Properties
         public ObservableCollection<AnimalInformationModel> Pets { get => pets; set => SetProperty(ref pets, value); }
         public AnimalInformationModel Pet { get => pet; set => SetProperty(ref pet, value); }
-        public ObservableCollection<string> TypeProcedures { get => typeProcedures; set => SetProperty(ref typeProcedures, value); }
+        public ObservableCollection<TypeProceduresModel>  TypeProceduresModels{ get => typeProceduresModels; set => SetProperty(ref typeProceduresModels, value); }
         public string TypeProcedure { get => typeProcedure; set => SetProperty(ref typeProcedure, value); }
         public DateTime DateAppointment { get => dateAppointment; set => SetProperty(ref dateAppointment, value); }
         public TimeSpan Hour { get => hour; set => SetProperty(ref hour, value); }
-        public ObservableCollection<string> ListSizes { get => listSizes; set => SetProperty(ref listSizes, value); }
-        public string ListSize { get => listSize; set => SetProperty(ref listSize, value); }
-        private SignUpModel Model { get; set; }
+        public ObservableCollection<ListSizesModel> ListSizes { get => listSizes; set => SetProperty(ref listSizes, value); }
+        public string Size { get => size; set => SetProperty(ref size, value); }
+
+
         #endregion
 
         #region Commands
@@ -57,15 +58,27 @@ namespace AppointmentManager.ViewModels.Register
         #region Methodos
         public async void OnNavigated()
         {
-            TypeProcedures = new ObservableCollection<string>(new string[] { "BAÑO MEDICADO", "BAÑO Y CORTE", "CORTE DE UÑAS" });
-            ListSizes = new ObservableCollection<string>(new string[] { " ANIMAL PEQUEÑO(30)", "ANIMAL MEDIANOS (40)", "ANIMAL GRANDES(45)" });
+            TypeProceduresModels = new ObservableCollection<TypeProceduresModel>(new TypeProceduresModel[] {
+                new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_MEDICADO, Name = "BAÑO MEDICADO" },
+                new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_Y_CORTE, Name = "BAÑO Y CORTE" },
+                new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.CORTE_DE_UÑAS, Name = "CORTE DE UÑAS" }
+            });
+
+           
+            ListSizes = new ObservableCollection<ListSizesModel>(new ListSizesModel[] 
+            {
+                new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_PEQUEÑO_30, Name= "ANIMAL PEQUEÑO(30)"},
+                new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_MEDIANOS_40, Name= "ANIMAL MEDIANOS (40)" },
+                new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_GRANDES_45, Name= "ANIMAL GRANDES(45)" }
+                
+            });
 
             var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
             using (await _loadingFactory.ShowAsync("Listando datos","Espere un momento estmos obteniendo los datos"))
             using (var client = _apiClientFactory.CreateClient())
             {
                 var result = await client
-                    .AppendPath($"pet/{user.Id}")
+                    .AppendPath($"pets/{user.Id}")
                     .GetAsAsync<List<AnimalInformationModel>>();
                 if (result)
                 {
@@ -78,12 +91,19 @@ namespace AppointmentManager.ViewModels.Register
 
         public async void Reserva()
         {
+            var model = new NewApointmentModel();
+            model.Hour = Hour;
+            model.sizes = Size;
+            model.PetId = Pet.Id;
+            model.TypeProcedure = TypeProcedure;
+            model.Status = AppointmentStatus.PENDING;
+
             using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
             using (var client = _apiClientFactory.CreateClient())
             {
                 var result = await client
                     .AppendPath("account")
-                    .AddJsonBody(Model)
+                    .AddJsonBody(model)
                     .PostAsAsync<UserModel>();
 
                 if (result)
