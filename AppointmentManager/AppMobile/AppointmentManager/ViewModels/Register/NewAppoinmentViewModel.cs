@@ -41,7 +41,7 @@ namespace AppointmentManager.ViewModels.Register
         #region Properties
         public ObservableCollection<AnimalInformationModel> Pets { get => pets; set => SetProperty(ref pets, value); }
         public AnimalInformationModel Pet { get => pet; set => SetProperty(ref pet, value); }
-        public ObservableCollection<TypeProceduresModel>  TypeProceduresModels{ get => typeProceduresModels; set => SetProperty(ref typeProceduresModels, value); }
+        public ObservableCollection<TypeProceduresModel> TypeProceduresModels { get => typeProceduresModels; set => SetProperty(ref typeProceduresModels, value); }
         public string TypeProcedure { get => typeProcedure; set => SetProperty(ref typeProcedure, value); }
         public DateTime DateAppointment { get => dateAppointment; set => SetProperty(ref dateAppointment, value); }
         public TimeSpan Hour { get => hour; set => SetProperty(ref hour, value); }
@@ -64,17 +64,17 @@ namespace AppointmentManager.ViewModels.Register
                 new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.CORTE_DE_UÑAS, Name = "CORTE DE UÑAS" }
             });
 
-           
-            ListSizes = new ObservableCollection<ListSizesModel>(new ListSizesModel[] 
+
+            ListSizes = new ObservableCollection<ListSizesModel>(new ListSizesModel[]
             {
                 new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_PEQUEÑO_30, Name= "ANIMAL PEQUEÑO(30)"},
                 new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_MEDIANOS_40, Name= "ANIMAL MEDIANOS (40)" },
                 new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_GRANDES_45, Name= "ANIMAL GRANDES(45)" }
-                
+
             });
 
             var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
-            using (await _loadingFactory.ShowAsync("Listando datos","Espere un momento estmos obteniendo los datos"))
+            using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los datos"))
             using (var client = _apiClientFactory.CreateClient())
             {
                 var result = await client

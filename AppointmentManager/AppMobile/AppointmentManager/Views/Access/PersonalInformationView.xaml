@@ -16,8 +16,8 @@
                         DisplayMemberPath="Name"
                         SelectedItem="{Binding TypeDocument, Mode=TwoWay}"
                         ItemsSource="{Binding TypeDocuments}"/>
-            <input:Masked Hint="Número de documento" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"/>
-            <input:Masked Hint="Numero de telefono" StyleClass="Text" Text="{Binding Telefono, Mode=TwoWay}"/>
+            <input:Masked Hint="Número de documento" Mask="00000000" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"/>
+            <input:Masked Hint="Numero de telefono" Mask="000-000-000" StyleClass="Text" Text="{Binding Telefono, Mode=TwoWay}"/>
             <input:Entry Hint="Direccion" StyleClass="Text" Text="{Binding Address, Mode=TwoWay}"/>
         </StackLayout>
     </Grid>
