@@ -15,9 +15,9 @@
     <None Remove="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Netcos.Extensions.DependencyInjection.ConfigurationExtensions" Version="3.0.0-preview-20220609.1" />
-    <PackageReference Include="Netcos.Data.SqlServer" Version="3.0.0-preview-20220524.1" />
-    <PackageReference Include="Netcos.EntityFrameworkCore.Abstractions" Version="3.0.0-preview-20220609.1" />
+    <PackageReference Include="Netcos.Extensions.DependencyInjection.ConfigurationExtensions" Version="3.0.0-preview-20220610.1" />
+    <PackageReference Include="Netcos.Data.SqlServer" Version="3.0.0-preview-20220611.1" />
+    <PackageReference Include="Netcos.EntityFrameworkCore.Abstractions" Version="3.0.0-preview-20220610.1" />
     <PackageReference Include="Netcos.Security.Cryptography" Version="3.0.0-preview-20220524.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.16" />
   </ItemGroup>
