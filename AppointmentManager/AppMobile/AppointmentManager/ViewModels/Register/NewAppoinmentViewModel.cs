@@ -14,9 +14,9 @@ namespace AppointmentManager.ViewModels.Register
     public class NewAppoinmentViewModel : ViewModelBase, INavigated
     {
         private ObservableCollection<TypeProceduresModel> typeProceduresModels;
-        private string typeProcedure;
+        private TypeProceduresModel typeProcedure;
         private ObservableCollection<ListSizesModel> listSizes;
-        private string size;
+        private ListSizesModel size;
         private TimeSpan hour;
         private DateTime dateAppointment;
         private ObservableCollection<AnimalInformationModel> pets;
@@ -42,11 +42,11 @@ namespace AppointmentManager.ViewModels.Register
         public ObservableCollection<AnimalInformationModel> Pets { get => pets; set => SetProperty(ref pets, value); }
         public AnimalInformationModel Pet { get => pet; set => SetProperty(ref pet, value); }
         public ObservableCollection<TypeProceduresModel> TypeProceduresModels { get => typeProceduresModels; set => SetProperty(ref typeProceduresModels, value); }
-        public string TypeProcedure { get => typeProcedure; set => SetProperty(ref typeProcedure, value); }
+        public TypeProceduresModel TypeProcedure { get => typeProcedure; set => SetProperty(ref typeProcedure, value); }
         public DateTime DateAppointment { get => dateAppointment; set => SetProperty(ref dateAppointment, value); }
         public TimeSpan Hour { get => hour; set => SetProperty(ref hour, value); }
         public ObservableCollection<ListSizesModel> ListSizes { get => listSizes; set => SetProperty(ref listSizes, value); }
-        public string Size { get => size; set => SetProperty(ref size, value); }
+        public ListSizesModel Size { get => size; set => SetProperty(ref size, value); }
 
 
         #endregion
@@ -93,18 +93,19 @@ namespace AppointmentManager.ViewModels.Register
         {
             var model = new NewApointmentModel();
             model.Hour = Hour;
-            model.sizes = Size;
+            model.sizes = Size.Type;
             model.PetId = Pet.Id;
-            model.TypeProcedure = TypeProcedure;
+            model.TypeProcedure = TypeProcedure.Type;
+            model.DateAppointment = DateAppointment;
             model.Status = AppointmentStatus.PENDING;
 
             using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
             using (var client = _apiClientFactory.CreateClient())
             {
                 var result = await client
-                    .AppendPath("account")
+                    .AppendPath("appointment")
                     .AddJsonBody(model)
-                    .PostAsAsync<UserModel>();
+                    .PostAsync();
 
                 if (result)
                 {

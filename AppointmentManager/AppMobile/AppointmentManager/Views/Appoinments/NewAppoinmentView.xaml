@@ -8,24 +8,24 @@
     Title="Reserva"
     x:Class="AppointmentManager.Views.Register.NewAppoinmentView">
 
-    <Grid RowDefinitions="*, *, *">
+    
         <StackLayout Grid.Row="1">
             <input:ComboBox Hint="Seleccionar Animal" StyleClass="Combo"
                         DisplayMemberPath="PetName"
                         SelectedItem="{Binding Pet, Mode=TwoWay}"
                         ItemsSource="{Binding Pets}"/>
             <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
-                        DisplayMemberPath=""
+                        DisplayMemberPath="Name"
                         SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
-                        ItemsSource="{Binding TypeProcedures}"/>
+                        ItemsSource="{Binding TypeProceduresModels}"/>
             <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"/>
             <input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>
             <input:ComboBox Hint="Escoger tamaño" StyleClass="Combo"
-                        DisplayMemberPath=""
-                        SelectedItem="{Binding ListSize, Mode=TwoWay}"
+                        DisplayMemberPath="Name"
+                        SelectedItem="{Binding Size, Mode=TwoWay}"
                         ItemsSource="{Binding  ListSizes}"/>
         </StackLayout>
-    </Grid>
+   
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*" ColumnSpacing="15">
             <Button Text="Realizar reservar" Grid.Column="0"
