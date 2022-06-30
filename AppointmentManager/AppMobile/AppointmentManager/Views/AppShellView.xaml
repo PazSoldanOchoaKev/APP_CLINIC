@@ -14,6 +14,7 @@
     FlyoutHeaderBehavior="CollapseOnScroll"
     Shell.NavBarHasShadow="False"
     Shell.TabBarIsVisible="False"
+    FlyoutIsPresented="{Binding IsFlyoutOpen}"
     x:Class="AppointmentManager.Views.AppShellView">
 
     <TabBar>
@@ -28,12 +29,16 @@
                       ContentTemplate="{DataTemplate views:MainView}"/>
     </FlyoutItem>
 
-    <FlyoutItem icon:Font.Icon="Plus"
+    <!--<FlyoutItem icon:Font.Icon="Plus"
                 icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
-                Title="Reserva">
+                Title="">
         <ShellContent Route="New"
                       ContentTemplate="{DataTemplate register:NewAppoinmentView}"/>
-    </FlyoutItem>
+    </FlyoutItem>-->
+
+    <MenuItem Text="Reserva"
+              icon:Font.Icon="Plus"
+              Command="{Binding AppoinmentCommand}"/>
     <FlyoutItem icon:Font.Icon="Plus"
                 icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
                 Title="Mis Mascotas">
