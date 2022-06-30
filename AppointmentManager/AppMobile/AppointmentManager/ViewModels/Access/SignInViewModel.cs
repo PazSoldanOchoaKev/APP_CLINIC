@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace AppointmentManager.ViewModels.Access
 {
-    public class SignInViewModel : ViewModelBase
+    public class SignInViewModel : ViewModelBase, INavigated
     {
         private readonly IAppNavigation _navigation;
         private readonly IDisplay _display;
@@ -97,6 +97,14 @@ namespace AppointmentManager.ViewModels.Access
                     }
                 }
             }
+        }
+
+        public void OnNavigated()
+        {
+#if DEBUG
+            UserName = "stalin_kevin@hotmail.com";
+            Password = "p4SSword*123";
+#endif
         }
         #endregion
     }

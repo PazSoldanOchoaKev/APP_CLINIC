@@ -18,8 +18,13 @@
                         DisplayMemberPath="Name"
                         SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
                         ItemsSource="{Binding TypeProceduresModels}"/>
-            <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"/>
-            <input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>
+            <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"
+                              MinimumDate="{Binding Minimun}"
+                              StyleClass="Text"/>
+            <!--<input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>-->
+            <input:ComboBox Hint="Hora" StyleClass="Combo"
+                            SelectedItem="{Binding Hour, Mode=TwoWay}"
+                            ItemsSource="{Binding Hours}"/>
             <input:ComboBox Hint="Escoger tamaño" StyleClass="Combo"
                         DisplayMemberPath="Name"
                         SelectedItem="{Binding Size, Mode=TwoWay}"

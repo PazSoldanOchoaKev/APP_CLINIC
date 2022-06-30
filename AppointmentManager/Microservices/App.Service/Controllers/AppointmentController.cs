@@ -31,6 +31,12 @@ namespace App.Service.Controllers
         {
             return _appointmentManager.GetAppointmentByUser(userId);
         }
-           
+
+        [HttpGet("avaibalehours")]
+        public Result GetAvailableHours(DateTime date)
+        {
+            return _appointmentManager.GetAvailableHours(date);
+        }
+
     }
 }

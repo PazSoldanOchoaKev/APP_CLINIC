@@ -39,5 +39,13 @@ namespace App.Application.Services
         {
             return _appointments.Include(a => a.Pets).Where(a => a.Pets.UserId == userId).ToList();
         }
+
+        public Result<IEnumerable<string>> GetAvailableHours(DateTime date)
+        {
+            var hours = Enumerable.Range(9, 9).Select(item => TimeSpan.FromHours(item));
+            var usedHours = _appointments.Where(a => a.DateAppointment == date).Select(a => a.Hour).ToList();
+            var availableHours = hours.Where(h => !usedHours.Contains(h)).Select(item => DateTime.MinValue.AddHours(item.Hours).ToString("hh:mm tt"));
+            return Ok(availableHours);
+        }
     }
 }

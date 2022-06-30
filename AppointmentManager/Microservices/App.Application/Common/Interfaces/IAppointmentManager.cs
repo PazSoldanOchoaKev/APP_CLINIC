@@ -12,5 +12,6 @@ namespace App.Application
     {
         Task<Result> CreatAppointmentAsync(AppointmentModel model);
         Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId);
+        Result<IEnumerable<string>> GetAvailableHours(DateTime date);
     }
 }
