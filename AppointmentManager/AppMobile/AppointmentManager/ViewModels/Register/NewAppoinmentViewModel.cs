@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 using System.Threading.Tasks;
+using FluentValidation;
 
 namespace AppointmentManager.ViewModels.Register
 {
@@ -26,15 +27,18 @@ namespace AppointmentManager.ViewModels.Register
         private AnimalInformationModel pet;
         private DateTime minimun;
         private ObservableCollection<string> hours;
+        private int selectIndex;
         private readonly ILoadingFactory _loadingFactory;
         private readonly IApiClientFactory _apiClientFactory;
         private readonly IAppNavigation _navigation;
         private readonly ISecureStorage _storage;
         private readonly IDisplay _display;
+        private readonly IValidationFactory _validationFactory;
 
         public NewAppoinmentViewModel(
             IAppNavigation navigation,
             ILoadingFactory loadingFactory,
+            IValidationFactory validationFactory,
             IDisplay display,
             IApiClientFactory apiClientFactory,
             ISecureStorage storage)
@@ -44,6 +48,7 @@ namespace AppointmentManager.ViewModels.Register
             _apiClientFactory = apiClientFactory;
             _storage = storage;
             _display = display;
+            _validationFactory = validationFactory;
         }
 
         #region Properties
@@ -57,18 +62,21 @@ namespace AppointmentManager.ViewModels.Register
         public ObservableCollection<ListSizesModel> ListSizes { get => listSizes; set => SetProperty(ref listSizes, value); }
         public ListSizesModel Size { get => size; set => SetProperty(ref size, value); }
         public DateTime Minimun { get => minimun; set => SetProperty(ref minimun, value); }
-
+        public int SelectIndex { get => selectIndex; set => SetProperty(ref selectIndex, value); }
 
         #endregion
 
         #region Commands
+
         public ICommand Reservar => new Command(Reserva);
+        
         #endregion
 
         #region Methodos
+
         public async void OnNavigated()
         {
-            Minimun = DateTime.Now;
+            DateAppointment = Minimun = DateTime.Now;
             TypeProceduresModels = new ObservableCollection<TypeProceduresModel>(new TypeProceduresModel[] {
                 new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_MEDICADO, Name = "BAÑO MEDICADO" },
                 new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_Y_CORTE, Name = "BAÑO Y CORTE" },
@@ -84,8 +92,6 @@ namespace AppointmentManager.ViewModels.Register
 
             });
 
-            Hours = new ObservableCollection<string>();
-
             var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
             using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los datos"))
             {
@@ -99,18 +105,23 @@ namespace AppointmentManager.ViewModels.Register
                         Pets = new ObservableCollection<AnimalInformationModel>(result.Value);
                     }
                 }
-                await loadAvailableHoursAsync();
+                //await loadAvailableHoursAsync();
             }
+            Pet = null;
+            TypeProcedure = null;
+            Hour = null;
+            Size = null;
         }
 
         private async Task loadAvailableHoursAsync()
         {
             using (var client = _apiClientFactory.CreateClient())
             {
+                var date = DateAppointment.ToString("MM/dd/yyyy");
                 var result = await client
                     .AppendPath("appointment")
                     .AppendPath("avaibalehours")
-                    .AddQueryParameter("date", DateAppointment.ToShortDateString())
+                    .AddQueryParameter("date", date)
                     .GetAsAsync<List<string>>();
                 if (result)
                     Hours = new ObservableCollection<string>(result.Value);
@@ -122,39 +133,65 @@ namespace AppointmentManager.ViewModels.Register
 
         private async void OnDateChanged(DateTime date)
         {
+            Hour = null;
             using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los horarios disponibles!"))
             {
                 await loadAvailableHoursAsync();
             }
         }
 
+        private bool Validate()
+        {
+            return _validationFactory.Create<NewAppoinmentViewModel>("NewAppoinmentForm")
+                .AddRule(n => n.Pet, n => n
+                .NotEmpty()
+                .WithMessage("Selecciona una mascota"))
+                .AddRule(p => p.TypeProcedure, p => p
+                .NotEmpty()
+                .WithMessage("Selecciona un tipo de procedimiento"))
+                .AddRule(d => d.DateAppointment, d => d
+                .NotEmpty()
+                .WithMessage("Selecciona un dia de cita"))
+                .AddRule(h => h.Hour, h => h
+                .NotEmpty()
+                .WithMessage("Seleccione un horario"))
+                .AddRule(s => s.Size, s => s
+                .NotEmpty()
+                .WithMessage("Selecciona un tamaño"))
+                .Validate();
+
+        }
+
         public async void Reserva()
         {
-            var model = new NewApointmentModel();
-            model.Hour = DateTime.ParseExact(Hour, "hh:mm tt", CultureInfo.InvariantCulture).TimeOfDay;
-            model.sizes = Size.Type;
-            model.PetId = Pet.Id;
-            model.TypeProcedure = TypeProcedure.Type;
-            model.DateAppointment = DateAppointment;
-            model.Status = AppointmentStatus.PENDING;
-
-            using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
-            using (var client = _apiClientFactory.CreateClient())
+            if (Validate())
             {
-                var result = await client
-                    .AppendPath("appointment")
-                    .AddJsonBody(model)
-                    .PostAsync();
+                var model = new NewApointmentModel();
+                model.Hour = DateTime.ParseExact(Hour, "hh:mm tt", CultureInfo.InvariantCulture).TimeOfDay;
+                model.sizes = Size.Type;
+                model.PetId = Pet.Id;
+                model.TypeProcedure = TypeProcedure.Type;
+                model.DateAppointment = DateAppointment;
+                model.Status = AppointmentStatus.PENDING;
 
-                if (result)
+                using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
+                using (var client = _apiClientFactory.CreateClient())
                 {
-                    await _navigation
-                       .GoToAsync("//Main")
-                       .NotifyAsync(result.Value);
-                }
-                else
-                {
-                    //mostrar mensaje de error
+                    var result = await client
+                        .AppendPath("appointment")
+                        .AddJsonBody(model)
+                        .PostAsync();
+
+                    if (result)
+                    {
+                        await _navigation
+                           .GoToAsync("//Main")
+                           .NotifyAsync(result.Value);
+                    }
+                    else
+                    {
+                        //mostrar mensaje de error
+                    }
                 }
             }
         }

@@ -19,6 +19,7 @@
     <PackageReference Include="Netcos.Xamarin.Forms.Icons.MaterialDesignIcons" Version="3.0.0-preview-20220629.1" />
     <PackageReference Include="Netcos.Xamarin.Forms.InputLayout" Version="3.0.0-preview-20220629.1" />
     <PackageReference Include="Netcos.Xamarin.Forms.Validations" Version="3.0.0-preview-20220629.1" />
+    <PackageReference Include="Netcos.Net.Http" Version="3.0.0-preview-20220629.2" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\" />
@@ -37,6 +38,7 @@
     <None Remove="Resources\Controls\" />
     <None Remove="Netcos.Xamarin.Forms.InputLayout" />
     <None Remove="Netcos.Xamarin.Forms.Validations" />
+    <None Remove="Netcos.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

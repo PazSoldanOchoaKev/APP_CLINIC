@@ -4,32 +4,42 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+    xmlns:vd="clr-namespace:Netcos.Xamarin.Forms.Validations;assembly=Netcos.Xamarin.Forms.Validations"
     HeaderTitle="Reserva de cita"
     Title="Reserva"
     x:Class="AppointmentManager.Views.Register.NewAppoinmentView">
 
-    
-        <StackLayout Grid.Row="1">
+
+    <vd:ValidationForm  Grid.Row="1" GroupName="NewAppoinmentForm">
             <input:ComboBox Hint="Seleccionar Animal" StyleClass="Combo"
                         DisplayMemberPath="PetName"
                         SelectedItem="{Binding Pet, Mode=TwoWay}"
-                        ItemsSource="{Binding Pets}"/>
+                        ItemsSource="{Binding Pets}"
+                            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
+                        vd:Validate.ErrorProperty="Pet"/>
             <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
                         DisplayMemberPath="Name"
+                            vd:Validate.ErrorProperty="TypeProcedure"
                         SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
+                            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
                         ItemsSource="{Binding TypeProceduresModels}"/>
             <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"
                               MinimumDate="{Binding Minimun}"
+                              vd:Validate.ErrorProperty="DateAppointment"
                               StyleClass="Text"/>
             <!--<input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>-->
             <input:ComboBox Hint="Hora" StyleClass="Combo"
                             SelectedItem="{Binding Hour, Mode=TwoWay}"
+                            vd:Validate.ErrorProperty="Hour"
+                            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
                             ItemsSource="{Binding Hours}"/>
             <input:ComboBox Hint="Escoger tamaño" StyleClass="Combo"
                         DisplayMemberPath="Name"
                         SelectedItem="{Binding Size, Mode=TwoWay}"
-                        ItemsSource="{Binding  ListSizes}"/>
-        </StackLayout>
+                        ItemsSource="{Binding  ListSizes}"
+                            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
+                        vd:Validate.ErrorProperty="Size"/>
+    </vd:ValidationForm>
    
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*" ColumnSpacing="15">

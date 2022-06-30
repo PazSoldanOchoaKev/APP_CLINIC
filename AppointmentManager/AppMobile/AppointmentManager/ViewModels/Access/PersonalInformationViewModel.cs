@@ -1,4 +1,5 @@
 ﻿using AppointmentManager.Models;
+using FluentValidation;
 using Netcos.Extensions.Http;
 using Netcos.Mvvm;
 using Netcos.Xamarin.Forms;
@@ -24,8 +25,10 @@ namespace AppointmentManager.ViewModels.Access
         private readonly IApiClientFactory _apiClientFactory;
         private readonly IDisplay _display;
         private readonly ILoadingFactory _loadingFactory;
+        private readonly IValidationFactory _validationFactory;
         public PersonalInformationViewModel(
             IApiClientFactory apiClientFactory,
+            IValidationFactory validationFactory,
             IDisplay display,
             IAppNavigation navigation,
             ILoadingFactory loadingFactory)
@@ -33,6 +36,7 @@ namespace AppointmentManager.ViewModels.Access
             _apiClientFactory = apiClientFactory;
             _navigation = navigation;
             _loadingFactory = loadingFactory;
+            _validationFactory = validationFactory;
         }
 
         #region Properties
@@ -61,34 +65,62 @@ namespace AppointmentManager.ViewModels.Access
                 new DocumentTypeModel { Type = DocumentType.CE, Name = "CARNET DE EXTRANJERIA" }
             });
         }
+        private bool PersonalInformationValidate()
+        {
+            return _validationFactory.Create<PersonalInformationViewModel>("PersonalInformationForm")
+                .AddRule(n => n.Name, n => n
+                .NotEmpty()
+                .WithMessage("Ingrese un nombre"))
+                .AddRule(a => a.Apellido, a => a
+                .NotEmpty()
+                .WithMessage("Ingrese un Apellido"))
+                .AddRule(t => t.TypeDocument, t => t
+                .NotEmpty()
+                .WithMessage("Seleccione un tipo de documento"))
+                .AddRule(d => d.Document, d => d
+                .NotEmpty()
+                .WithMessage("Ingrese su documento"))
+                .AddRule(f => f.Telefono, f => f
+                .NotEmpty()
+                .WithMessage("Ingrese su telefono"))
+                .AddRule(j => j.Address, j => j
+                .NotEmpty()
+                .WithMessage("Ingrese su direccion"))
+                .Validate();
 
+        }
         public async void Confirm()
         {
-            Model.FirstName = Name;
-            Model.LastName = Apellido;
-            Model.TypeDocument = TypeDocument.Type;
-            Model.Document = Document;
-            Model.PhoneNumber = Telefono;
-            Model.Address = Address;
-            using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
-            using (var client = _apiClientFactory.CreateClient())
-            {
-                var result = await client
-                    .AppendPath("account")
-                    .AddJsonBody(Model)
-                    .PostAsAsync<UserModel>();
+            if (PersonalInformationValidate())
+            { 
+            
+                Model.FirstName = Name;
+                Model.LastName = Apellido;
+                Model.TypeDocument = TypeDocument.Type;
+                Model.Document = Document;
+                Model.PhoneNumber = Telefono;
+                Model.Address = Address;
+                using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
+                using (var client = _apiClientFactory.CreateClient())
+                {
+                    var result = await client
+                        .AppendPath("account")
+                        .AddJsonBody(Model)
+                        .PostAsAsync<UserModel>();
 
-                if (result)
-                {
-                    await _navigation
-                       .GoToAsync("//Main")
-                       .NotifyAsync(result.Value);
-                }
-                else
-                {
-                    //mostrar mensaje de error
+                    if (result)
+                    {
+                        await _navigation
+                           .GoToAsync("//Main")
+                           .NotifyAsync(result.Value);
+                    }
+                    else
+                    {
+                        //mostrar mensaje de error
+                    }
                 }
             }
+            
         }
 
         public void OnNotify(SignUpModel model)
