@@ -8,6 +8,7 @@ using Netcos.Extensions.Http;
 using AppointmentManager.Models;
 using Netcos.IO.IsolatedStorage;
 using System.Collections.Generic;
+using FluentValidation;
 
 namespace AppointmentManager.ViewModels.Register
 {
@@ -25,10 +26,11 @@ namespace AppointmentManager.ViewModels.Register
         private readonly IApiClientFactory _apiClientFactory;
         private readonly IAppNavigation _navigation;
         private readonly ISecureStorage _storage;
-
+        private readonly IValidationFactory _validationFactory;
         public NewAppoinmentViewModel(
             IAppNavigation navigation,
             ILoadingFactory loadingFactory,
+             IValidationFactory validationFactory,
             IApiClientFactory apiClientFactory,
             ISecureStorage storage)
         {
@@ -36,6 +38,7 @@ namespace AppointmentManager.ViewModels.Register
             _loadingFactory = loadingFactory;
             _apiClientFactory = apiClientFactory;
             _storage = storage;
+            _validationFactory = validationFactory;
         }
 
         #region Properties
@@ -89,6 +92,27 @@ namespace AppointmentManager.ViewModels.Register
 
         }
 
+        private bool NewApoValidate()
+        {
+            return _validationFactory.Create<NewAppoinmentViewModel>("NewAppoinmentForm")
+                .AddRule(n => n.Pet, n => n
+                .NotEmpty()
+                .WithMessage("Selecciona una mascota"))
+                .AddRule(p => p.TypeProcedure, p => p
+                .NotEmpty()
+                .WithMessage("Selecciona un tipo de procedimiento"))
+                .AddRule(d => d.DateAppointment, d => d
+                .NotEmpty()
+                .WithMessage("Selecciona un dia de cita"))
+                .AddRule(h => h.Hour, h => h
+                .NotEmpty()
+                .WithMessage("Seleccione un horario"))
+                .AddRule(s => s.Size, s => s
+                .NotEmpty()
+                .WithMessage("Selecciona un tamaño"))
+                .Validate();
+
+        }
         public async void Reserva()
         {
             var model = new NewApointmentModel();

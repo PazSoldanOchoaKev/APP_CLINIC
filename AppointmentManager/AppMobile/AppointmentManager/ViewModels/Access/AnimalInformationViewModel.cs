@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using System.IO;
 using Netcos.Xamarin.Forms;
 using Netcos.IO.IsolatedStorage;
+using FluentValidation;
 
 namespace AppointmentManager.ViewModels.Access
 {
@@ -30,9 +31,11 @@ namespace AppointmentManager.ViewModels.Access
         private readonly ISecureStorage _storage;
         private readonly IAppNavigation _navigation;
         private readonly ILoadingFactory _loadingFactory;
+        private readonly IValidationFactory _validationFactory;
 
         public AnimalInformationViewModel(
             IApiClientFactory apiClientFactory,
+            IValidationFactory validationFactory,
             ISecureStorage storage,
             IAppNavigation navigation,
             IDisplay display,
@@ -43,6 +46,7 @@ namespace AppointmentManager.ViewModels.Access
             _display = display;
             _navigation = navigation;
             _loadingFactory = loadingFactory;
+            _validationFactory = validationFactory;
         }
 
         #region Properties
@@ -84,37 +88,64 @@ namespace AppointmentManager.ViewModels.Access
                 Image = ImageSource.FromStream(() => new MemoryStream(Photo));
             }
         }
+        private bool AnimalInformationValidate()
+        {
+            return _validationFactory.Create<AnimalInformationViewModel>("AnimalInformationForm")
+                .AddRule(n => n.AnimalName, n => n
+                .NotEmpty()
+                .WithMessage("Ingrese un nombre de mascota"))
+                .AddRule(s => s.AnimalSpecie, s => s
+                .NotEmpty()
+                .WithMessage("Ingrese la especie del animal"))
+                .AddRule(g => g.Gender, g => g
+                .NotEmpty()
+                .WithMessage("Seleccione el sexo"))
+                .AddRule(c => c.ColorAnimal, c => c
+                .NotEmpty()
+                .WithMessage("Ingresar el color de la mascota"))
+                .AddRule(p => p.ParticularSigns, p => p
+                .NotEmpty()
+                .WithMessage("Ingresar Señas particulares"))
+                .AddRule(b => b.Breeds, b => b
+                .NotEmpty()
+                .WithMessage("Ingresar raza de la mascota"))
+                .Validate();
 
+        }
         public async void Confirm()
         {
-            var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
-            var model = new AnimalInformationModel
+            if (AnimalInformationValidate())
             {
-                AninalSpecie = AnimalSpecie,
-                Breed = Breeds,
-                Color = ColorAnimal,
-                Gender = Gender.Type,
-                ParticularSigns = ParticularSigns,
-                PetName = AnimalName,
-                Photo = Photo,
-                UserId = user.Id
-            };
-            using (await _loadingFactory.ShowAsync("Registrando datos", "Espera un momento estamos registrando los datos"))
-            using (var client = _apiClientFactory.CreateClient())
-            {
-                var result = await client
-                    .AppendPath("pets")
-                    .AddJsonBody(model)
-                    .PostAsync();
-                if (!result)
+                var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
+                var model = new AnimalInformationModel
                 {
-                    await _display.AlertAsync("Registro Mascota", result.ErrorMessage);
-                }
-                else
+                    AninalSpecie = AnimalSpecie,
+                    Breed = Breeds,
+                    Color = ColorAnimal,
+                    Gender = Gender.Type,
+                    ParticularSigns = ParticularSigns,
+                    PetName = AnimalName,
+                    Photo = Photo,
+                    UserId = user.Id
+                };
+                using (await _loadingFactory.ShowAsync("Registrando datos", "Espera un momento estamos registrando los datos"))
+                using (var client = _apiClientFactory.CreateClient())
                 {
-                    await _navigation.BackAsync();
-                }
+                    var result = await client
+                        .AppendPath("pets")
+                        .AddJsonBody(model)
+                        .PostAsync();
+                    if (!result)
+                    {
+                        await _display.AlertAsync("Registro Mascota", result.ErrorMessage);
+                    }
+                    else
+                    {
+                        await _navigation.BackAsync();
+                    }
+                } 
             }
+               
 
         }
 

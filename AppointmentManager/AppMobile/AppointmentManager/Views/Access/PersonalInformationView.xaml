@@ -4,22 +4,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+    xmlns:vd="clr-namespace:Netcos.Xamarin.Forms.Validations;assembly=Netcos.Xamarin.Forms.Validations"
     HeaderTitle="Registar Datos"
     Title="REGISTRARSE"
     x:Class="AppointmentManager.Views.Access.PersonalInformationView">
 
     <Grid>
-        <StackLayout>
-            <input:Entry Hint="Nombres" StyleClass="Text" Text="{Binding Name, Mode=TwoWay}"/>
-            <input:Entry Hint="Apellidos" StyleClass="Text" Text="{Binding Apellido, Mode=TwoWay}"/>
+        <vd:ValidationForm   GroupName="PersonalInformationForm">
+            <input:Entry Hint="Nombres" StyleClass="Text" Text="{Binding Name, Mode=TwoWay}"
+                         vd:Validate.ErrorProperty="Name"/>
+            <input:Entry Hint="Apellidos" StyleClass="Text" Text="{Binding Apellido, Mode=TwoWay}"
+                         vd:Validate.ErrorProperty="Apellido"/>
             <input:ComboBox Hint="Tipo de documento" StyleClass="Combo"
                         DisplayMemberPath="Name"
                         SelectedItem="{Binding TypeDocument, Mode=TwoWay}"
-                        ItemsSource="{Binding TypeDocuments}"/>
-            <input:Masked Hint="Número de documento" Mask="00000000" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"/>
-            <input:Masked Hint="Numero de telefono" Mask="000-000-000" StyleClass="Text" Text="{Binding Telefono, Mode=TwoWay}"/>
-            <input:Entry Hint="Direccion" StyleClass="Text" Text="{Binding Address, Mode=TwoWay}"/>
-        </StackLayout>
+                        ItemsSource="{Binding TypeDocuments}"
+                        vd:Validate.ErrorProperty="TypeDocument"/>
+            <input:Masked Hint="Número de documento" Mask="00000000" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"
+                        vd:Validate.ErrorProperty="Document"/>
+            <input:Masked Hint="Numero de telefono" Mask="000-000-000" StyleClass="Text" Text="{Binding Telefono, Mode=TwoWay}"
+                         vd:Validate.ErrorProperty="Telefono"/>
+            <input:Entry Hint="Direccion" StyleClass="Text" Text="{Binding Address, Mode=TwoWay}"
+                         vd:Validate.ErrorProperty="Address"/>
+        </vd:ValidationForm>
     </Grid>
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*" ColumnSpacing="15">
