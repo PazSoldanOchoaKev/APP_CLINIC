@@ -4,15 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+    xmlns:vf="clr-namespace:Netcos.Xamarin.Forms.Validations;assembly=Netcos.Xamarin.Forms.Validations"
     HeaderTitle="Crear Usuario"
     Title="REGISTRARSE"
     x:Class="AppointmentManager.Views.Access.SignUpView">
     <Grid>
-        <StackLayout>
-            <input:Entry Hint="Correo" StyleClass="Text" Text="{Binding Email, Mode=TwoWay}"/>
-            <input:Entry Hint="Contraseña" StyleClass="Text" IsPassword="True" Text="{Binding Password, Mode=TwoWay}"/>
-            
-        </StackLayout>
+        <vf:ValidationForm GroupName="SignUpForm">
+            <input:Entry Hint="Correo" StyleClass="Text" Text="{Binding Email, Mode=TwoWay}"
+                         vf:Validate.ErrorProperty="Email"/>
+            <input:Entry Hint="Contraseña" StyleClass="Text" IsPassword="True" Text="{Binding Password, Mode=TwoWay}"
+                         vf:Validate.ErrorProperty="Password"/>
+            <input:Entry Hint="Repetir Contraseña" StyleClass="Text" IsPassword="True" Text="{Binding RepeatPassword, Mode=TwoWay}"
+                         vf:Validate.ErrorProperty="RepeatPassword"/>
+        </vf:ValidationForm>
     </Grid>
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*" ColumnSpacing="15">

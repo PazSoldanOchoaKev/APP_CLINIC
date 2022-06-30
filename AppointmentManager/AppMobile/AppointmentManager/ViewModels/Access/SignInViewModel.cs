@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using AppointmentManager.Models;
 using AppointmentManager.Views.Access;
+using FluentValidation;
 using Netcos.Extensions.Http;
 using Netcos.Mvvm;
 using Netcos.Xamarin.Forms;
@@ -18,10 +19,12 @@ namespace AppointmentManager.ViewModels.Access
         private string password;
         private readonly IApiClientFactory _apiClientFactory;
         private readonly ILoadingFactory _loadingFactory;
+        private readonly IValidationFactory _validationFactory;
 
         public SignInViewModel(
             IDisplay display,
             ILoadingFactory loadingFactory,
+            IValidationFactory validationFactory,
             IAppNavigation navigation,
             IApiClientFactory apiClientFactory)
         {
@@ -29,6 +32,7 @@ namespace AppointmentManager.ViewModels.Access
             _display = display;
             _loadingFactory = loadingFactory;
             _apiClientFactory = apiClientFactory;
+            _validationFactory = validationFactory;
         }
 
 
@@ -50,33 +54,48 @@ namespace AppointmentManager.ViewModels.Access
         {
             await _navigation.NavigateToAsync<SignUpView>();
         }
+
+        private bool signInValidate()
+        {
+            return _validationFactory.Create<SignInViewModel>("SignInForm")
+                .AddRule(p => p.UserName, _ => _
+                    .NotEmpty()
+                    .WithMessage("Ingrese su usuario"))
+                .AddRule(p => p.Password, p => p
+                    .NotEmpty()
+                    .WithMessage("Ingresa tu contraseña"))
+                .Validate();
+        }
+
         public async void NavigateToSignIn()
         {
-            var model = new SignInModel
+            if (signInValidate())
             {
-                User = UserName,
-                Password = Password
-            };
-
-            using (await _loadingFactory.ShowAsync("Inicio de sesión", "Espera un momento estamos validando tu usuario"))
-            using (var client = _apiClientFactory.CreateClient())
-            {
-                var result = await client
-                    .AppendPath("account/SignIn")
-                    .AddJsonBody(model)
-                    .PostAsAsync<UserModel>();
-
-                if (result)
+                var model = new SignInModel
                 {
-                    await _navigation
-                        .GoToAsync("//Main")
-                        .NotifyAsync(result.Value);
-                }
-                else
-                {
-                    await _display.AlertAsync("Inicio de sesión", result.ErrorMessage);
-                }
+                    User = UserName,
+                    Password = Password
+                };
 
+                using (await _loadingFactory.ShowAsync("Inicio de sesión", "Espera un momento estamos validando tu usuario"))
+                using (var client = _apiClientFactory.CreateClient())
+                {
+                    var result = await client
+                        .AppendPath("account/SignIn")
+                        .AddJsonBody(model)
+                        .PostAsAsync<UserModel>();
+
+                    if (result)
+                    {
+                        await _navigation
+                            .GoToAsync("//Main")
+                            .NotifyAsync(result.Value);
+                    }
+                    else
+                    {
+                        await _display.AlertAsync("Inicio de sesión", result.ErrorMessage);
+                    }
+                }
             }
         }
         #endregion

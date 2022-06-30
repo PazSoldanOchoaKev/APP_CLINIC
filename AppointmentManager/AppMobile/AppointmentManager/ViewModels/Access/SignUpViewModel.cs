@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using AppointmentManager.Models;
 using AppointmentManager.Views.Access;
+using FluentValidation;
 using Netcos.Mvvm;
 using Netcos.Xamarin.Forms;
 using Xamarin.Forms;
@@ -14,16 +15,19 @@ namespace AppointmentManager.ViewModels.Access
     {
         private readonly IAppNavigation _navigation;
         private readonly IDisplay _display;
+        private readonly IValidationFactory _validationFactory;
         private string email;
         private string password;
         private string repeatPassword;
 
         public SignUpViewModel(
             IDisplay display,
+            IValidationFactory validationFactory,
             IAppNavigation navigation)
         {
             _navigation = navigation;
             _display = display;
+            _validationFactory = validationFactory;
         }
 
         #region Properties
@@ -47,11 +51,33 @@ namespace AppointmentManager.ViewModels.Access
 
         public async void Confirm()
         {
-            var model = new SignUpModel();
-            model.Email = Email;
-            model.Password = Password;
-            await _navigation.NavigateToAsync<PersonalInformationView>()
-                .NotifyAsync(model);
+            if (validate())
+            {
+                var model = new SignUpModel();
+                model.Email = Email;
+                model.Password = Password;
+                await _navigation.NavigateToAsync<PersonalInformationView>()
+                    .NotifyAsync(model);
+            }
+        }
+
+        private bool validate()
+        {
+            return _validationFactory.Create<SignUpViewModel>("SignUpForm")
+                .AddRule(p => p.Email, e => e
+                    .NotEmpty()
+                    .WithMessage("Ingresa tu correo electronico")
+                    .EmailAddress()
+                    .WithMessage("Inhgresa un correo correcto"))
+                .AddRule(p => p.Password, p => p
+                    .NotEmpty()
+                    .WithMessage("Ingresa tu contraseña"))
+                .AddRule(p => p.RepeatPassword, r => r
+                    .NotEmpty()
+                    .WithMessage("Ingresa tu contraseña")
+                    .Equal(p => p.Password)
+                    .WithMessage("Las contraseñas no coinciden!"))
+                .Validate();
         }
 
         #endregion

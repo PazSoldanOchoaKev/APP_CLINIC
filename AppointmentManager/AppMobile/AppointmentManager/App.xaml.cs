@@ -24,6 +24,8 @@ namespace AppointmentManager
             services.AddLightTeme<LightTheme>();
 
             services.AddInputLayout();
+            services.AddLocalizer();
+            services.AddValidationForm();
             services.AddViewModel<AppShellViewModel>();
             services.AddViewModelToRoute<MainViewModel>("Main");
             services.AddViewModelToRoute<SignInViewModel>("SignIn");
