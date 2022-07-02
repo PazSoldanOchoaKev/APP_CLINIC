@@ -12,6 +12,7 @@ using System.Linq;
 using System.Globalization;
 using System.Threading.Tasks;
 using FluentValidation;
+using Xamarin.Essentials;
 
 namespace AppointmentManager.ViewModels.Register
 {
@@ -25,7 +26,6 @@ namespace AppointmentManager.ViewModels.Register
         private DateTime dateAppointment;
         private ObservableCollection<AnimalInformationModel> pets;
         private AnimalInformationModel pet;
-        private DateTime minimun;
         private ObservableCollection<string> hours;
         private int selectIndex;
         private readonly ILoadingFactory _loadingFactory;
@@ -49,6 +49,7 @@ namespace AppointmentManager.ViewModels.Register
             _storage = storage;
             _display = display;
             _validationFactory = validationFactory;
+            dateAppointment = DateTime.Now;
         }
 
         #region Properties
@@ -61,7 +62,6 @@ namespace AppointmentManager.ViewModels.Register
         public ObservableCollection<string> Hours { get => hours; set => SetProperty(ref hours, value); }
         public ObservableCollection<ListSizesModel> ListSizes { get => listSizes; set => SetProperty(ref listSizes, value); }
         public ListSizesModel Size { get => size; set => SetProperty(ref size, value); }
-        public DateTime Minimun { get => minimun; set => SetProperty(ref minimun, value); }
         public int SelectIndex { get => selectIndex; set => SetProperty(ref selectIndex, value); }
 
         #endregion
@@ -69,14 +69,13 @@ namespace AppointmentManager.ViewModels.Register
         #region Commands
 
         public ICommand Reservar => new Command(Reserva);
-        
+
         #endregion
 
         #region Methodos
 
         public async void OnNavigated()
         {
-            DateAppointment = Minimun = DateTime.Now;
             TypeProceduresModels = new ObservableCollection<TypeProceduresModel>(new TypeProceduresModel[] {
                 new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_MEDICADO, Name = "BAÑO MEDICADO" },
                 new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_Y_CORTE, Name = "BAÑO Y CORTE" },
@@ -105,30 +104,8 @@ namespace AppointmentManager.ViewModels.Register
                         Pets = new ObservableCollection<AnimalInformationModel>(result.Value);
                     }
                 }
-                //await loadAvailableHoursAsync();
+                await GetAvailableHoursAsync(DateTime.Now);
             }
-            Pet = null;
-            TypeProcedure = null;
-            Hour = null;
-            Size = null;
-        }
-
-        private async Task loadAvailableHoursAsync()
-        {
-            using (var client = _apiClientFactory.CreateClient())
-            {
-                var date = DateAppointment.ToString("MM/dd/yyyy");
-                var result = await client
-                    .AppendPath("appointment")
-                    .AppendPath("avaibalehours")
-                    .AddQueryParameter("date", date)
-                    .GetAsAsync<List<string>>();
-                if (result)
-                    Hours = new ObservableCollection<string>(result.Value);
-                else
-                    await _display.AlertAsync("Listando datos", "Ocurrio un problema al obtener los horarios");
-            }
-
         }
 
         private async void OnDateChanged(DateTime date)
@@ -136,7 +113,23 @@ namespace AppointmentManager.ViewModels.Register
             Hour = null;
             using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los horarios disponibles!"))
             {
-                await loadAvailableHoursAsync();
+                await GetAvailableHoursAsync(date);
+            }
+        }
+
+        private async Task GetAvailableHoursAsync(DateTime date)
+        {
+            using (var client = _apiClientFactory.CreateClient())
+            {
+                var result = await client
+                    .AppendPath("appointment")
+                    .AppendPath("avaibalehours")
+                    .AddQueryParameter("date", date.ToString("MM/dd/yyyy"))
+                    .GetAsAsync<List<string>>();
+                if (result)
+                    Hours = new ObservableCollection<string>(result.Value);
+                else
+                    await _display.AlertAsync("Listando datos", "Ocurrio un problema al obtener los horarios");
             }
         }
 

@@ -5,6 +5,7 @@ using AppointmentManager.ViewModels.Access;
 using AppointmentManager.ViewModels.Pets;
 using AppointmentManager.ViewModels.Register;
 using AppointmentManager.Views.Access;
+using AppointmentManager.Views.Register;
 using AppointmentManager.Views.Pets;
 using Microsoft.Extensions.DependencyInjection;
 using Netcos.Xamarin.Forms;
@@ -30,13 +31,13 @@ namespace AppointmentManager
             services.AddViewModel<AppShellViewModel>();
             services.AddViewModelToRoute<MainViewModel>("Main");
             services.AddViewModelToRoute<SignInViewModel>("SignIn");
-            services.AddViewModelToRoute<NewAppoinmentViewModel>("New");
             services.AddRoute<SignUpView, SignUpViewModel>();
             services.AddViewModelToRoute<PetsViewModel>("Pets");
             services.AddViewModelToRoute<HistoryAppointmentViewModel>("HistoryAppointment");
             services.AddRoute<MainViewModel>();
             services.AddRoute<AnimalInformationView, AnimalInformationViewModel>();
             services.AddRoute<PersonalInformationView, PersonalInformationViewModel>();
+            services.AddRoute<NewAppoinmentView, NewAppoinmentViewModel>();
             services.AddRoute<ModifyAnimalInformationView, ModifyAnimalInformationViewModel>();
             services
                 .AddApiClient()

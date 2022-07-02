@@ -20,20 +20,24 @@ namespace AppointmentManager.ViewModels
         #region Fields
 
         private ContentApp app;
+        private bool isFlyoutOpen;
 
         #endregion
 
 
         #region Properties
 
-        public ICommand Naigation => new Command(Navegar);
+        public ICommand AppoinmentCommand => new Command(NewAppoinment);
+
+        public bool IsFlyoutOpen { get => isFlyoutOpen; set => SetProperty(ref isFlyoutOpen, value); }
 
         #endregion
 
         #region Methods
 
-        public async void Navegar()
+        public async void NewAppoinment()
         {
+            IsFlyoutOpen = false;
             await _navigation.NavigateToAsync<NewAppoinmentView>();
         }
 

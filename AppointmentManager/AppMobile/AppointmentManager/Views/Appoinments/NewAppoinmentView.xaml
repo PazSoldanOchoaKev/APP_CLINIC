@@ -11,36 +11,31 @@
 
 
     <vd:ValidationForm  Grid.Row="1" GroupName="NewAppoinmentForm">
-            <input:ComboBox Hint="Seleccionar Animal" StyleClass="Combo"
+        <input:ComboBox Hint="Seleccionar Animal" StyleClass="Combo"
                         DisplayMemberPath="PetName"
                         SelectedItem="{Binding Pet, Mode=TwoWay}"
                         ItemsSource="{Binding Pets}"
-                            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
                         vd:Validate.ErrorProperty="Pet"/>
-            <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
+        <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
                         DisplayMemberPath="Name"
                             vd:Validate.ErrorProperty="TypeProcedure"
                         SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
-                            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
                         ItemsSource="{Binding TypeProceduresModels}"/>
-            <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"
-                              MinimumDate="{Binding Minimun}"
+        <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"
                               vd:Validate.ErrorProperty="DateAppointment"
                               StyleClass="Text"/>
-            <!--<input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>-->
-            <input:ComboBox Hint="Hora" StyleClass="Combo"
+        <!--<input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>-->
+        <input:ComboBox Hint="Hora" StyleClass="Combo"
                             SelectedItem="{Binding Hour, Mode=TwoWay}"
                             vd:Validate.ErrorProperty="Hour"
-                            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
                             ItemsSource="{Binding Hours}"/>
-            <input:ComboBox Hint="Escoger tamaño" StyleClass="Combo"
+        <input:ComboBox Hint="Escoger tamaño" StyleClass="Combo"
                         DisplayMemberPath="Name"
                         SelectedItem="{Binding Size, Mode=TwoWay}"
                         ItemsSource="{Binding  ListSizes}"
-                            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
                         vd:Validate.ErrorProperty="Size"/>
     </vd:ValidationForm>
-   
+
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*" ColumnSpacing="15">
             <Button Text="Realizar reservar" Grid.Column="0"
