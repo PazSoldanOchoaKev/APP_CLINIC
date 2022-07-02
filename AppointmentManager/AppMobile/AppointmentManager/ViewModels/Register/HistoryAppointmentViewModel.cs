@@ -50,6 +50,7 @@ namespace AppointmentManager.ViewModels.Register
                 IsRefresh = true;
                 var result = await client
                     .AppendPath($"appointment/{user.Id}")
+                    .AddQueryParameter("status", AppointmentStatus.DONE)
                     .GetAsAsync<List<NewApointmentModel>>();
                 if (result)
                 {

@@ -66,7 +66,7 @@ namespace AppointmentManager.ViewModels.Access
         public ICommand AddPhotoCommand => new Command(AddPhoto);
         #endregion
 
-        #region Methodos
+        #region Method
         public void OnNavigated()
         {
             Genders = new ObservableCollection<GenderTypeModel>(new GenderTypeModel[]

@@ -1,4 +1,5 @@
 ﻿using App.Application;
+using App.Domain.Enums;
 using App.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Netcos;
@@ -27,9 +28,9 @@ namespace App.Service.Controllers
             return _appointmentManager.CreatAppointmentAsync(model);
         }
         [HttpGet("{userId}")]
-        public Result GetAppointment(string userId)
+        public Result GetAppointment(string userId, [FromQuery] AppoinmentStatus status)
         {
-            return _appointmentManager.GetAppointmentByUser(userId);
+            return _appointmentManager.GetAppointmentByUser(userId, status);
         }
 
         [HttpGet("avaibalehours")]

@@ -3,12 +3,41 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+    xmlns:icon="clr-namespace:Netcos.Xamarin.Forms.Icons.MaterialDesignIcons;assembly=Netcos.Xamarin.Forms.Icons.MaterialDesignIcons"
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
-    HeaderTitle="Reserva de cita"
+    HeaderTitle="Reserva"
     Title="Reserva"
+    ScrollMode="Neither"
     x:Class="AppointmentManager.Views.MainView">
-
+    
+    
     <StackLayout>
-        <Label Text="Main"/>
+        <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Appointment}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="80, *,50">
+                            <Image Grid.Column="0" Source="{Binding Pets.Image}"/>
+                            <StackLayout Grid.Column="1">
+                                <Label Text="{Binding Pets.PetName}" StyleClass="Title"/>
+                                <Label Text="{Binding TypeProcedure}" StyleClass="Title"/>
+                                <Label Text="{Binding DateTime}" StyleClass="Title"/>
+                                <Label Text="{Binding Hour}"/>
+                                <Label Text="{Binding Status}"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Button  icon:Font.Icon="AccountEdit" Command="{Binding Modify}"
+                                class=""/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </StackLayout>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*" ColumnSpacing="15">
+
+        </Grid>
+    </ctrls:PageBase.Fotter>
 </ctrls:PageBase>

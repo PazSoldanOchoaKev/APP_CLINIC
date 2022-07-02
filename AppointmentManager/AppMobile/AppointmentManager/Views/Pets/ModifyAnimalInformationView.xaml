@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ctrls:PageBase 
+             xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"         
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+             xmlns:vd="clr-namespace:Netcos.Xamarin.Forms.Validations;assembly=Netcos.Xamarin.Forms.Validations"
+             HeaderTitle="Mascotas"
+             Title="Lista de Mascotas"
+             x:Class="AppointmentManager.Views.Pets.ModifyAnimalInformationView">
+    <StackLayout>
+        <vd:ValidationForm GroupName="AnimalInformationForm">
+            <input:Entry Hint="Nombres Mascota" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
+                 vd:Validate.ErrorProperty="AnimalName"/>
+            <input:Entry Hint="Especie" StyleClass="Text" Text="{Binding AnimalSpecie, Mode=TwoWay}"
+                          vd:Validate.ErrorProperty="AnimalSpecie"/>
+            <input:ComboBox Hint="Seleccionar sexo" StyleClass="Combo"
+                        DisplayMemberPath="Name"
+                        SelectedItem="{Binding Gender, Mode=TwoWay}"
+                        ItemsSource="{Binding Genders}"
+                             vd:Validate.ErrorProperty="Gender"/>
+            <Label Text="Especificacion del animal" StyleClass="Text"/>
+            <input:Entry Hint="Color de la mascota" StyleClass="Text" Text="{Binding ColorAnimal, Mode=TwoWay}"
+                          vd:Validate.ErrorProperty="ColorAnimal"/>
+            <input:Entry Hint="Señas particulares" StyleClass="Text" Text="{Binding ParticularSigns, Mode=TwoWay}"
+                          vd:Validate.ErrorProperty="ParticularSigns"/>
+            <input:Entry Hint="Raza" StyleClass="Text" Text="{Binding Breeds, Mode=TwoWay}"
+                          vd:Validate.ErrorProperty="Breeds"/>
+
+        </vd:ValidationForm>
+        <Image Source="{Binding Image}"/>
+    </StackLayout>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+            <Button Text="Agregar Foto" Grid.Column="0" Command="{Binding AddPhotoCommand}" class="Primary"/>
+            <Button Text="Confirmar" Grid.Column="1" Command="{Binding Confirmar}" class="Secondary"/>
+        </Grid>
+    </ctrls:PageBase.Fotter>
+</ctrls:PageBase>

@@ -1,4 +1,5 @@
 ﻿using App.Domain.Entities;
+using App.Domain.Enums;
 using App.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Netcos;
@@ -35,9 +36,9 @@ namespace App.Application.Services
             return result;
         }
 
-        public Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId)
+        public Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId, AppoinmentStatus status)
         {
-            return _appointments.Include(a => a.Pets).Where(a => a.Pets.UserId == userId).ToList();
+            return _appointments.Include(a => a.Pets).Where(a => a.Pets.UserId == userId && a.Status == status).ToList();
         }
 
         public Result<IEnumerable<string>> GetAvailableHours(DateTime date)

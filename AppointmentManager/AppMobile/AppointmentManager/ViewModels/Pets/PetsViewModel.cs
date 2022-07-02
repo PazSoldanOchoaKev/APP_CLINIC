@@ -48,7 +48,7 @@ namespace AppointmentManager.ViewModels.Pets
 
         #endregion
 
-        #region Methodos
+        #region Method
 
         private async void NavegateToRegistration()
         {

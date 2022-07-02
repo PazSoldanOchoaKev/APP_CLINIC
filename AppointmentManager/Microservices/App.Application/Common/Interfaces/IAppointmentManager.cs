@@ -1,4 +1,5 @@
 ﻿using App.Domain.Entities;
+using App.Domain.Enums;
 using App.Domain.Models;
 using Netcos;
 using System;
@@ -11,7 +12,7 @@ namespace App.Application
     public interface IAppointmentManager
     {
         Task<Result> CreatAppointmentAsync(AppointmentModel model);
-        Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId);
+        Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId, AppoinmentStatus status);
         Result<IEnumerable<string>> GetAvailableHours(DateTime date);
     }
 }
