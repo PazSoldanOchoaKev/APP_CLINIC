@@ -113,6 +113,27 @@
         <Setter Property="FontSize" Value="{StaticResource LabelSize}"/>
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
+
+    <Style TargetType="Label" x:Key="Label">
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}"/>
+        <Setter Property="FontSize" Value="{StaticResource LabelSize}"/>
+    </Style>
+
+    <Style TargetType="Label" BaseResourceKey="Label" Class="Label">
+    </Style>
+
+    <Style TargetType="Label" BaseResourceKey="Label" Class="LabelBold">
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="Small">
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}"/>
+        <Setter Property="FontSize" Value="{StaticResource SmallSize}"/>
+    </Style>
+
+    <Style TargetType="Label" BaseResourceKey="Small" Class="Small">
+    </Style>
+
     <Style TargetType="input:CustomInputLayout" x:Key="BaseInput">
         <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>

@@ -27,6 +27,12 @@ namespace App.Service.Controllers
             return _petsManager.CreatePetAsync(model);
         }
 
+        [HttpPost("edit")]
+        public Task<Result> EditPets([FromBody] PetModel model)
+        {
+            return _petsManager.EditPetAsync(model);
+        }
+
         [HttpGet("{userId}")]
         public Result GetPets(string userId)
         {

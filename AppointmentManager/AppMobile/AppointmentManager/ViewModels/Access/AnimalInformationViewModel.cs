@@ -13,10 +13,11 @@ using System.IO;
 using Netcos.Xamarin.Forms;
 using Netcos.IO.IsolatedStorage;
 using FluentValidation;
+using System.Linq;
 
 namespace AppointmentManager.ViewModels.Access
 {
-    class AnimalInformationViewModel : ViewModelBase, INavigated
+    class AnimalInformationViewModel : ViewModelBase, INavigated, INotify<AnimalInformationModel>
     {
         private ObservableCollection<GenderTypeModel> genders;
         private GenderTypeModel gender;
@@ -59,6 +60,8 @@ namespace AppointmentManager.ViewModels.Access
         public string ParticularSigns { get => particularSigns; set => SetProperty(ref particularSigns, value); }
         public string Breeds { get => breeds; set => SetProperty(ref breeds, value); }
         public ImageSource Image { get => image; set => SetProperty(ref image, value); }
+        public bool IsEdit { get; set; }
+        public string Id { get; set; }
 
         public byte[] Photo { get; set; }
         #region Commands
@@ -126,13 +129,17 @@ namespace AppointmentManager.ViewModels.Access
                     ParticularSigns = ParticularSigns,
                     PetName = AnimalName,
                     Photo = Photo,
-                    UserId = user.Id
+                    UserId = user.Id,
+                    //Id = IsEdit ? Id: ""
                 };
+                if (IsEdit)
+                    model.Id = Id;
+                var methodUrl = IsEdit ? "pets/edit" : "pets";
                 using (await _loadingFactory.ShowAsync("Registrando datos", "Espera un momento estamos registrando los datos"))
                 using (var client = _apiClientFactory.CreateClient())
                 {
                     var result = await client
-                        .AppendPath("pets")
+                        .AppendPath(methodUrl)
                         .AddJsonBody(model)
                         .PostAsync();
                     if (!result)
@@ -143,10 +150,19 @@ namespace AppointmentManager.ViewModels.Access
                     {
                         await _navigation.BackAsync();
                     }
-                } 
+                }
             }
-               
 
+
+        }
+
+        public void OnNotify(AnimalInformationModel pet)
+        {
+            IsEdit = true;
+            AnimalName = pet.PetName;
+            AnimalSpecie = pet.AninalSpecie;
+            Gender = Genders.FirstOrDefault(g => g.Type == pet.Gender);
+            Id = pet.Id;
         }
 
         #endregion

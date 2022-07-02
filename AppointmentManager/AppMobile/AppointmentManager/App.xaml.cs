@@ -38,14 +38,13 @@ namespace AppointmentManager
             services.AddRoute<AnimalInformationView, AnimalInformationViewModel>();
             services.AddRoute<PersonalInformationView, PersonalInformationViewModel>();
             services.AddRoute<NewAppoinmentView, NewAppoinmentViewModel>();
-            services.AddRoute<ModifyAnimalInformationView, ModifyAnimalInformationViewModel>();
             services
                 .AddApiClient()
                 .AcceptAnyServerCertificate()
                 .ConfigureApiClient(options =>
                 {
-                    //options.Url = "http://192.168.18.17:45455/api";
-                    options.Url = "http://192.168.18.4:45455/api";
+                    options.Url = "http://192.168.18.17:45455/api";
+                    //options.Url = "http://192.168.18.4:45455/api";
                 });
         }
     }

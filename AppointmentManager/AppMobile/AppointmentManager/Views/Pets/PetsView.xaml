@@ -3,9 +3,11 @@
                  xmlns="http://xamarin.com/schemas/2014/forms"
                  xmlns:icon="clr-namespace:Netcos.Xamarin.Forms.Icons.MaterialDesignIcons;assembly=Netcos.Xamarin.Forms.Icons.MaterialDesignIcons"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pckv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
                  HeaderTitle="Mascotas"
                  Title="Lista de Mascotas"
                  ScrollMode="Neither"
+                 x:Name="root"
                  x:Class="AppointmentManager.Views.Pets.PetsView">
 
     <ctrls:PageBase.ToolbarItems>
@@ -15,16 +17,85 @@
     <StackLayout>
         <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
             <CollectionView ItemsSource="{Binding Pets}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="60, *">
-                            <Image Grid.Column="0" Source="{Binding Image}"/>
-                            <StackLayout Grid.Column="1">
-                                <Label Text="{Binding PetName}" StyleClass="Title"/>
-                                <Label Text="{Binding AninalSpecie}"/>
-                                <Label Text="{Binding Breed}"/>
-                            </StackLayout>
-                        </Grid>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItemView Command="{Binding Source={x:Reference root}, Path=BindingContext.PetEditCommand}"
+                                                   CommandParameter="{Binding .}">
+                                        <Grid>
+                                            <BoxView BackgroundColor="#AFBCEB"
+                                                     CornerRadius="0, 15, 0, 15"/>
+                                            <StackLayout WidthRequest="150" VerticalOptions="Center" HorizontalOptions="Center">
+                                                <Image icon:Font.Icon="AccountEdit"
+                                                   icon:Font.IconColor="{DynamicResource SecondaryTextColor}"
+                                                   icon:Font.IconSize="28"/>
+                                                <Label Text="Editar" FontSize="12"
+                                                   TextColor="{DynamicResource SecondaryTextColor}"
+                                                   HorizontalOptions="Center"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItemView>
+                                        <Grid>
+                                            <BoxView BackgroundColor="#AFBCEB"
+                                                     CornerRadius="15, 0, 15, 0"/>
+                                            <StackLayout WidthRequest="150" VerticalOptions="Center" HorizontalOptions="Center">
+                                                <Image icon:Font.Icon="Delete"
+                                                   icon:Font.IconColor="{DynamicResource SecondaryTextColor}"
+                                                   icon:Font.IconSize="28"/>
+                                                <Label Text="Eliminar" FontSize="12"
+                                                   TextColor="{DynamicResource SecondaryTextColor}"
+                                                   HorizontalOptions="Center"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <pckv:PancakeView class="Shadow" BackgroundColor="White">
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <Image Source="{Binding Image}"
+                                       HeightRequest="80"
+                                       WidthRequest="80"
+                                       Grid.Column="0" Aspect="AspectFill">
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="40,40"
+                                                     RadiusX="40"
+                                                     RadiusY="40"/>
+                                        </Image.Clip>
+                                    </Image>
+                                    <StackLayout Grid.Column="1" Spacing="10">
+                                        <Label Text="{Binding PetName}" StyleClass="Label"/>
+                                        <Label StyleClass="Small">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Especie: " FontSize="{StaticResource SmallSize}"
+                                                      FontAttributes="Bold"/>
+                                                    <Span Text="{Binding AninalSpecie}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label StyleClass="Small">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Raza: " FontSize="{StaticResource SmallSize}"
+                                                      FontAttributes="Bold"/>
+                                                    <Span Text="{Binding Breed}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                            </pckv:PancakeView>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

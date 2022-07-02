@@ -1,4 +1,5 @@
 ﻿using AppointmentManager.Models;
+using AppointmentManager.Views.Access;
 using AppointmentManager.Views.Pets;
 using Netcos.Extensions.Http;
 using Netcos.IO.IsolatedStorage;
@@ -47,10 +48,12 @@ namespace AppointmentManager.ViewModels
         #endregion
 
         #region Methodos
+
         private async void NavegateToModifyAnimalInformation()
         {
-            await _navigation.NavigateToAsync<ModifyAnimalInformationView>();
+            await _navigation.NavigateToAsync<AnimalInformationView>();
         }
+
         public async void OnNotify(UserModel parameter)
         {
             await _storage.SetValueAsync(user, parameter);
@@ -82,7 +85,7 @@ namespace AppointmentManager.ViewModels
                 IsRefresh = false;
             }
         }
-        
+
         #endregion
     }
 }

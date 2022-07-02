@@ -45,10 +45,18 @@ namespace AppointmentManager.ViewModels.Pets
 
         public ICommand Confirmar => new Command(NavegateToRegistration);
         public ICommand RefreshCommand => new Command(OnNavigated);
+        public ICommand PetEditCommand => new Command<AnimalInformationModel>(PetEdit);
 
         #endregion
 
         #region Method
+
+        private async void PetEdit(AnimalInformationModel pet)
+        {
+            await _navigation
+                .NavigateToAsync<AnimalInformationView>()
+                .NotifyAsync(pet);
+        }
 
         private async void NavegateToRegistration()
         {
