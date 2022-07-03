@@ -16,6 +16,9 @@
     <StackLayout>
         <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
             <CollectionView ItemsSource="{Binding Appointment}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
@@ -69,11 +72,43 @@
                                         </Image.Clip>
                                     </Image>
                                     <StackLayout Grid.Column="1" Spacing="10">
-                                        <Label Text="{Binding Pets.PetName}" StyleClass="Title"/>
-                                        <Label Text="{Binding TypeProcedure}" StyleClass="Title"/>
-                                        <Label Text="{Binding DateTime}" StyleClass="Title"/>
-                                        <Label Text="{Binding Hour}"/>
-                                        <Label Text="{Binding Status}"/>
+                                        <Label Text="{Binding Pets.PetName}" StyleClass="Label"/>
+                                        <Label StyleClass="Small">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Procedimiento: " FontSize="{StaticResource SmallSize}"
+                                                      FontAttributes="Bold"/>
+                                                    <Span Text="{Binding TypeProcedure}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label StyleClass="Small">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Dia: " FontSize="{StaticResource SmallSize}"
+                                                      FontAttributes="Bold"/>
+                                                    <Span Text="{Binding DateTime}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label StyleClass="Small">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="hora: " FontSize="{StaticResource SmallSize}"
+                                                      FontAttributes="Bold"/>
+                                                    <Span Text="{Binding Hour}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label StyleClass="Small">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Estado: " FontSize="{StaticResource SmallSize}"
+                                                      FontAttributes="Bold"/>
+                                                    <Span Text="{Binding Status}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
                                     </StackLayout>
                                 </Grid>
                             </pckv:PancakeView>
