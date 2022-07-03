@@ -39,6 +39,15 @@ namespace App.Application.Services
             }
             return result;
         }
+        public async Task<Result> DeletePetAsync(PetModel model)
+        {
+            var result = await _pets.DeleteAsync(model);
+            if (!result)
+            {
+                return Fail("Error al eliminar la mascota");
+            }
+            return result;
+        }
 
         public Result<IEnumerable<Pets>> GetPetsByUser(string userId)
         {

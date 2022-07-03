@@ -46,11 +46,17 @@ namespace AppointmentManager.ViewModels.Pets
         public ICommand Confirmar => new Command(NavegateToRegistration);
         public ICommand RefreshCommand => new Command(OnNavigated);
         public ICommand PetEditCommand => new Command<AnimalInformationModel>(PetEdit);
+        public ICommand PetdeleteCommand => new Command<AnimalInformationModel>(DeletePet);
+
+       
 
         #endregion
 
         #region Method
-
+        private void DeletePet(AnimalInformationModel pet)
+        {
+            throw new NotImplementedException();
+        }
         private async void PetEdit(AnimalInformationModel pet)
         {
             await _navigation

@@ -13,5 +13,6 @@ namespace App.Application
         Task<Result> CreatePetAsync(PetModel model);
         Result<IEnumerable<Pets>> GetPetsByUser(string userId);
         Task<Result> EditPetAsync(PetModel model);
+        Task<Result> DeletePetAsync(PetModel model);
     }
 }
