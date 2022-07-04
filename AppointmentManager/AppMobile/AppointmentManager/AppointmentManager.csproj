@@ -60,6 +60,12 @@
     <Compile Update="Views\Access\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Payment\PaymentFormView.xaml.cs">
+      <DependentUpon>PaymentFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Payment\PaymentMethodView.xaml.cs">
+      <DependentUpon>PaymentMethodView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Views\Access\AnimalInformationView.xaml">
@@ -69,6 +75,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Appoinments\HistoryAppointmentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Payment\PaymentFormView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Payment\PaymentMethodView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pets\PetsView.xaml">

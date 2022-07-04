@@ -7,6 +7,7 @@
     xmlns:views="clr-namespace:AppointmentManager.Views"
     xmlns:access="clr-namespace:AppointmentManager.Views.Access"
     xmlns:pets="clr-namespace:AppointmentManager.Views.Pets"
+    xmlns:Payment="clr-namespace:AppointmentManager.Views.Payment"
     xmlns:register="clr-namespace:AppointmentManager.Views.Register"
     xmlns:appoinment="clr-namespace:AppointmentManager.Views.Appoinments"
     Visual="Material"
@@ -50,5 +51,11 @@
                 Title="Historial de reservas">
         <ShellContent Route="HistoryAppointment"
                       ContentTemplate="{DataTemplate  appoinment:HistoryAppointmentView}"/>
+    </FlyoutItem>
+    <FlyoutItem icon:Font.Icon="Plus"
+                icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
+                Title="Historial de reservas">
+        <ShellContent Route="Pay"
+                      ContentTemplate="{DataTemplate  Payment:PaymentFormView}"/>
     </FlyoutItem>
 </Shell>

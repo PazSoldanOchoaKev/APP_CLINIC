@@ -21,6 +21,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
+                            <!--
                             <SwipeView.RightItems>
                                 <SwipeItems Mode="Execute">
                                     <SwipeItemView Command="{Binding Source={x:Reference root}, Path=BindingContext.PetEditCommand}"
@@ -58,6 +59,7 @@
                                     </SwipeItemView>
                                 </SwipeItems>
                             </SwipeView.LeftItems>
+                            -->
                             <pckv:PancakeView class="Shadow" BackgroundColor="White">
                                 <Grid ColumnDefinitions="Auto, *">
                                     <Image Source="{Binding Pets.Image}"

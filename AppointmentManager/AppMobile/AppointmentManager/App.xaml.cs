@@ -9,6 +9,7 @@ using AppointmentManager.Views.Register;
 using AppointmentManager.Views.Pets;
 using Microsoft.Extensions.DependencyInjection;
 using Netcos.Xamarin.Forms;
+using AppointmentManager.ViewModels.Payment;
 
 namespace AppointmentManager
 {
@@ -38,6 +39,7 @@ namespace AppointmentManager
             services.AddRoute<AnimalInformationView, AnimalInformationViewModel>();
             services.AddRoute<PersonalInformationView, PersonalInformationViewModel>();
             services.AddRoute<NewAppoinmentView, NewAppoinmentViewModel>();
+            services.AddViewModelToRoute<PaymentFormViewModel>("Pay");
             services
                 .AddApiClient()
                 .AcceptAnyServerCertificate()

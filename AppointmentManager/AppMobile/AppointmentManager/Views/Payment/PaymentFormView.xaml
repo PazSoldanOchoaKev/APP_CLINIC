@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ctrls:PageBase 
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
+             xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+             xmlns:vf="clr-namespace:Netcos.Xamarin.Forms.Validations;assembly=Netcos.Xamarin.Forms.Validations"
+             xmlns:vd="clr-namespace:Netcos.Xamarin.Forms.Validations;assembly=Netcos.Xamarin.Forms.Validations"
+             HeaderTitle="Registar Datos"
+             Title="Registrar Mascota"
+             x:Class="AppointmentManager.Views.Payment.PaymentFormView">
+
+    <StackLayout>
+        <vd:ValidationForm GroupName="AnimalInformationForm">
+            <input:Masked Hint="Numero de tarjeta" Mask="000-0000000-0-00" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
+                 vd:Validate.ErrorProperty="AnimalName"/>
+            <input:Masked Hint="Fecha de vencimiento" Mask="00/00/0000" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
+                 vd:Validate.ErrorProperty="AnimalName"/>
+            <input:Masked Hint="CVV" Mask="000" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
+                 vd:Validate.ErrorProperty="AnimalName"/>
+            <input:Entry Hint="Nombres y Apellido " StyleClass="Text" Text="{Binding Name, Mode=TwoWay}"
+                 vd:Validate.ErrorProperty="Name"/>
+            <input:Entry Hint="Correo" StyleClass="Text" Text="{Binding Email, Mode=TwoWay}"
+                 vf:Validate.ErrorProperty="Email"/>
+
+        </vd:ValidationForm>
+    </StackLayout>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*" ColumnSpacing="15">
+            <Button Text="Confirmar pago" Grid.Column="0"
+                    Command="{Binding Confirmar}"
+                    class="Secondary"/>
+        </Grid>
+    </ctrls:PageBase.Fotter>
+</ctrls:PageBase>
