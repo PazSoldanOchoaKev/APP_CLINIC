@@ -8,6 +8,7 @@
     xmlns:access="clr-namespace:AppointmentManager.Views.Access"
     xmlns:pets="clr-namespace:AppointmentManager.Views.Pets"
     xmlns:Payment="clr-namespace:AppointmentManager.Views.Payment"
+    xmlns:User="clr-namespace:AppointmentManager.Views.User"
     xmlns:register="clr-namespace:AppointmentManager.Views.Register"
     xmlns:appoinment="clr-namespace:AppointmentManager.Views.Appoinments"
     Visual="Material"
@@ -54,8 +55,14 @@
     </FlyoutItem>
     <FlyoutItem icon:Font.Icon="Plus"
                 icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
-                Title="Historial de reservas">
+                Title="Pago por tarjeta">
         <ShellContent Route="Pay"
                       ContentTemplate="{DataTemplate  Payment:PaymentFormView}"/>
+    </FlyoutItem>
+    <FlyoutItem icon:Font.Icon="Plus"
+                icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
+                Title="Profile">
+        <ShellContent Route="Profile"
+                      ContentTemplate="{DataTemplate  User:ProfileView}"/>
     </FlyoutItem>
 </Shell>

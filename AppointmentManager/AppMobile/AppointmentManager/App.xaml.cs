@@ -10,6 +10,7 @@ using AppointmentManager.Views.Pets;
 using Microsoft.Extensions.DependencyInjection;
 using Netcos.Xamarin.Forms;
 using AppointmentManager.ViewModels.Payment;
+using AppointmentManager.ViewModels.User;
 
 namespace AppointmentManager
 {
@@ -40,13 +41,14 @@ namespace AppointmentManager
             services.AddRoute<PersonalInformationView, PersonalInformationViewModel>();
             services.AddRoute<NewAppoinmentView, NewAppoinmentViewModel>();
             services.AddViewModelToRoute<PaymentFormViewModel>("Pay");
+            services.AddViewModelToRoute<ProfileViewModel>("Profile");
             services
                 .AddApiClient()
                 .AcceptAnyServerCertificate()
                 .ConfigureApiClient(options =>
                 {
-                    options.Url = "http://192.168.18.17:45455/api";
-                    //options.Url = "http://192.168.18.4:45455/api";
+                    //options.Url = "http://192.168.18.17:45455/api";
+                    options.Url = "http://192.168.18.4:45455/api";
                 });
         }
     }

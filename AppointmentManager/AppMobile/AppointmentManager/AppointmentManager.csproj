@@ -66,6 +66,9 @@
     <Compile Update="Views\Payment\PaymentMethodView.xaml.cs">
       <DependentUpon>PaymentMethodView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\User\profileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Views\Access\AnimalInformationView.xaml">
@@ -84,6 +87,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pets\PetsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\User\ProfileView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
