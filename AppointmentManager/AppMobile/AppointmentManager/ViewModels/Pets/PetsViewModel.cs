@@ -22,18 +22,21 @@ namespace AppointmentManager.ViewModels.Pets
         private readonly IDisplay _display;
         private readonly IApiClientFactory _apiClientFactory;
         private ObservableCollection<AnimalInformationModel> pets;
+        private readonly ILoadingFactory _loadingFactory;
         private bool isRefresh;
 
         public PetsViewModel(
             ISecureStorage storage,
             IDisplay display,
             IAppNavigation navigation,
+            ILoadingFactory loadingFactory,
             IApiClientFactory apiClientFactory)
         {
             _navigation = navigation;
             _storage = storage;
             _display = display;
             _apiClientFactory = apiClientFactory;
+            _loadingFactory = loadingFactory;
         }
         #region Properties
         public ObservableCollection<AnimalInformationModel> Pets { get => pets; set => SetProperty(ref pets, value); }
@@ -48,20 +51,37 @@ namespace AppointmentManager.ViewModels.Pets
         public ICommand PetEditCommand => new Command<AnimalInformationModel>(PetEdit);
         public ICommand PetdeleteCommand => new Command<AnimalInformationModel>(DeletePet);
 
-       
+
 
         #endregion
 
         #region Method
-        private void DeletePet(AnimalInformationModel pet)
-        {
-            throw new NotImplementedException();
-        }
+
         private async void PetEdit(AnimalInformationModel pet)
         {
             await _navigation
                 .NavigateToAsync<AnimalInformationView>()
                 .NotifyAsync(pet);
+        }
+
+        private async void DeletePet(AnimalInformationModel pet)
+        {
+            var result = await _display.ConfirmAsync("Eliminar Mascota!", $"Esta seguro de eliminar tu mascota: {pet.PetName}");
+            if (result)
+            {
+                using (await _loadingFactory.ShowAsync("Registrando datos", "Espera un momento estamos registrando los datos"))
+                using (var client = _apiClientFactory.CreateClient())
+                {
+                    var resultPet = await client
+                        .AppendPath("pet/delete")
+                        .AddJsonBody(pet)
+                        .PostAsync();
+                    if (!resultPet)
+                        await _display.AlertAsync("Registro Mascota", resultPet.ErrorMessage);
+                    else
+                        await _navigation.BackAsync();
+                }
+            }
         }
 
         private async void NavegateToRegistration()

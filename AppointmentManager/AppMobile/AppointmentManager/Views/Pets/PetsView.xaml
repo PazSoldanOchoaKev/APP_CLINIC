@@ -44,7 +44,8 @@
                             </SwipeView.RightItems>
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Execute">
-                                    <SwipeItemView>
+                                    <SwipeItemView Command="{Binding Source={x:Reference root}, Path=BindingContext.PetdeleteCommand}"
+                                                   CommandParameter="{Binding .}">
                                         <Grid>
                                             <BoxView BackgroundColor="#AFBCEB"
                                                      CornerRadius="15, 0, 15, 0"/>
