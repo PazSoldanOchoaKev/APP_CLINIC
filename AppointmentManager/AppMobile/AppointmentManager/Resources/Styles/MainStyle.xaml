@@ -149,5 +149,9 @@
 
     <Style TargetType="input:ComboBox" BaseResourceKey="BaseInput" Class="Combo">
     </Style>
+
+    <Style TargetType="CollectionView" CanCascade="True" ApplyToDerivedTypes="True">
+        <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
+    </Style>
 </ResourceDictionary>
 

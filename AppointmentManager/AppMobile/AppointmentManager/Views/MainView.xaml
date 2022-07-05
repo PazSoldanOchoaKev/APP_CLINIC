@@ -5,35 +5,33 @@
     xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
     xmlns:icon="clr-namespace:Netcos.Xamarin.Forms.Icons.MaterialDesignIcons;assembly=Netcos.Xamarin.Forms.Icons.MaterialDesignIcons"
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
-     xmlns:pckv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:pckv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     HeaderTitle="Reserva"
     Title="{Binding Title}"
     ScrollMode="Neither"
     x:Name="root"
     x:Class="AppointmentManager.Views.MainView">
-    
-    
-    <StackLayout>
-        <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
-            <CollectionView ItemsSource="{Binding Appointment}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItems Mode="Execute">
-                                    <SwipeItemView Command="{Binding Source={x:Reference root}, Path=BindingContext.AppointmentEditCommand}"
+
+    <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
+        <CollectionView ItemsSource="{Binding Appointment}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItemView Command="{Binding Source={x:Reference root}, Path=BindingContext.PetEditCommand}"
                                                    CommandParameter="{Binding .}">
-                                        <Grid>
-                                            <BoxView BackgroundColor="#AFBCEB"
+                                    <Grid>
+                                        <BoxView BackgroundColor="#AFBCEB"
                                                      CornerRadius="0, 15, 0, 15"/>
-                                            <StackLayout WidthRequest="150" VerticalOptions="Center" HorizontalOptions="Center">
-                                                <Image icon:Font.Icon="AccountEdit"
+                                        <StackLayout WidthRequest="150" VerticalOptions="Center" HorizontalOptions="Center">
+                                            <Image icon:Font.Icon="AccountEdit"
                                                    icon:Font.IconColor="{DynamicResource SecondaryTextColor}"
                                                    icon:Font.IconSize="28"/>
-                                                <Label Text="Editar" FontSize="12"
+                                            <Label Text="Editar" FontSize="12"
                                                    TextColor="{DynamicResource SecondaryTextColor}"
                                                    HorizontalOptions="Center"/>
                                             </StackLayout>
@@ -48,80 +46,67 @@
                                         <Grid>
                                             <BoxView BackgroundColor="#AFBCEB"
                                                      CornerRadius="15, 0, 15, 0"/>
-                                            <StackLayout WidthRequest="150" VerticalOptions="Center" HorizontalOptions="Center">
-                                                <Image icon:Font.Icon="Delete"
+                                        <StackLayout WidthRequest="150" VerticalOptions="Center" HorizontalOptions="Center">
+                                            <Image icon:Font.Icon="Delete"
                                                    icon:Font.IconColor="{DynamicResource SecondaryTextColor}"
                                                    icon:Font.IconSize="28"/>
-                                                <Label Text="Eliminar" FontSize="12"
+                                            <Label Text="Eliminar" FontSize="12"
                                                    TextColor="{DynamicResource SecondaryTextColor}"
                                                    HorizontalOptions="Center"/>
-                                            </StackLayout>
-                                        </Grid>
-                                    </SwipeItemView>
-                                </SwipeItems>
-                            </SwipeView.LeftItems>
-                            <pckv:PancakeView class="Shadow" BackgroundColor="White">
-                                <Grid ColumnDefinitions="Auto, *">
-                                    <Image Source="{Binding Pets.Image}"
-                                       HeightRequest="80"
-                                       WidthRequest="80"
+                                        </StackLayout>
+                                    </Grid>
+                                </SwipeItemView>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <pckv:PancakeView class="Shadow" BackgroundColor="White">
+                            <Grid ColumnDefinitions="Auto, *">
+                                <Image Source="{Binding Pets.Image}"
+                                       HeightRequest="70"
+                                       WidthRequest="70"
                                        Grid.Column="0" Aspect="AspectFill">
-                                        <Image.Clip>
-                                            <EllipseGeometry Center="40,40"
-                                                     RadiusX="40"
-                                                     RadiusY="40"/>
-                                        </Image.Clip>
-                                    </Image>
-                                    <StackLayout Grid.Column="1" Spacing="10">
-                                        <Label Text="{Binding Pets.PetName}" StyleClass="Label"/>
-                                        <Label StyleClass="Small">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="Procedimiento: " FontSize="{StaticResource SmallSize}"
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="35,35"
+                                                     RadiusX="35"
+                                                     RadiusY="35"/>
+                                    </Image.Clip>
+                                </Image>
+                                <StackLayout Grid.Column="1" Spacing="10">
+                                    <Label Text="{Binding Pets.PetName}" StyleClass="Label"/>
+                                    <Label StyleClass="Small">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Procedimiento: " FontSize="{StaticResource SmallSize}"
                                                       FontAttributes="Bold"/>
-                                                    <Span Text="{Binding TypeProcedure}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                        <Label StyleClass="Small">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="Dia: " FontSize="{StaticResource SmallSize}"
+                                                <Span Text="{Binding TypeProcedure}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label StyleClass="Small">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Fecha: " FontSize="{StaticResource SmallSize}"
                                                       FontAttributes="Bold"/>
-                                                    <Span Text="{Binding DateTime}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                        <Label StyleClass="Small">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="hora: " FontSize="{StaticResource SmallSize}"
+                                                <Span Text="{Binding DateAppointment, StringFormat='{0:dd MMM yyyy}'}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding Hour, StringFormat='{0:hh:mm tt}'}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label StyleClass="Small">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Estado: " FontSize="{StaticResource SmallSize}"
                                                       FontAttributes="Bold"/>
-                                                    <Span Text="{Binding Hour}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                        <Label StyleClass="Small">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="Estado: " FontSize="{StaticResource SmallSize}"
-                                                      FontAttributes="Bold"/>
-                                                    <Span Text="{Binding Status}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                    </StackLayout>
-                                </Grid>
-                            </pckv:PancakeView>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
-    </StackLayout>
-    <ctrls:PageBase.Fotter>
-        <Grid ColumnDefinitions="*" ColumnSpacing="15">
-
-        </Grid>
-    </ctrls:PageBase.Fotter>
+                                                <Span Text="{Binding Status}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
+                        </pckv:PancakeView>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
 </ctrls:PageBase>

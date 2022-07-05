@@ -23,6 +23,7 @@ namespace App.Service
         }
 
         public IConfiguration Configuration { get; }
+        string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -31,6 +32,15 @@ namespace App.Service
             services.AddAppoinmentIntraestructure();
             services.AddSwagger();
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins, policy =>
+                {
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +52,8 @@ namespace App.Service
             }
 
             //app.UseHttpsRedirection();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseRouting();
 

@@ -3,6 +3,7 @@ using App.Domain.Enums;
 using App.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Netcos;
+using Netcos.Drawing;
 using Netcos.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,10 @@ namespace App.Application.Services
         }
         public Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId, AppoinmentStatus status)
         {
-            return _appointments.Include(a => a.Pets).Where(a => a.Pets.UserId == userId && a.Status == status).ToList();
+            return _appointments.Include(a => a.Pets)
+                .Where(a => a.Pets.UserId == userId && a.Status == status)
+                .OrderByDescending(a => a.DateAppointment)
+                .ToList();
         }
         public async Task<Result> DeleteAppointmentAsync(AppointmentModel model)
         {
@@ -52,9 +56,26 @@ namespace App.Application.Services
         public Result<IEnumerable<string>> GetAvailableHours(DateTime date)
         {
             var hours = Enumerable.Range(9, 9).Select(item => TimeSpan.FromHours(item));
-            var usedHours = _appointments.Where(a => a.DateAppointment == date).Select(a => a.Hour).ToList();
+            var usedHours = _appointments.Where(a => a.DateAppointment.Date == date).Select(a => a.Hour).ToList();
             var availableHours = hours.Where(h => !usedHours.Contains(h)).Select(item => DateTime.MinValue.AddHours(item.Hours).ToString("hh:mm tt"));
             return Ok(availableHours);
+        }
+
+        public Result<IEnumerable<ScheduleModel>> GetAppoinments(DateTime StartDate, DateTime EndDate)
+        {
+            return _appointments
+                .Include(a => a.Pets)
+                .Where(a => a.DateAppointment.Date >= StartDate && a.DateAppointment.Date <= EndDate)
+                .Select(a => new ScheduleModel
+                {
+                    CategoryColor = ColorHelper.GetDarkColor().ToHex(),
+                    Id = a.Id,
+                    //Image = a.Pets.Photo,
+                    StartTime = a.DateAppointment.Date.Add(a.Hour).ToUniversalTime(),
+                    Subject = a.Pets.PetName
+                })
+                .ToList()
+                .ToList();
         }
     }
 }
