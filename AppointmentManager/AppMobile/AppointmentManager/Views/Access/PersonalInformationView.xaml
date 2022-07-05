@@ -20,7 +20,7 @@
                         SelectedItem="{Binding TypeDocument, Mode=TwoWay}"
                         ItemsSource="{Binding TypeDocuments}"
                         vd:Validate.ErrorProperty="TypeDocument"/>
-            <input:Masked Hint="Número de documento" Mask="00000000" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"
+            <input:Masked Hint="Número de documento" Mask="{Binding Mask, Mode=TwoWay}" StyleClass="Text" Text="{Binding Document, Mode=TwoWay}"
                         vd:Validate.ErrorProperty="Document"/>
             <input:Masked Hint="Numero de telefono" Mask="000-000-000" StyleClass="Text" Text="{Binding Telefono, Mode=TwoWay}"
                          vd:Validate.ErrorProperty="Telefono"/>

@@ -18,7 +18,9 @@ namespace AppointmentManager.ViewModels
     {
         private readonly ISecureStorage _storage;
         private readonly IApiClientFactory _apiClientFactory;
+        private readonly IDisplay _display;
         private readonly IAppNavigation _navigation;
+        private readonly ILoadingFactory _loadingFactory;
         private bool isRefresh;
         private ObservableCollection<NewApointmentModel> appointment;
 
@@ -27,11 +29,15 @@ namespace AppointmentManager.ViewModels
         public MainViewModel(
             ISecureStorage storage,
             IApiClientFactory apiClientFactory,
+             IDisplay display,
+             ILoadingFactory loadingFactory,
             IAppNavigation navigation)
         {
             _storage = storage;
             _apiClientFactory = apiClientFactory;
             _navigation = navigation;
+            _loadingFactory = loadingFactory;
+            _display = display;
         }
 
 
@@ -45,10 +51,30 @@ namespace AppointmentManager.ViewModels
         #region Commands
         public ICommand Modify => new Command(NavegateToModifyAnimalInformation);
         public ICommand RefreshCommand => new Command(OnNavigated);
+        public ICommand AppointmentDeleteCommand => new Command<NewApointmentModel>(DeleteAppointment);
+
         #endregion
 
         #region Methodos
-
+        private async void DeleteAppointment(NewApointmentModel newApointment)
+        {
+            var result = await _display.ConfirmAsync("Eliminar la reserva!", $"Esta seguro de eliminar la reserva");
+            if (result)
+            {
+                using (await _loadingFactory.ShowAsync("Registrando datos", "Espera un momento estamos registrando la reserva"))
+                using (var client = _apiClientFactory.CreateClient())
+                {
+                    var resultPet = await client
+                        .AppendPath("Appointment/delete")
+                        .AddJsonBody(newApointment)
+                        .PostAsync();
+                    if (!resultPet)
+                        await _display.AlertAsync("Registro de reserva", resultPet.ErrorMessage);
+                    else
+                        await _navigation.BackAsync();
+                }
+            }
+        }
         private async void NavegateToModifyAnimalInformation()
         {
             await _navigation.NavigateToAsync<AnimalInformationView>();

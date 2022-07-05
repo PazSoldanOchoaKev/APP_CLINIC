@@ -34,16 +34,17 @@
                                             <Label Text="Editar" FontSize="12"
                                                    TextColor="{DynamicResource SecondaryTextColor}"
                                                    HorizontalOptions="Center"/>
-                                        </StackLayout>
-                                    </Grid>
-                                </SwipeItemView>
-                            </SwipeItems>
-                        </SwipeView.RightItems>
-                        <SwipeView.LeftItems>
-                            <SwipeItems Mode="Execute">
-                                <SwipeItemView>
-                                    <Grid>
-                                        <BoxView BackgroundColor="#AFBCEB"
+                                            </StackLayout>
+                                        </Grid>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItemView Command="{Binding Source={x:Reference root}, Path=BindingContext.AppointmentDeleteCommand}"
+                                                   CommandParameter="{Binding .}">
+                                        <Grid>
+                                            <BoxView BackgroundColor="#AFBCEB"
                                                      CornerRadius="15, 0, 15, 0"/>
                                         <StackLayout WidthRequest="150" VerticalOptions="Center" HorizontalOptions="Center">
                                             <Image icon:Font.Icon="Delete"

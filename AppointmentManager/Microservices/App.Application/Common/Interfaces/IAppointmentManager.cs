@@ -15,5 +15,6 @@ namespace App.Application
         Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId, AppoinmentStatus status);
         Result<IEnumerable<string>> GetAvailableHours(DateTime date);
         Result<IEnumerable<ScheduleModel>> GetAppoinments(DateTime StartDate, DateTime EndDate);
+        Task<Result> DeleteAppointmentAsync(AppointmentModel model);
     }
 }

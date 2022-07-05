@@ -33,6 +33,11 @@ namespace App.Service.Controllers
             return _appointmentManager.GetAppointmentByUser(userId, status);
         }
 
+        [HttpPost("delete")]
+        public Task<Result> Deleteappointment([FromBody] AppointmentModel model)
+        {
+            return _appointmentManager.DeleteAppointmentAsync(model);
+        }
         [HttpGet("avaibalehours")]
         public Result GetAvailableHours(DateTime date)
         {

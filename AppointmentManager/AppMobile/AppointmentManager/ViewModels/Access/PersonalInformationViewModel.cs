@@ -23,6 +23,7 @@ namespace AppointmentManager.ViewModels.Access
         private string document;
         private string telefono;
         private string address;
+        private string mask;
         private readonly IAppNavigation _navigation;
         private readonly IApiClientFactory _apiClientFactory;
         private readonly IDisplay _display;
@@ -48,10 +49,11 @@ namespace AppointmentManager.ViewModels.Access
         public string Name { get => name; set => SetProperty(ref name, value); }
         public string Apellido { get => apellido; set => SetProperty(ref apellido, value); }
         public ObservableCollection<DocumentTypeModel> TypeDocuments { get => typeDocuments; set => SetProperty(ref typeDocuments, value); }
-        public DocumentTypeModel TypeDocument { get => typeDocument; set => SetProperty(ref typeDocument, value); }
+        public DocumentTypeModel TypeDocument { get => typeDocument; set => SetProperty(ref typeDocument, value, onChanged: OnDocumentTypeChanged); }
         public string Document { get => document; set => SetProperty(ref document, value); }
         public string Telefono { get => telefono; set => SetProperty(ref telefono, value); }
         public string Address { get => address; set => SetProperty(ref address, value); }
+        public string Mask { get => mask; set => SetProperty(ref mask, value); }
 
         public bool IsEdit { get; set; }
 
@@ -67,6 +69,20 @@ namespace AppointmentManager.ViewModels.Access
         #endregion
 
         #region Methodos
+
+        public void OnDocumentTypeChanged(DocumentTypeModel model)
+        {
+            if (model.Type == DocumentType.DNI)
+            {
+                Mask = "00000000";
+            }
+            else
+            {
+                Mask = "";
+            }
+
+        }
+
         public void OnNavigated()
         {
             TypeDocuments = new ObservableCollection<DocumentTypeModel>(new DocumentTypeModel[] {
