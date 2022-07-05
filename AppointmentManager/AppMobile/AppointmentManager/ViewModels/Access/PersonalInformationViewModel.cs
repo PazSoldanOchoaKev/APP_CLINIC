@@ -48,7 +48,7 @@ namespace AppointmentManager.ViewModels.Access
         public string Name { get => name; set => SetProperty(ref name, value); }
         public string Apellido { get => apellido; set => SetProperty(ref apellido, value); }
         public ObservableCollection<DocumentTypeModel> TypeDocuments { get => typeDocuments; set => SetProperty(ref typeDocuments, value); }
-        public DocumentTypeModel TypeDocument { get => typeDocument; set => typeDocument = value; }
+        public DocumentTypeModel TypeDocument { get => typeDocument; set => SetProperty(ref typeDocument, value); }
         public string Document { get => document; set => SetProperty(ref document, value); }
         public string Telefono { get => telefono; set => SetProperty(ref telefono, value); }
         public string Address { get => address; set => SetProperty(ref address, value); }
@@ -127,9 +127,9 @@ namespace AppointmentManager.ViewModels.Access
                     {
                         if (IsEdit)
                         {
-                           await _storage.RemoveAsync(MainViewModel.user);
-                           await _storage.SetValueAsync(MainViewModel.user, result.Value);
-                           await _navigation.BackAsync();
+                            await _storage.RemoveAsync(MainViewModel.user);
+                            await _storage.SetValueAsync(MainViewModel.user, result.Value);
+                            await _navigation.BackAsync();
                         }
                         else
                         {
