@@ -35,7 +35,6 @@ namespace App.Application.Services
             }
             return result;
         }
-
         public Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId, AppoinmentStatus status)
         {
             return _appointments.Include(a => a.Pets).Where(a => a.Pets.UserId == userId && a.Status == status).ToList();
@@ -50,7 +49,6 @@ namespace App.Application.Services
             }
             return result;
         }
-
         public Result<IEnumerable<string>> GetAvailableHours(DateTime date)
         {
             var hours = Enumerable.Range(9, 9).Select(item => TimeSpan.FromHours(item));
