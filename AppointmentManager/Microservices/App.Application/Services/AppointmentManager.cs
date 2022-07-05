@@ -40,6 +40,16 @@ namespace App.Application.Services
         {
             return _appointments.Include(a => a.Pets).Where(a => a.Pets.UserId == userId && a.Status == status).ToList();
         }
+        public async Task<Result> DeleteAppointmentAsync(AppointmentModel model)
+        {
+            var appoinment = _appointments.FirstOrDefault(item => item.Id == model.Id);
+            var result = await _appointments.DeleteAsync(appoinment);
+            if (!result)
+            {
+                return Fail("Error al eliminar la mascota");
+            }
+            return result;
+        }
 
         public Result<IEnumerable<string>> GetAvailableHours(DateTime date)
         {

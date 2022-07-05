@@ -6,14 +6,15 @@ namespace AppointmentManager.Models
 {
     public class NewApointmentModel
     {
+        public string Id { get; set; }
         public string PetId { get; set; }
         public TypeProcedures TypeProcedure { get; set; }
         public DateTime DateAppointment { get; set; }
         public TimeSpan Hour { get; set; }
-        public ListSizes sizes {get;set;}
+        public ListSizes sizes { get; set; }
 
         public AppointmentStatus Status { get; set; }
-       
+
         public AnimalInformationModel Pets { get; set; }
     }
 

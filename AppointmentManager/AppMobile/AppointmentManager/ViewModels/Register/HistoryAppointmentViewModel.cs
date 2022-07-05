@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AppointmentManager.ViewModels.Register
 {
@@ -15,19 +17,25 @@ namespace AppointmentManager.ViewModels.Register
 
         private readonly IAppNavigation _navigation;
         private bool isRefresh;
+        private readonly IDisplay _display;
         private readonly ISecureStorage _storage;
         private readonly IApiClientFactory _apiClientFactory;
+        private readonly ILoadingFactory _loadingFactory;
         private ObservableCollection<NewApointmentModel> appointment;
 
         public HistoryAppointmentViewModel(
             ISecureStorage storage,
             IApiClientFactory apiClientFactory,
+            IDisplay display,
+            ILoadingFactory loadingFactory,
             IAppNavigation navigation
             )
         {
             _storage = storage;
             _apiClientFactory = apiClientFactory;
             _navigation = navigation;
+            _apiClientFactory = apiClientFactory;
+            _display = display;
         }
 
 
@@ -38,10 +46,32 @@ namespace AppointmentManager.ViewModels.Register
         #endregion
 
         #region Commands
+        //public ICommand AppointmentDeleteCommand => new Command<NewApointmentModel>(DeleteAppointment);
 
         #endregion
 
         #region Methodos
+
+       /* private async void DeleteAppointment(NewApointmentModel newApointment)
+        {
+            var result = await _display.ConfirmAsync("Eliminar la reserva!", $"Esta seguro de eliminar la reserva");
+            if (result)
+            {
+                using (await _loadingFactory.ShowAsync("Registrando datos", "Espera un momento estamos registrando la reserva"))
+                using (var client = _apiClientFactory.CreateClient())
+                {
+                    var resultPet = await client
+                        .AppendPath("Appointment/delete")
+                        .AddJsonBody(appointment)
+                        .PostAsync();
+                    if (!resultPet)
+                        await _display.AlertAsync("Registro de reserva", resultPet.ErrorMessage);
+                    else
+                        await _navigation.BackAsync();
+                }
+            }
+        }*/
+
         public async void OnNavigated()
         {
             var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);

@@ -116,7 +116,7 @@ namespace AppointmentManager.ViewModels.Register
                 await GetAvailableHoursAsync(date);
             }
         }
-
+ 
         private async Task GetAvailableHoursAsync(DateTime date)
         {
             using (var client = _apiClientFactory.CreateClient())
