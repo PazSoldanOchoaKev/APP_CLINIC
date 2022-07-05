@@ -73,7 +73,7 @@ namespace AppointmentManager.ViewModels.Pets
                 using (var client = _apiClientFactory.CreateClient())
                 {
                     var resultPet = await client
-                        .AppendPath("pet/delete")
+                        .AppendPath("pets/delete")
                         .AddJsonBody(pet)
                         .PostAsync();
                     if (!resultPet)

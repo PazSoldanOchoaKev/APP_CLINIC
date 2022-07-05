@@ -33,7 +33,7 @@ namespace App.Service.Controllers
             return _petsManager.EditPetAsync(model);
         }
 
-        [HttpDelete]
+        [HttpPost("delete")]
         public Task<Result> DeletePets([FromBody] PetModel model)
         {
             return _petsManager.DeletePetAsync(model);
