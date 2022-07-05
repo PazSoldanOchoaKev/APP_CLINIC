@@ -65,6 +65,7 @@ namespace AppointmentManager.ViewModels
             var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
             if (user != null)
             {
+                Title = $"Hola, {user.FirstName}";
                 LoadData(user.Id);
             }
         }

@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace AppointmentManager.ViewModels.User
 {
-    public class ProfileViewModel: ViewModelBase, INavigated
+    public class ProfileViewModel : ViewModelBase, INavigated
     {
         private readonly IAppNavigation _navigation;
         private readonly ISecureStorage _storage;
@@ -21,6 +21,8 @@ namespace AppointmentManager.ViewModels.User
         private readonly IApiClientFactory _apiClientFactory;
         private ObservableCollection<UserModel> user;
         private bool isRefresh;
+        private UserModel model;
+
         public ProfileViewModel(
             ISecureStorage storage,
             IDisplay display,
@@ -38,26 +40,30 @@ namespace AppointmentManager.ViewModels.User
         #region Propertoes
         public ObservableCollection<UserModel> User { get => user; set => SetProperty(ref user, value); }
         public bool IsRefresh { get => isRefresh; set => SetProperty(ref isRefresh, value); }
-
+        public UserModel Model { get => model; set => SetProperty(ref model, value); }
 
         #endregion
 
         #region Commands
 
-        public ICommand Modify => new Command<PersonalInformationModel>(InformationEdit);
+        public ICommand ModifyCommand => new Command(Modify);
+
         #endregion
 
         #region Method
-        private async void PetEdit(PersonalInformationModel user)
+
+        public async void OnNavigated()
+        {
+            Model = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
+        }
+
+        public async void Modify()
         {
             await _navigation
-                .NavigateToAsync<AnimalInformationView>()
-                .NotifyAsync(user);
+                .NavigateToAsync<PersonalInformationView>()
+                .NotifyAsync(Model);
         }
-        public void OnNavigated()
-        {
-          
-        }
+
         #endregion
 
     }

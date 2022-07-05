@@ -6,7 +6,7 @@
     xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
     xmlns:vd="clr-namespace:Netcos.Xamarin.Forms.Validations;assembly=Netcos.Xamarin.Forms.Validations"
     HeaderTitle="Registar Datos"
-    Title="REGISTRARSE"
+    Title="{Binding Title}"
     x:Class="AppointmentManager.Views.Access.PersonalInformationView">
 
     <Grid>

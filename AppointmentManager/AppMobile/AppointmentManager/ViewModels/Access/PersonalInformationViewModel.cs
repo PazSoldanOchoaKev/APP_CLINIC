@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace AppointmentManager.ViewModels.Access
 {
-    public class PersonalInformationViewModel : ViewModelBase, INavigated, INotify<SignUpModel>
+    public class PersonalInformationViewModel : ViewModelBase, INavigated, INotify<SignUpModel>, INotify<UserModel>
     {
         private string name;
         private string apellido;
@@ -47,6 +47,8 @@ namespace AppointmentManager.ViewModels.Access
         public string Document { get => document; set => SetProperty(ref document, value); }
         public string Telefono { get => telefono; set => SetProperty(ref telefono, value); }
         public string Address { get => address; set => SetProperty(ref address, value); }
+
+        public bool IsEdit { get; set; }
 
         private SignUpModel Model { get; set; }
 
@@ -125,7 +127,16 @@ namespace AppointmentManager.ViewModels.Access
 
         public void OnNotify(SignUpModel model)
         {
+            Title = "Registrarse";
             Model = model;
+        }
+
+        public void OnNotify(UserModel user)
+        {
+            Title = "Modificar Datos";
+            IsEdit = true;
+            Name = user.FirstName;
+            Apellido = user.LastName;
         }
 
         #endregion

@@ -3,25 +3,25 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ctrls="clr-namespace:AppointmentManager.Resources.Controls"
-             HeaderTitle="Mascotas"        
-             Title="Lista de Mascotas"
+             xmlns:input="clr-namespace:Netcos.Xamarin.Forms.InputLayout;assembly=Netcos.Xamarin.Forms.InputLayout"
+             Title="Mi Perfil"
+             HeaderTitle="Datos Personales"
              x:Class="AppointmentManager.Views.User.ProfileView">
     <StackLayout>
-        <Grid ColumnDefinitions="60, *">
-            <StackLayout Grid.Column="1">
-                <Label Text="{Binding Name}" StyleClass="Title"/>
-                <Label Text="{Binding Apellido}" StyleClass="Title"/>
-                <Label Text="{Binding TypeDocument }"/>
-                <Label Text="{Binding Document}"/>
-                <Label Text="{Binding Telefono}"/>
-                <Label Text="{Binding Address}"/>
-            </StackLayout>
-        </Grid>
+        <Label Text="Nombres:" StyleClass="LabelBold"/>
+        <Label Text="{Binding Model.FirstName}" StyleClass="Label"/>
+        <Label Text="Apellidos:" StyleClass="LabelBold"/>
+        <Label Text="{Binding Model.LastName}" StyleClass="Label"/>
+        <Label Text="Documento:" StyleClass="LabelBold"/>
+        <Label Text="{Binding Model.Document}" StyleClass="Label"/>
+        <Label Text="Contacto:" StyleClass="SubTitleBold"/>
+        <Label Text="Celular:" StyleClass="LabelBold"/>
+        <Label Text="{Binding Model.PhoneNumber}" StyleClass="Label"/>
+        <Label Text="Dirección:" StyleClass="LabelBold"/>
+        <Label Text="{Binding Model.Address}" StyleClass="Label"/>
     </StackLayout>
     <ctrls:PageBase.Fotter>
-        <Grid ColumnDefinitions="*" ColumnSpacing="15">
-            <Button Text="Modificar datos" Grid.Column="1" Command="{Binding Modify}" class="Secondary"/>
-        </Grid>
+        <Button Text="Editar datos" Command="{Binding ModifyCommand}" class="Secondary"/>
     </ctrls:PageBase.Fotter>
 
 </ctrls:PageBase>
