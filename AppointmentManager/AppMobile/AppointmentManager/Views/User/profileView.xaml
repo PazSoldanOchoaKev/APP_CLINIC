@@ -7,25 +7,21 @@
              Title="Lista de Mascotas"
              x:Class="AppointmentManager.Views.User.ProfileView">
     <StackLayout>
-        <RefreshView IsRefreshing="{Binding IsRefresh, Mode=TwoWay}" Command="{Binding RefreshCommand}">
-
-            <CollectionView ItemsSource="{Binding User}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="60, *">
-                            <StackLayout Grid.Column="1">
-                                <Label Text="{Binding Name}" StyleClass="Title"/>
-                                <Label Text="{Binding Apellido}" StyleClass="Title"/>
-                                <Label Text="{Binding TypeDocument }"/>
-                                <Label Text="{Binding Document}"/>
-                                <Label Text="{Binding Telefono}"/>
-                                <Label Text="{Binding Address}"/>
-                            </StackLayout>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+        <Grid ColumnDefinitions="60, *">
+            <StackLayout Grid.Column="1">
+                <Label Text="{Binding Name}" StyleClass="Title"/>
+                <Label Text="{Binding Apellido}" StyleClass="Title"/>
+                <Label Text="{Binding TypeDocument }"/>
+                <Label Text="{Binding Document}"/>
+                <Label Text="{Binding Telefono}"/>
+                <Label Text="{Binding Address}"/>
+            </StackLayout>
+        </Grid>
     </StackLayout>
+    <ctrls:PageBase.Fotter>
+        <Grid ColumnDefinitions="*" ColumnSpacing="15">
+            <Button Text="Modificar datos" Grid.Column="1" Command="{Binding Modify}" class="Secondary"/>
+        </Grid>
+    </ctrls:PageBase.Fotter>
 
 </ctrls:PageBase>

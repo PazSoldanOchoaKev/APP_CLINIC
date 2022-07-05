@@ -44,12 +44,19 @@ namespace AppointmentManager.ViewModels.User
 
         #region Commands
 
+        public ICommand Modify => new Command<PersonalInformationModel>(InformationEdit);
         #endregion
 
         #region Method
+        private async void PetEdit(PersonalInformationModel user)
+        {
+            await _navigation
+                .NavigateToAsync<AnimalInformationView>()
+                .NotifyAsync(user);
+        }
         public void OnNavigated()
         {
-           
+          
         }
         #endregion
 
