@@ -39,5 +39,11 @@ namespace App.Service.Controllers
             return _appointmentManager.GetAvailableHours(date);
         }
 
+        [HttpGet("schedule")]
+        public Result GetAppoinments(DateTime StartDate, DateTime EndDate)
+        {
+            return _appointmentManager.GetAppoinments(StartDate, EndDate);
+        }
+
     }
 }

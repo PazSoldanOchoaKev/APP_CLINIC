@@ -13,6 +13,7 @@
     <None Remove="Netcos.EntityFrameworkCore.Abstractions" />
     <None Remove="Netcos.Security.Cryptography" />
     <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Netcos.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Netcos.Extensions.DependencyInjection.ConfigurationExtensions" Version="3.0.0-preview-20220610.1" />
@@ -20,6 +21,7 @@
     <PackageReference Include="Netcos.EntityFrameworkCore.Abstractions" Version="3.0.0-preview-20220610.1" />
     <PackageReference Include="Netcos.Security.Cryptography" Version="3.0.0-preview-20220524.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.16" />
+    <PackageReference Include="Netcos.Drawing" Version="3.0.0-preview-20220705.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Domain\App.Domain.csproj" />
