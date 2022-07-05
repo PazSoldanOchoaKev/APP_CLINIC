@@ -28,26 +28,23 @@ namespace App.Application.Services
         public async Task<Result<Users>> RegisterAccountAsync(AccountRequestModel model)
         {
             var passwordEncrypt = EncryptProvider.AESEncrypt(model.Password, passwordKey);
-            var user = new Users
-            {
-                Address = model.Address,
-                Document = model.Document,
-                DocumentType = model.TypeDocument,
-                PhoneNumber = model.PhoneNumber,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Access = new Access
-                {
-                    User = model.Email,
-                    Password = passwordEncrypt
-                }
-            };
-            var result = await _users.AddAsync(user);
+            model.Access = new Access { User = model.Email, Password = passwordEncrypt };
+            var result = await _users.AddAsync(model);
             if (!result)
             {
                 return Fail("Error al crear el usuario");
             }
-            return Ok(user);
+            return model;
+        }
+
+        public async Task<Result<Users>> EditAccountAsync(AccountRequestModel model)
+        {
+            var result = await _users.UpdateAsync(model);
+            if (!result)
+            {
+                return Fail("Error al editar los datos del usuario");
+            }
+            return model;
         }
 
         public Result<Users> Authenticate(AuthModel model)

@@ -10,5 +10,6 @@ namespace App.Application
     {
         Task<Result<Users>> RegisterAccountAsync(AccountRequestModel model);
         Result<Users> Authenticate(AuthModel model);
+        Task<Result<Users>> EditAccountAsync(AccountRequestModel model);
     }
 }

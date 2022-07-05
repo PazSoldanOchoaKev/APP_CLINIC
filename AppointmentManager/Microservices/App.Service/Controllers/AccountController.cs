@@ -28,9 +28,13 @@ namespace App.Service.Controllers
         {
             return _accountManager.RegisterAccountAsync(model);
         }
-
+        [HttpPost("edit")]
+        public Task<Result<Users>> EditAccout([FromBody] AccountRequestModel model)
+        {
+            return _accountManager.EditAccountAsync(model);
+        }
         [HttpPost("SignIn")]
-        public Result SignIn([FromBody] AuthModel model) 
+        public Result SignIn([FromBody] AuthModel model)
         {
             return _accountManager.Authenticate(model);
         }

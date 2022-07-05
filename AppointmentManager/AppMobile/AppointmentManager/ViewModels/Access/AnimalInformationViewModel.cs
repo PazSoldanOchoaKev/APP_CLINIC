@@ -163,6 +163,8 @@ namespace AppointmentManager.ViewModels.Access
             AnimalSpecie = pet.AninalSpecie;
             Gender = Genders.FirstOrDefault(g => g.Type == pet.Gender);
             ColorAnimal = pet.Color;
+            ParticularSigns = pet.ParticularSigns;
+            Breeds = pet.Breed;
             Id = pet.Id;
         }
 

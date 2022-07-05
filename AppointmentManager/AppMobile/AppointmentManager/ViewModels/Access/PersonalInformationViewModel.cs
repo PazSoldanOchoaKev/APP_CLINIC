@@ -1,6 +1,7 @@
 ﻿using AppointmentManager.Models;
 using FluentValidation;
 using Netcos.Extensions.Http;
+using Netcos.IO.IsolatedStorage;
 using Netcos.Mvvm;
 using Netcos.Xamarin.Forms;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace AppointmentManager.ViewModels.Access
@@ -26,17 +28,20 @@ namespace AppointmentManager.ViewModels.Access
         private readonly IDisplay _display;
         private readonly ILoadingFactory _loadingFactory;
         private readonly IValidationFactory _validationFactory;
+        private readonly ISecureStorage _storage;
         public PersonalInformationViewModel(
             IApiClientFactory apiClientFactory,
             IValidationFactory validationFactory,
             IDisplay display,
             IAppNavigation navigation,
-            ILoadingFactory loadingFactory)
+            ILoadingFactory loadingFactory,
+            ISecureStorage storage)
         {
             _apiClientFactory = apiClientFactory;
             _navigation = navigation;
             _loadingFactory = loadingFactory;
             _validationFactory = validationFactory;
+            _storage = storage;
         }
 
         #region Properties
@@ -51,6 +56,8 @@ namespace AppointmentManager.ViewModels.Access
         public bool IsEdit { get; set; }
 
         private SignUpModel Model { get; set; }
+        private string Id { get; set; }
+        private string AccessId { get; set; }
 
         #endregion
 
@@ -93,28 +100,43 @@ namespace AppointmentManager.ViewModels.Access
         }
         public async void Confirm()
         {
+
             if (PersonalInformationValidate())
-            { 
-            
+            {
                 Model.FirstName = Name;
                 Model.LastName = Apellido;
-                Model.TypeDocument = TypeDocument.Type;
+                Model.DocumentType = TypeDocument.Type;
                 Model.Document = Document;
                 Model.PhoneNumber = Telefono;
                 Model.Address = Address;
+                if (IsEdit)
+                {
+                    Model.AccessId = AccessId;
+                    Model.Id = Id;
+                }
+                var methodUrl = IsEdit ? "account/edit" : "account";
                 using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
                 using (var client = _apiClientFactory.CreateClient())
                 {
                     var result = await client
-                        .AppendPath("account")
+                        .AppendPath(methodUrl)
                         .AddJsonBody(Model)
                         .PostAsAsync<UserModel>();
 
                     if (result)
                     {
-                        await _navigation
-                           .GoToAsync("//Main")
-                           .NotifyAsync(result.Value);
+                        if (IsEdit)
+                        {
+                           await _storage.RemoveAsync(MainViewModel.user);
+                           await _storage.SetValueAsync(MainViewModel.user, result.Value);
+                           await _navigation.BackAsync();
+                        }
+                        else
+                        {
+                            await _navigation
+                               .GoToAsync("//Main")
+                               .NotifyAsync(result.Value);
+                        }
                     }
                     else
                     {
@@ -122,7 +144,7 @@ namespace AppointmentManager.ViewModels.Access
                     }
                 }
             }
-            
+
         }
 
         public void OnNotify(SignUpModel model)
@@ -135,8 +157,15 @@ namespace AppointmentManager.ViewModels.Access
         {
             Title = "Modificar Datos";
             IsEdit = true;
+            Model = new SignUpModel();
             Name = user.FirstName;
             Apellido = user.LastName;
+            TypeDocument = TypeDocuments.FirstOrDefault(d => d.Type == user.DocumentType);
+            Document = user.Document;
+            Telefono = user.PhoneNumber;
+            Address = user.Address;
+            AccessId = user.AccessId;
+            Id = user.Id;
         }
 
         #endregion
