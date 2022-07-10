@@ -70,11 +70,11 @@ namespace App.Application.Services
                 .Where(a => a.DateAppointment.Date >= StartDate && a.DateAppointment.Date <= EndDate)
                 .Select(a => new ScheduleModel
                 {
-                    CategoryColor = ColorHelper.GetDarkColor().ToHex(),
                     Id = a.Id,
                     //Image = a.Pets.Photo,
                     StartTime = a.DateAppointment.Date.Add(a.Hour).ToUniversalTime(),
-                    Subject = a.Pets.PetName
+                    Subject = a.Pets.PetName,
+                    Status = a.Status
                 })
                 .ToList()
                 .ToList();
