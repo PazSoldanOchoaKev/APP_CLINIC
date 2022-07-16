@@ -12,7 +12,7 @@ export class AppComponent {
   endHour = '18:00';
 
   private dataManager: DataManager = new DataManager({
-    url: 'http://192.168.18.17:45455/api/appointment/schedule',
+    url: 'http://192.168.18.4:45455/api/appointment/schedule',
     adaptor: new WebApiAdaptor(),
     crossDomain: false
   });
