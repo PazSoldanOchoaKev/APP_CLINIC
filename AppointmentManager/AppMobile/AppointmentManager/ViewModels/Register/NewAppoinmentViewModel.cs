@@ -65,6 +65,7 @@ namespace AppointmentManager.ViewModels.Register
         public int SelectIndex { get => selectIndex; set => SetProperty(ref selectIndex, value); }
         public bool IsEdit { get; set; }
         public string Id { get; set; }
+        public TaskCompletionSource<bool> tcs;
         #endregion
 
         #region Commands
@@ -77,6 +78,7 @@ namespace AppointmentManager.ViewModels.Register
 
         public async void OnNavigated()
         {
+            tcs = new TaskCompletionSource<bool>();
             TypeProceduresModels = new ObservableCollection<TypeProceduresModel>(new TypeProceduresModel[] {
                 new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_MEDICADO, Name = "BAÑO MEDICADO" },
                 new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_Y_CORTE, Name = "BAÑO Y CORTE" },
@@ -107,6 +109,7 @@ namespace AppointmentManager.ViewModels.Register
                 }
                 await GetAvailableHoursAsync(DateTime.Now);
             }
+            tcs.SetResult(true);
         }
 
         private async void OnDateChanged(DateTime date)
@@ -158,7 +161,6 @@ namespace AppointmentManager.ViewModels.Register
 
         public async void Reserva()
         {
-
             if (Validate())
             {
                 var model = new NewApointmentModel();
@@ -194,13 +196,16 @@ namespace AppointmentManager.ViewModels.Register
             }
         }
 
-        public void OnNotify(NewApointmentModel newApointment)
+        public async void OnNotify(NewApointmentModel newApointment)
         {
             IsEdit = true;
+            await tcs.Task;
             Pet = Pets.FirstOrDefault(p => p.Id == newApointment.PetId);
             TypeProcedure = TypeProceduresModels.FirstOrDefault(p => p.Type == newApointment.TypeProcedures);
             DateAppointment = dateAppointment;
-            Hour = Hours.FirstOrDefault(h => h == DateTime.MinValue.Add(newApointment.Hour).ToString("hh:mm tt"));
+            var hour = DateTime.MinValue.Add(newApointment.Hour).ToString("hh:mm tt");
+            Hours.Add(hour);
+            Hour = hour;
             Size = ListSizes.FirstOrDefault(s => s.Type == newApointment.ListSizes);
             Id = newApointment.Id;
         }
