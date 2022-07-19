@@ -27,6 +27,7 @@ namespace App.Service.Controllers
         {
             return _appointmentManager.CreatAppointmentAsync(model);
         }
+
         [HttpGet("{userId}")]
         public Result GetAppointment(string userId, [FromQuery] AppoinmentStatus status)
         {
@@ -48,6 +49,18 @@ namespace App.Service.Controllers
         public Result GetAppoinments(DateTime StartDate, DateTime EndDate)
         {
             return _appointmentManager.GetAppoinments(StartDate, EndDate);
+        }
+
+        [HttpGet("chart/pending")]
+        public Result GetChart()
+        {
+            return _appointmentManager.GetChart();
+        }
+
+        [HttpOptions("chart/pending")]
+        public IActionResult GetChartOptions()
+        {
+            return Ok();
         }
 
     }

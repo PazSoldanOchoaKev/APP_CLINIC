@@ -1,15 +1,13 @@
-﻿using App.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using App.Domain.Entities;
 using App.Domain.Enums;
 using App.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Netcos;
-using Netcos.Drawing;
 using Netcos.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Netcos.Result;
 
 namespace App.Application.Services
@@ -73,11 +71,25 @@ namespace App.Application.Services
                     Id = a.Id,
                     //Image = a.Pets.Photo,
                     StartTime = a.DateAppointment.Date.Add(a.Hour).ToUniversalTime(),
-                    Subject = a.Pets.PetName,
+                    Subject = $"{a.Pets.PetName} - {a.TypeProcedures.GetEnumMemberValue()}",
                     Status = a.Status
                 })
                 .ToList()
                 .ToList();
+        }
+
+        public Result<ChartModel> GetChart()
+        {
+            var pendings = _appointments
+                .Where(a => a.Status == AppoinmentStatus.PENDING && a.DateAppointment.Date >= DateTime.Now.AddMonths(-1))
+                .GroupBy(a => a.DateAppointment.Date)
+                .Select(a => new ChartPendingModel
+                {
+                    Count = a.Count(),
+                    Date = a.Key.ToUniversalTime()
+                })
+                .ToList();
+            return new ChartModel { result = pendings, count = pendings.Count };
         }
     }
 }

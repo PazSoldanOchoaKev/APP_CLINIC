@@ -161,9 +161,9 @@ namespace AppointmentManager.ViewModels.Register
             {
                 var model = new NewApointmentModel();
                 model.Hour = DateTime.ParseExact(Hour, "hh:mm tt", CultureInfo.InvariantCulture).TimeOfDay;
-                model.sizes = Size.Type;
+                model.ListSizes = Size.Type;
                 model.PetId = Pet.Id;
-                model.TypeProcedure = TypeProcedure.Type;
+                model.TypeProcedures = TypeProcedure.Type;
                 model.DateAppointment = DateAppointment;
                 model.Status = AppointmentStatus.PENDING;
 

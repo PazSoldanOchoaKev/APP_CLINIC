@@ -1,5 +1,9 @@
-<ejs-schedule #scheduleObj
-    [startHour]="startHour" [endHour]="endHour"
-    [readonly]="true" [eventSettings]="eventSettings"
-    (eventRendered)="onEventRendered($event)"
-></ejs-schedule>
+<!-- <app-calendar></app-calendar> -->
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Panel de control</span>
+</mat-toolbar>
+<app-dashboard></app-dashboard>
+<app-calendar></app-calendar>
