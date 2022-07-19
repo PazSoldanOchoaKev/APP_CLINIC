@@ -198,10 +198,10 @@ namespace AppointmentManager.ViewModels.Register
         {
             IsEdit = true;
             Pet = Pets.FirstOrDefault(p => p.Id == newApointment.PetId);
-            TypeProcedure = TypeProceduresModels.FirstOrDefault(p => p.Type == newApointment.TypeProcedure);
+            TypeProcedure = TypeProceduresModels.FirstOrDefault(p => p.Type == newApointment.TypeProcedures);
             DateAppointment = dateAppointment;
             Hour = Hours.FirstOrDefault(h => h == DateTime.MinValue.Add(newApointment.Hour).ToString("hh:mm tt"));
-            Size = ListSizes.FirstOrDefault(s => s.Type == newApointment.sizes);
+            Size = ListSizes.FirstOrDefault(s => s.Type == newApointment.ListSizes);
             Id = newApointment.Id;
         }
         #endregion
