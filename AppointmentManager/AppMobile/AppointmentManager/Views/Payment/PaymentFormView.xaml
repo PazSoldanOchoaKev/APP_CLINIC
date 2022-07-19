@@ -14,11 +14,13 @@
         <vd:ValidationForm GroupName="AnimalInformationForm">
             <input:Masked Hint="Numero de tarjeta" Mask="000-0000000-0-00" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
                  vd:Validate.ErrorProperty="AnimalName"/>
-            <input:Masked Hint="Fecha de vencimiento" Mask="00/00/0000" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
+            <input:Masked Hint="Fecha de vencimiento" Mask="00/00" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
                  vd:Validate.ErrorProperty="AnimalName"/>
             <input:Masked Hint="CVV" Mask="000" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
                  vd:Validate.ErrorProperty="AnimalName"/>
-            <input:Entry Hint="Nombres y Apellido " StyleClass="Text" Text="{Binding Name, Mode=TwoWay}"
+            <input:Entry Hint="Nombres" StyleClass="Text" Text="{Binding Name, Mode=TwoWay}"
+                 vd:Validate.ErrorProperty="Name"/>
+            <input:Entry Hint="Apellido" StyleClass="Text" Text="{Binding Name, Mode=TwoWay}"
                  vd:Validate.ErrorProperty="Name"/>
             <input:Entry Hint="Correo" StyleClass="Text" Text="{Binding Email, Mode=TwoWay}"
                  vf:Validate.ErrorProperty="Email"/>
@@ -27,7 +29,7 @@
     </StackLayout>
     <ctrls:PageBase.Fotter>
         <Grid ColumnDefinitions="*" ColumnSpacing="15">
-            <Button Text="Confirmar pago" Grid.Column="0"
+            <Button Text="Pagar{Binding Monto}" Grid.Column="0"
                     Command="{Binding Confirmar}"
                     class="Secondary"/>
         </Grid>

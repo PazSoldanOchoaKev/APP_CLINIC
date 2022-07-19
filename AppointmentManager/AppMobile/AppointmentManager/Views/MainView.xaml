@@ -22,7 +22,7 @@
                     <SwipeView>
                         <SwipeView.RightItems>
                             <SwipeItems Mode="Execute">
-                                <SwipeItemView Command="{Binding Source={x:Reference root}, Path=BindingContext.PetEditCommand}"
+                                <SwipeItemView Command="{Binding Source={x:Reference root}, Path=BindingContext.AppointmentEditCommand}"
                                                    CommandParameter="{Binding .}">
                                     <Grid>
                                         <BoxView BackgroundColor="#AFBCEB"

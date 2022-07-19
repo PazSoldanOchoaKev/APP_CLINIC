@@ -51,11 +51,19 @@ namespace AppointmentManager.ViewModels
         #region Commands
         public ICommand Modify => new Command(NavegateToModifyAnimalInformation);
         public ICommand RefreshCommand => new Command(OnNavigated);
+        public ICommand AppointmentEditCommand => new Command<NewApointmentModel>(AppointmentEdit);
         public ICommand AppointmentDeleteCommand => new Command<NewApointmentModel>(DeleteAppointment);
+
 
         #endregion
 
         #region Methodos
+        private async void AppointmentEdit(NewApointmentModel newApointment)
+        {
+            await _navigation
+                .NavigateToAsync<AnimalInformationView>()
+                .NotifyAsync(newApointment);
+        }
         private async void DeleteAppointment(NewApointmentModel newApointment)
         {
             var result = await _display.ConfirmAsync("Eliminar la reserva!", $"Esta seguro de eliminar la reserva");

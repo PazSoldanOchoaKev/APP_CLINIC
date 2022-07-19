@@ -102,8 +102,10 @@ namespace AppointmentManager.ViewModels.Access
         public void OnNavigated()
         {
 #if DEBUG
-            UserName = "stalin_kevin@hotmail.com";
-            Password = "p4SSword*123";
+            UserName = "kevinpazsoldan@gmail.com";
+            Password ="123456";
+            // UserName = "stalin_kevin@hotmail.com";
+            //  Password = "p4SSword*123";
 #endif
         }
         #endregion
