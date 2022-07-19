@@ -15,6 +15,7 @@ namespace App.Domain.Models
         public bool IsBlock { get; set; }
         public bool IsReadonly { get; set; }
         public AppoinmentStatus Status { get; set; }
+        public string Procedure { get; set; }
 
         private string EvaluateColor()
         {

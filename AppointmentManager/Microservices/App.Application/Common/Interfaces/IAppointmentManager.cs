@@ -17,5 +17,6 @@ namespace App.Application
         Task<Result> EditAppointmentAsync(AppointmentModel model);
         Result<IEnumerable<ScheduleModel>> GetAppoinments(DateTime StartDate, DateTime EndDate);
         Task<Result> DeleteAppointmentAsync(AppointmentModel model);
+        Result<ChartModel> GetChart();
     }
 }

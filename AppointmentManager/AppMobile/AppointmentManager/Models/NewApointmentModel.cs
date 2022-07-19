@@ -8,10 +8,10 @@ namespace AppointmentManager.Models
     {
         public string Id { get; set; }
         public string PetId { get; set; }
-        public TypeProcedures TypeProcedure { get; set; }
+        public TypeProcedures TypeProcedures { get; set; }
         public DateTime DateAppointment { get; set; }
         public TimeSpan Hour { get; set; }
-        public ListSizes sizes { get; set; }
+        public ListSizes ListSizes { get; set; }
 
         public AppointmentStatus Status { get; set; }
 
