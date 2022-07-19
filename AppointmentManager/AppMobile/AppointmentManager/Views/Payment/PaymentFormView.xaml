@@ -14,7 +14,7 @@
         <vd:ValidationForm GroupName="AnimalInformationForm">
             <input:Masked Hint="Numero de tarjeta" Mask="000-0000000-0-00" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
                  vd:Validate.ErrorProperty="AnimalName"/>
-            <input:Masked Hint="Fecha de vencimiento" Mask="00/00" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
+            <input:Masked Hint="Fecha de vencimiento" Mask="00/00/000" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
                  vd:Validate.ErrorProperty="AnimalName"/>
             <input:Masked Hint="CVV" Mask="000" StyleClass="Text" Text="{Binding AnimalName, Mode=TwoWay}"
                  vd:Validate.ErrorProperty="AnimalName"/>

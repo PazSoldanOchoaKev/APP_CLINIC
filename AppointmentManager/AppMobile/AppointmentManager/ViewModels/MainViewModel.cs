@@ -1,6 +1,7 @@
 ﻿using AppointmentManager.Models;
 using AppointmentManager.Views.Access;
 using AppointmentManager.Views.Pets;
+using AppointmentManager.Views.Register;
 using Netcos.Extensions.Http;
 using Netcos.IO.IsolatedStorage;
 using Netcos.Mvvm;
@@ -61,7 +62,7 @@ namespace AppointmentManager.ViewModels
         private async void AppointmentEdit(NewApointmentModel newApointment)
         {
             await _navigation
-                .NavigateToAsync<AnimalInformationView>()
+                .NavigateToAsync<NewAppoinmentView>()
                 .NotifyAsync(newApointment);
         }
         private async void DeleteAppointment(NewApointmentModel newApointment)

@@ -43,6 +43,15 @@ namespace App.Application.Services
                 .OrderByDescending(a => a.DateAppointment)
                 .ToList();
         }
+        public async Task<Result> EditAppointmentAsync(AppointmentModel model)
+        {
+            var result = await _appointments.UpdateAsync(model);
+            if (!result)
+            {
+                return Fail("Error al editar la mascota");
+            }
+            return result;
+        }
         public async Task<Result> DeleteAppointmentAsync(AppointmentModel model)
         {
             var appoinment = _appointments.FirstOrDefault(item => item.Id == model.Id);

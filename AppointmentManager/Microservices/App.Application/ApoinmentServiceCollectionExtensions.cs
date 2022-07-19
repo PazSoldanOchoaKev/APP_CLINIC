@@ -11,7 +11,7 @@ namespace App.Application
             services.AddScoped<IAccountManager, AccountManager>();
             services.AddScoped<IPetsManager, PetsManager>();
             services.AddScoped<IAppointmentManager, AppointmentManager>();
-            services.AddScoped<IPaymentManager, PaymentManager>();
+            //services.AddScoped<IPaymentManager, PaymentManager>();
             return services;
         }
     }

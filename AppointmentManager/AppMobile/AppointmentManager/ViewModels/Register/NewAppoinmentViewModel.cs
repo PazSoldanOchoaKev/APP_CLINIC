@@ -16,7 +16,7 @@ using Xamarin.Essentials;
 
 namespace AppointmentManager.ViewModels.Register
 {
-    public class NewAppoinmentViewModel : ViewModelBase, INavigated
+    public class NewAppoinmentViewModel : ViewModelBase, INavigated, INotify<NewApointmentModel>
     {
         private ObservableCollection<TypeProceduresModel> typeProceduresModels;
         private TypeProceduresModel typeProcedure;
@@ -63,7 +63,8 @@ namespace AppointmentManager.ViewModels.Register
         public ObservableCollection<ListSizesModel> ListSizes { get => listSizes; set => SetProperty(ref listSizes, value); }
         public ListSizesModel Size { get => size; set => SetProperty(ref size, value); }
         public int SelectIndex { get => selectIndex; set => SetProperty(ref selectIndex, value); }
-
+        public bool IsEdit { get; set; }
+        public string Id { get; set; }
         #endregion
 
         #region Commands
@@ -116,7 +117,7 @@ namespace AppointmentManager.ViewModels.Register
                 await GetAvailableHoursAsync(date);
             }
         }
- 
+
         private async Task GetAvailableHoursAsync(DateTime date)
         {
             using (var client = _apiClientFactory.CreateClient())
@@ -157,6 +158,7 @@ namespace AppointmentManager.ViewModels.Register
 
         public async void Reserva()
         {
+
             if (Validate())
             {
                 var model = new NewApointmentModel();
@@ -167,11 +169,14 @@ namespace AppointmentManager.ViewModels.Register
                 model.DateAppointment = DateAppointment;
                 model.Status = AppointmentStatus.PENDING;
 
+                if (IsEdit)
+                    model.Id = Id;
+                var methodUrl = IsEdit ? "appointment/edit" : "appointment";
                 using (await _loadingFactory.ShowAsync("Subiendo datos", "Espera un momento estamos registrando los datos"))
                 using (var client = _apiClientFactory.CreateClient())
                 {
                     var result = await client
-                        .AppendPath("appointment")
+                        .AppendPath(methodUrl)
                         .AddJsonBody(model)
                         .PostAsync();
 
@@ -187,6 +192,17 @@ namespace AppointmentManager.ViewModels.Register
                     }
                 }
             }
+        }
+
+        public void OnNotify(NewApointmentModel newApointment)
+        {
+            IsEdit = true;
+            Pet = Pets.FirstOrDefault(p => p.Id == newApointment.PetId);
+            TypeProcedure = TypeProceduresModels.FirstOrDefault(p => p.Type == newApointment.TypeProcedure);
+            DateAppointment = dateAppointment;
+            Hour = Hours.FirstOrDefault(h => h == DateTime.MinValue.Add(newApointment.Hour).ToString("hh:mm tt"));
+            Size = ListSizes.FirstOrDefault(s => s.Type == newApointment.sizes);
+            Id = newApointment.Id;
         }
         #endregion
     }

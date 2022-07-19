@@ -47,8 +47,8 @@ namespace AppointmentManager
                 .AcceptAnyServerCertificate()
                 .ConfigureApiClient(options =>
                 {
-                   options.Url = "http://192.168.18.17:45455/api";
-                    //options.Url = "http://192.168.18.4:45455/api";
+                   //options.Url = "http://192.168.18.17:45455/api";
+                    options.Url = "http://192.168.18.4:45455/api";
                 });
         }
     }
