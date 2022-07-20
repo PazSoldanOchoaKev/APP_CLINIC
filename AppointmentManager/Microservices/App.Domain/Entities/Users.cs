@@ -15,7 +15,7 @@ namespace App.Domain.Entities
         [Required]
         [MaxLength(200)]
         public string LastName { get; set; }
-        [Required]
+        //[Required]
         public string AccessId { get; set; }
         [Required]
         public DocumentType DocumentType { get; set; }
