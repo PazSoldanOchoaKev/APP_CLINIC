@@ -43,7 +43,7 @@
               Command="{Binding AppoinmentCommand}"/>
     <FlyoutItem icon:Font.Icon="Plus"
                 icon:Font.IconColor="{DynamicResource PrimaryTextColor}"
-                Title="Mis Mascotas">
+                Title="SubClient">
         <ShellContent Route="Pets"
                       ContentTemplate="{DataTemplate pets:PetsView}"/>
     </FlyoutItem>

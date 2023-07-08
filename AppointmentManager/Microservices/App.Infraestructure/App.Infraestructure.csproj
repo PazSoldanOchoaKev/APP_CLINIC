@@ -1,15 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net5.0</TargetFrameworks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Data\" />
-    <None Remove="Netcos.EntityFrameworkCore.SqlServer" />
-    <None Remove="Microsoft.EntityFrameworkCore.Tools" />
-    <None Remove="Migrations\" />
-  </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Migrations\" />

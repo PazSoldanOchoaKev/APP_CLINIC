@@ -11,7 +11,7 @@
 
 
     <vd:ValidationForm  Grid.Row="1" GroupName="NewAppoinmentForm">
-        <input:ComboBox Hint="Seleccionar Animal" StyleClass="Combo"
+        <input:ComboBox Hint="Seleccionar paciente" StyleClass="Combo"
                         DisplayMemberPath="PetName"
                         SelectedItem="{Binding Pet, Mode=TwoWay}"
                         ItemsSource="{Binding Pets}"
@@ -29,7 +29,7 @@
                             SelectedItem="{Binding Hour, Mode=TwoWay}"
                             vd:Validate.ErrorProperty="Hour"
                             ItemsSource="{Binding Hours}"/>
-        <input:ComboBox Hint="Escoger tamaño" StyleClass="Combo"
+        <input:ComboBox Hint="Escoger el doctor" StyleClass="Combo"
                         DisplayMemberPath="Name"
                         SelectedItem="{Binding Size, Mode=TwoWay}"
                         ItemsSource="{Binding  ListSizes}"

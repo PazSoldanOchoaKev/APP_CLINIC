@@ -1,20 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Services\" />
-    <None Remove="Common\" />
-    <None Remove="Common\Interfaces\" />
-    <None Remove="Netcos.Extensions.DependencyInjection.ConfigurationExtensions" />
-    <None Remove="Netcos.Data.SqlServer" />
-    <None Remove="Netcos.EntityFrameworkCore.Abstractions" />
-    <None Remove="Netcos.Security.Cryptography" />
-    <None Remove="Microsoft.EntityFrameworkCore" />
-    <None Remove="Netcos.Drawing" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Netcos.Extensions.DependencyInjection.ConfigurationExtensions" Version="3.0.0-preview-20220610.1" />
     <PackageReference Include="Netcos.Data.SqlServer" Version="3.0.0-preview-20220611.1" />

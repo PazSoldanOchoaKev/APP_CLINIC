@@ -74,8 +74,8 @@ namespace AppointmentManager.ViewModels.Access
         {
             Genders = new ObservableCollection<GenderTypeModel>(new GenderTypeModel[]
             {
-                new GenderTypeModel { Type = GenderType.MACHO, Name = "MACHO" },
-                new GenderTypeModel { Type = GenderType.HEMBRA, Name = "HEMBRA"}
+                new GenderTypeModel { Type = GenderType.MACHO, Name = "HOMBRE" },
+                new GenderTypeModel { Type = GenderType.HEMBRA, Name = "MUJER"}
             });
         }
 
