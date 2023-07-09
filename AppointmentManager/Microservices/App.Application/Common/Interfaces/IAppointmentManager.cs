@@ -19,5 +19,6 @@ namespace App.Application
         Task<Result> DeleteAppointmentAsync(AppointmentModel model);
         Result<ChartModel> GetChart();
         Result<IEnumerable<ProcedureTypes>> GetProcedureTypes();
+        Result<IEnumerable<Doctors>> GetDoctors();
     }
 }

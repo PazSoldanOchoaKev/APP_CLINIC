@@ -74,5 +74,11 @@ namespace App.Service.Controllers
             return _appointmentManager.GetProcedureTypes();
         }
 
+        [HttpGet("doctors")]
+        public Result GetDoctors()
+        {
+            return _appointmentManager.GetDoctors();
+        }
+
     }
 }

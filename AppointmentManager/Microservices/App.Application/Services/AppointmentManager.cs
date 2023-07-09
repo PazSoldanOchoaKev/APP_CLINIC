@@ -17,11 +17,14 @@ namespace App.Application.Services
         private readonly IRepository<Appointment> _appointments;
         private readonly IRepository<Pets> _pets;
         private readonly IRepository<ProcedureTypes> _procedureTypes;
+        private readonly IRepository<Doctors> _doctors;
 
         public AppointmentManager(
             IRepository<Pets> pets,
             IRepository<ProcedureTypes> procedureTypes,
-            IRepository<Appointment> appointment)
+            IRepository<Appointment> appointment,
+            IRepository<Doctors> doctors
+            )
         {
             _appointments = appointment;
             _pets = pets;
@@ -109,6 +112,10 @@ namespace App.Application.Services
         public Result<IEnumerable<ProcedureTypes>> GetProcedureTypes()
         {
             return _procedureTypes.ToList();
+        }
+        public Result<IEnumerable<Doctors>> GetDoctors()
+        {
+            return _doctors.ToList();
         }
     }
 }
