@@ -69,15 +69,13 @@ namespace App.Infraestructure.Migrations
 
                     b.Property<string>("TypeProcedureId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("PetId");
-
-                    b.HasIndex("TypeProcedureId");
 
                     b.ToTable("Appointments");
                 });
@@ -222,17 +220,9 @@ namespace App.Infraestructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Domain.Entities.ProcedureTypes", "ProcedureType")
-                        .WithMany()
-                        .HasForeignKey("TypeProcedureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Doctor");
 
                     b.Navigation("Pets");
-
-                    b.Navigation("ProcedureType");
                 });
 
             modelBuilder.Entity("App.Domain.Entities.Doctors", b =>

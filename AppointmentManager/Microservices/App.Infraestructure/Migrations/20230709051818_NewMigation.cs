@@ -2,7 +2,7 @@
 
 namespace App.Infraestructure.Migrations
 {
-    public partial class LastMigration : Migration
+    public partial class NewMigation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,7 +24,7 @@ namespace App.Infraestructure.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "TypeProcedureId",
                 table: "Appointments",
-                type: "nvarchar(450)",
+                type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
 
@@ -33,24 +33,11 @@ namespace App.Infraestructure.Migrations
                 table: "Appointments",
                 column: "DoctorId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Appointments_TypeProcedureId",
-                table: "Appointments",
-                column: "TypeProcedureId");
-
             migrationBuilder.AddForeignKey(
                 name: "FK_Appointments_Doctors_DoctorId",
                 table: "Appointments",
                 column: "DoctorId",
                 principalTable: "Doctors",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Appointments_ProcedureTypes_TypeProcedureId",
-                table: "Appointments",
-                column: "TypeProcedureId",
-                principalTable: "ProcedureTypes",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -61,16 +48,8 @@ namespace App.Infraestructure.Migrations
                 name: "FK_Appointments_Doctors_DoctorId",
                 table: "Appointments");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Appointments_ProcedureTypes_TypeProcedureId",
-                table: "Appointments");
-
             migrationBuilder.DropIndex(
                 name: "IX_Appointments_DoctorId",
-                table: "Appointments");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Appointments_TypeProcedureId",
                 table: "Appointments");
 
             migrationBuilder.DropColumn(

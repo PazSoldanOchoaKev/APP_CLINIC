@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infraestructure.Migrations
 {
     [DbContext(typeof(AppoinmentContext))]
-    [Migration("20230709043917_LastMigration")]
-    partial class LastMigration
+    [Migration("20230709051818_NewMigation")]
+    partial class NewMigation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,15 +71,13 @@ namespace App.Infraestructure.Migrations
 
                     b.Property<string>("TypeProcedureId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("PetId");
-
-                    b.HasIndex("TypeProcedureId");
 
                     b.ToTable("Appointments");
                 });
@@ -224,17 +222,9 @@ namespace App.Infraestructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Domain.Entities.ProcedureTypes", "ProcedureType")
-                        .WithMany()
-                        .HasForeignKey("TypeProcedureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Doctor");
 
                     b.Navigation("Pets");
-
-                    b.Navigation("ProcedureType");
                 });
 
             modelBuilder.Entity("App.Domain.Entities.Doctors", b =>
