@@ -1,96 +1,101 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1</TargetFrameworks>
-    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Netcos.Extensions.Http" Version="3.0.0-preview-20220610.1" />
-    <PackageReference Include="Netcos.IO" Version="3.0.0-preview-20220611.1" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
-    <PackageReference Include="Netcos.Xamarin.Forms" Version="3.0.0-preview-20220629.1" />
-    <PackageReference Include="Netcos.Xamarin.Forms.Icons.MaterialDesignIcons" Version="3.0.0-preview-20220629.1" />
-    <PackageReference Include="Netcos.Xamarin.Forms.InputLayout" Version="3.0.0-preview-20220629.1" />
-    <PackageReference Include="Netcos.Xamarin.Forms.Validations" Version="3.0.0-preview-20220629.1" />
-    <PackageReference Include="Netcos.Net.Http" Version="3.0.0-preview-20220629.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Views\" />
-    <None Remove="ViewModels\" />
-    <None Remove="Models\" />
-    <None Remove="Netcos.Xamarin.Forms" />
-    <None Remove="Services\" />
-    <None Remove="Views\Register\" />
-    <None Remove="ViewModels\Register\" />
-    <None Remove="Netcos.Xamarin.Forms.Icons.MaterialDesignIcons" />
-    <None Remove="Resources\" />
-    <None Remove="Resources\Themes\" />
-    <None Remove="Resources\Styles\" />
-    <None Remove="Views\Login\" />
-    <None Remove="ViewModels\Access\" />
-    <None Remove="Resources\Controls\" />
-    <None Remove="Netcos.Xamarin.Forms.InputLayout" />
-    <None Remove="Netcos.Xamarin.Forms.Validations" />
-    <None Remove="Netcos.Net.Http" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Resources\Themes\" />
-    <Folder Include="Resources\Styles\" />
-    <Folder Include="Resources\Controls\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Views\Access\SignInView.xaml.cs">
-      <DependentUpon>SignInView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Access\SignUpView.xaml.cs">
-      <DependentUpon>SignUpView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Access\SignInView.xaml.cs">
-      <DependentUpon>SignInView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Access\SignUpView.xaml.cs">
-      <DependentUpon>SignUpView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Payment\PaymentFormView.xaml.cs">
-      <DependentUpon>PaymentFormView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Payment\PaymentMethodView.xaml.cs">
-      <DependentUpon>PaymentMethodView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\User\profileView.xaml.cs">
-      <DependentUpon>ProfileView.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Views\Access\AnimalInformationView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Access\PersonalInformationView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Appoinments\HistoryAppointmentView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Payment\PaymentFormView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Payment\PaymentMethodView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Pets\PetsView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\User\ProfileView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+		<ProduceReferenceAssemblyInOutDir>true</ProduceReferenceAssemblyInOutDir>
+		<NeutralLanguage>es</NeutralLanguage>
+		<BuildWithMSBuildOnMono>true</BuildWithMSBuildOnMono>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<LangVersion>9.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<LangVersion>9.0</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Netcos.Extensions.Http" Version="3.0.0-preview-20230206.1" />
+		<PackageReference Include="Netcos.IO" Version="3.0.0-preview-20230206.5" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
+		<PackageReference Include="Netcos.Xamarin.Forms" Version="3.0.0-preview-20230403.2" />
+		<PackageReference Include="Netcos.Xamarin.Forms.Icons.MaterialDesignIcons" Version="3.0.0-preview-20230403.2" />
+		<PackageReference Include="Netcos.Xamarin.Forms.InputLayout" Version="3.0.0-preview-20230403.2" />
+		<PackageReference Include="Netcos.Xamarin.Forms.Validations" Version="3.0.0-preview-20230403.2" />
+		<PackageReference Include="Netcos.Net.Http" Version="3.0.0-preview-20230206.5" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Views\" />
+		<None Remove="ViewModels\" />
+		<None Remove="Models\" />
+		<None Remove="Netcos.Xamarin.Forms" />
+		<None Remove="Services\" />
+		<None Remove="Views\Register\" />
+		<None Remove="ViewModels\Register\" />
+		<None Remove="Netcos.Xamarin.Forms.Icons.MaterialDesignIcons" />
+		<None Remove="Resources\" />
+		<None Remove="Resources\Themes\" />
+		<None Remove="Resources\Styles\" />
+		<None Remove="Views\Login\" />
+		<None Remove="ViewModels\Access\" />
+		<None Remove="Resources\Controls\" />
+		<None Remove="Netcos.Xamarin.Forms.InputLayout" />
+		<None Remove="Netcos.Xamarin.Forms.Validations" />
+		<None Remove="Netcos.Net.Http" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Services\" />
+		<Folder Include="Resources\" />
+		<Folder Include="Resources\Themes\" />
+		<Folder Include="Resources\Styles\" />
+		<Folder Include="Resources\Controls\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Views\Access\SignInView.xaml.cs">
+			<DependentUpon>SignInView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Access\SignUpView.xaml.cs">
+			<DependentUpon>SignUpView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Access\SignInView.xaml.cs">
+			<DependentUpon>SignInView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Access\SignUpView.xaml.cs">
+			<DependentUpon>SignUpView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Payment\PaymentFormView.xaml.cs">
+			<DependentUpon>PaymentFormView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Payment\PaymentMethodView.xaml.cs">
+			<DependentUpon>PaymentMethodView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\User\profileView.xaml.cs">
+			<DependentUpon>ProfileView.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Views\Access\AnimalInformationView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Access\PersonalInformationView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Appoinments\HistoryAppointmentView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Payment\PaymentFormView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Payment\PaymentMethodView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\Pets\PetsView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Views\User\ProfileView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
 </Project>
