@@ -16,24 +16,24 @@
                         SelectedItem="{Binding Pet, Mode=TwoWay}"
                         ItemsSource="{Binding Pets}"
                         vd:Validate.ErrorProperty="Pet"/>
+        <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"
+                              vd:Validate.ErrorProperty="DateAppointment"
+                              StyleClass="Text"/>
         <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
                         DisplayMemberPath="Type"
                         vd:Validate.ErrorProperty="TypeProcedure"
                         SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
                         ItemsSource="{Binding TypeProceduresModels}"/>
-        <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"
-                              vd:Validate.ErrorProperty="DateAppointment"
-                              StyleClass="Text"/>
+        <input:ComboBox Hint="Escoger el doctor" StyleClass="Combo"
+                        DisplayMemberPath="Name"
+                        SelectedItem="{Binding Doctor, Mode=TwoWay}"
+                        ItemsSource="{Binding  Doctors}"
+                        vd:Validate.ErrorProperty="Doctor"/>
         <!--<input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>-->
         <input:ComboBox Hint="Hora" StyleClass="Combo"
                             SelectedItem="{Binding Hour, Mode=TwoWay}"
                             vd:Validate.ErrorProperty="Hour"
                             ItemsSource="{Binding Hours}"/>
-        <input:ComboBox Hint="Escoger el doctor" StyleClass="Combo"
-                        DisplayMemberPath="Name"
-                        SelectedItem="{Binding Size, Mode=TwoWay}"
-                        ItemsSource="{Binding  ListSizes}"
-                        vd:Validate.ErrorProperty="Size"/>
     </vd:ValidationForm>
 
     <ctrls:PageBase.Fotter>

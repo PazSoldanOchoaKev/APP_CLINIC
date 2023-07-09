@@ -44,11 +44,6 @@ namespace App.Service.Controllers
         {
             return _appointmentManager.DeleteAppointmentAsync(model);
         }
-        [HttpGet("avaibalehours")]
-        public Result GetAvailableHours(DateTime date)
-        {
-            return _appointmentManager.GetAvailableHours(date);
-        }
 
         [HttpGet("schedule")]
         public Result GetAppoinments(DateTime StartDate, DateTime EndDate)
@@ -74,11 +69,16 @@ namespace App.Service.Controllers
             return _appointmentManager.GetProcedureTypes();
         }
 
-        [HttpGet("doctors")]
-        public Result GetDoctors()
+        [HttpGet("{procedureId}/doctors")]
+        public Result GetDoctors(string procedureId)
         {
-            return _appointmentManager.GetDoctors();
+            return _appointmentManager.GetDoctors(procedureId);
         }
 
+        [HttpGet("{doctorId}/avaibalehours")]
+        public Result GetAvailableHours(string doctorId, [FromQuery] DateTime date)
+        {
+            return _appointmentManager.GetAvailableHours(doctorId, date);
+        }
     }
 }

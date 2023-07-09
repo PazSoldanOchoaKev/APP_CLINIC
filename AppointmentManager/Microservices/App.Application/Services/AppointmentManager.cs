@@ -29,6 +29,7 @@ namespace App.Application.Services
             _appointments = appointment;
             _pets = pets;
             _procedureTypes = procedureTypes;
+            _doctors = doctors;
         }
 
         public async Task<Result> CreatAppointmentAsync(AppointmentModel model)
@@ -70,28 +71,20 @@ namespace App.Application.Services
             return result;
         }
 
-        public Result<IEnumerable<string>> GetAvailableHours(DateTime date)
-        {
-            var hours = Enumerable.Range(9, 9).Select(item => TimeSpan.FromHours(item));
-            var usedHours = _appointments.Where(a => a.DateAppointment.Date == date).Select(a => a.Hour).ToList();
-            var availableHours = hours.Where(h => !usedHours.Contains(h)).Select(item => DateTime.MinValue.AddHours(item.Hours).ToString("hh:mm tt"));
-            return Ok(availableHours);
-        }
-
         public Result<IEnumerable<ScheduleModel>> GetAppoinments(DateTime StartDate, DateTime EndDate)
         {
             return _appointments
                 .Include(a => a.Pets)
+                //.Include(a => a.ProcedureType)
                 .Where(a => a.DateAppointment.Date >= StartDate && a.DateAppointment.Date <= EndDate)
                 .Select(a => new ScheduleModel
                 {
                     Id = a.Id,
                     //Image = a.Pets.Photo,
                     StartTime = a.DateAppointment.Date.Add(a.Hour).ToUniversalTime(),
-                    Subject = $"{a.Pets.PetName} - {a.TypeProcedures.GetEnumMemberValue()}",
+                    Subject = a.Pets.PetName,
                     Status = a.Status
                 })
-                .ToList()
                 .ToList();
         }
 
@@ -113,9 +106,23 @@ namespace App.Application.Services
         {
             return _procedureTypes.ToList();
         }
-        public Result<IEnumerable<Doctors>> GetDoctors()
+
+        public Result<IEnumerable<Doctors>> GetDoctors(string procedureId)
         {
-            return _doctors.ToList();
+            return _doctors
+                .Where(item => item.ProcedureTypeId == procedureId)
+                .ToList();
+        }
+
+        public Result<IEnumerable<string>> GetAvailableHours(string doctorId, DateTime date)
+        {
+            var doctor = _doctors.FirstOrDefault(item => item.Id == doctorId);
+            if (doctor == null)
+                return Fail("No se encontro horario disponible", 404);
+            var hours = Enumerable.Range(doctor.StartHour, doctor.CountHour).Select(item => TimeSpan.FromHours(item));
+            var usedHours = _appointments.Where(a => a.DateAppointment.Date == date && a.DoctorId == doctorId).Select(a => a.Hour).ToList();
+            var availableHours = hours.Where(h => !usedHours.Contains(h)).Select(item => DateTime.MinValue.AddHours(item.Hours).ToString("hh:mm tt"));
+            return Ok(availableHours);
         }
     }
 }

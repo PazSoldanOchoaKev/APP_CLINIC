@@ -4,9 +4,9 @@ using System.Text;
 
 namespace AppointmentManager.Models
 {
-    public class ListSizesModel
+    public class DoctorsModel
     {
-        public ListSizes Type { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
     }
 }
