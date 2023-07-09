@@ -17,8 +17,8 @@
                         ItemsSource="{Binding Pets}"
                         vd:Validate.ErrorProperty="Pet"/>
         <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
-                        DisplayMemberPath="Name"
-                            vd:Validate.ErrorProperty="TypeProcedure"
+                        DisplayMemberPath="Type"
+                        vd:Validate.ErrorProperty="TypeProcedure"
                         SelectedItem="{Binding TypeProcedure, Mode=TwoWay}"
                         ItemsSource="{Binding TypeProceduresModels}"/>
         <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"

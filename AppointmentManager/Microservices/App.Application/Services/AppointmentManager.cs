@@ -16,13 +16,16 @@ namespace App.Application.Services
     {
         private readonly IRepository<Appointment> _appointments;
         private readonly IRepository<Pets> _pets;
+        private readonly IRepository<ProcedureTypes> _procedureTypes;
 
         public AppointmentManager(
             IRepository<Pets> pets,
+            IRepository<ProcedureTypes> procedureTypes,
             IRepository<Appointment> appointment)
         {
             _appointments = appointment;
             _pets = pets;
+            _procedureTypes = procedureTypes;
         }
 
         public async Task<Result> CreatAppointmentAsync(AppointmentModel model)
@@ -34,6 +37,7 @@ namespace App.Application.Services
             }
             return result;
         }
+
         public Result<IEnumerable<Appointment>> GetAppointmentByUser(string userId, AppoinmentStatus status)
         {
             return _appointments.Include(a => a.Pets)
@@ -41,6 +45,7 @@ namespace App.Application.Services
                 .OrderByDescending(a => a.DateAppointment)
                 .ToList();
         }
+
         public async Task<Result> EditAppointmentAsync(AppointmentModel model)
         {
             var result = await _appointments.UpdateAsync(model);
@@ -50,6 +55,7 @@ namespace App.Application.Services
             }
             return result;
         }
+
         public async Task<Result> DeleteAppointmentAsync(AppointmentModel model)
         {
             var appoinment = _appointments.FirstOrDefault(item => item.Id == model.Id);
@@ -60,6 +66,7 @@ namespace App.Application.Services
             }
             return result;
         }
+
         public Result<IEnumerable<string>> GetAvailableHours(DateTime date)
         {
             var hours = Enumerable.Range(9, 9).Select(item => TimeSpan.FromHours(item));
@@ -97,6 +104,11 @@ namespace App.Application.Services
                 })
                 .ToList();
             return new ChartModel { result = pendings, count = pendings.Count };
+        }
+
+        public Result<IEnumerable<ProcedureTypes>> GetProcedureTypes()
+        {
+            return _procedureTypes.ToList();
         }
     }
 }

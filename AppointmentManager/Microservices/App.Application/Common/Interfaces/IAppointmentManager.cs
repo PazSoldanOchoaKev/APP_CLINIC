@@ -18,5 +18,6 @@ namespace App.Application
         Result<IEnumerable<ScheduleModel>> GetAppoinments(DateTime StartDate, DateTime EndDate);
         Task<Result> DeleteAppointmentAsync(AppointmentModel model);
         Result<ChartModel> GetChart();
+        Result<IEnumerable<ProcedureTypes>> GetProcedureTypes();
     }
 }

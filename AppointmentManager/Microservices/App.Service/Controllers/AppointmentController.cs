@@ -68,5 +68,11 @@ namespace App.Service.Controllers
             return Ok();
         }
 
+        [HttpGet("procedures")]
+        public Result GetProcedureTypes()
+        {
+            return _appointmentManager.GetProcedureTypes();
+        }
+
     }
 }

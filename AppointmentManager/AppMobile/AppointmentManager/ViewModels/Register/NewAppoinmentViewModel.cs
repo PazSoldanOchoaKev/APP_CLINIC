@@ -79,11 +79,11 @@ namespace AppointmentManager.ViewModels.Register
         public async void OnNavigated()
         {
             tcs = new TaskCompletionSource<bool>();
-            TypeProceduresModels = new ObservableCollection<TypeProceduresModel>(new TypeProceduresModel[] {
-                new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_MEDICADO, Name = "CARDIOLOGIA" },
-                new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_Y_CORTE, Name = "NEUROLOGIA" },
-                new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.CORTE_DE_UÑAS, Name = "DERMATOLOGIA" }
-            });
+            //TypeProceduresModels = new ObservableCollection<TypeProceduresModel>(new TypeProceduresModel[] {
+            //    new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_MEDICADO, Name = "CARDIOLOGIA" },
+            //    new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_Y_CORTE, Name = "NEUROLOGIA" },
+            //    new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.CORTE_DE_UÑAS, Name = "DERMATOLOGIA" }
+            //});
 
 
             ListSizes = new ObservableCollection<ListSizesModel>(new ListSizesModel[]
@@ -108,6 +108,7 @@ namespace AppointmentManager.ViewModels.Register
                     }
                 }
                 await GetAvailableHoursAsync(DateTime.Now);
+                await GetProcedureTypes();
             }
             tcs.SetResult(true);
         }
@@ -134,6 +135,21 @@ namespace AppointmentManager.ViewModels.Register
                     Hours = new ObservableCollection<string>(result.Value);
                 else
                     await _display.AlertAsync("Listando datos", "Ocurrio un problema al obtener los horarios");
+            }
+        }
+
+        private async Task GetProcedureTypes()
+        {
+            using (var client = _apiClientFactory.CreateClient())
+            {
+                var result = await client
+                    .AppendPath("appointment")
+                    .AppendPath("procedures")
+                    .GetAsAsync<IEnumerable<TypeProceduresModel>>();
+                if (result)
+                {
+                    TypeProceduresModels = new ObservableCollection<TypeProceduresModel>(result.Value);
+                }
             }
         }
 
@@ -167,7 +183,7 @@ namespace AppointmentManager.ViewModels.Register
                 model.Hour = DateTime.ParseExact(Hour, "hh:mm tt", CultureInfo.InvariantCulture).TimeOfDay;
                 model.ListSizes = Size.Type;
                 model.PetId = Pet.Id;
-                model.TypeProcedures = TypeProcedure.Type;
+                //model.TypeProcedures = TypeProcedure.Id;
                 model.DateAppointment = DateAppointment;
                 model.Status = AppointmentStatus.PENDING;
 
@@ -201,7 +217,7 @@ namespace AppointmentManager.ViewModels.Register
             IsEdit = true;
             await tcs.Task;
             Pet = Pets.FirstOrDefault(p => p.Id == newApointment.PetId);
-            TypeProcedure = TypeProceduresModels.FirstOrDefault(p => p.Type == newApointment.TypeProcedures);
+            //TypeProcedure = TypeProceduresModels.FirstOrDefault(p => p.Type == newApointment.TypeProcedures);
             DateAppointment = dateAppointment;
             var hour = DateTime.MinValue.Add(newApointment.Hour).ToString("hh:mm tt");
             Hours.Add(hour);

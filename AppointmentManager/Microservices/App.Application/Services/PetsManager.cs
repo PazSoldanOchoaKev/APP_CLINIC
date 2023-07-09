@@ -39,6 +39,7 @@ namespace App.Application.Services
             }
             return result;
         }
+
         public async Task<Result> DeletePetAsync(PetModel model)
         {
             var result = await _pets.DeleteAsync(model);
