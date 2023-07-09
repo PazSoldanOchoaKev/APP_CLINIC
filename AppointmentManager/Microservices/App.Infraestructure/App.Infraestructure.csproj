@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Data\Seed\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Netcos.EntityFrameworkCore.SqlServer" Version="3.0.0-preview-20220610.1" />
@@ -17,5 +18,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Domain\App.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Data\Seed\" />
   </ItemGroup>
 </Project>

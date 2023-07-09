@@ -58,13 +58,13 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
     <PackageReference Include="Netcos.Xamarin.Forms">
-      <Version>3.0.0-preview-20220629.1</Version>
+      <Version>3.0.0-preview-20230403.2</Version>
     </PackageReference>
     <PackageReference Include="Netcos.Xamarin.Forms.InputLayout">
-      <Version>3.0.0-preview-20220629.1</Version>
+      <Version>3.0.0-preview-20230403.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -98,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppointmentManager\AppointmentManager.csproj">
-      <Project>{5E85B7E7-C2C6-4F5A-B7A1-3DD427F8FF05}</Project>
       <Name>AppointmentManager</Name>
     </ProjectReference>
   </ItemGroup>

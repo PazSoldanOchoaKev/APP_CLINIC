@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using App.Domain.Entities;
 using App.Infraestructure.Data;
+using App.Infraestructure.Data.Seed;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Infraestructure
@@ -11,7 +13,9 @@ namespace App.Infraestructure
         {
             services
                 .AddDbContext<AppoinmentContext>("Appoinments")
-                .UseSqlServer();
+                .UseSqlServer()
+                .AddEntitySeed<ProcedureTypes, ProcedureTypeSeed>()
+                .AddEntitySeed<Doctors, DoctorsSeed>();
 
             return services;
         }

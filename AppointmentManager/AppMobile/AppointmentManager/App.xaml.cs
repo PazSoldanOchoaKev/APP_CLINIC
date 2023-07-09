@@ -24,7 +24,7 @@ namespace AppointmentManager
         protected override void RegisterServices(IServiceCollection services)
         {
             services.AddApplicationLife<ApplicationLife>();
-            services.AddDarkTheme<DarkTheme>();
+            services.AddDarkTheme<LightTheme>();
             services.AddLightTeme<LightTheme>();
 
             services.AddInputLayout();
@@ -47,7 +47,8 @@ namespace AppointmentManager
                 .AcceptAnyServerCertificate()
                 .ConfigureApiClient(options =>
                 {
-                   options.Url = "http://192.168.18.156:5000/api";
+                    options.Url = "http://192.168.18.131:9001/api";
+                   //options.Url = "http://192.168.18.156:5000/api";
                     //options.Url = "http://192.168.18.4:45455/api";
                 });
         }
