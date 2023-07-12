@@ -116,8 +116,8 @@ namespace AppointmentManager.ViewModels.Access
                 .NotEmpty()
                 .WithMessage("Ingrese su direccion"))
                 .Validate();
-
         }
+
         public async void Confirm()
         {
 
