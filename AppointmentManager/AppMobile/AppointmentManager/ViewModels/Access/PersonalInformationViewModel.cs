@@ -43,6 +43,7 @@ namespace AppointmentManager.ViewModels.Access
             _loadingFactory = loadingFactory;
             _validationFactory = validationFactory;
             _storage = storage;
+            _display = display;
         }
 
         #region Properties
@@ -104,7 +105,10 @@ namespace AppointmentManager.ViewModels.Access
                 .WithMessage("Seleccione un tipo de documento"))
                 .AddRule(d => d.Document, d => d
                 .NotEmpty()
-                .WithMessage("Ingrese su documento"))
+                .WithMessage("Ingrese su documento")
+                .NotEqual(p => "00000000")
+                .When(p => p.TypeDocument.Type == DocumentType.DNI)
+                .WithMessage("Ingrese un número de DNI valido"))
                 .AddRule(f => f.Telefono, f => f
                 .NotEmpty()
                 .WithMessage("Ingrese su telefono"))
@@ -156,7 +160,7 @@ namespace AppointmentManager.ViewModels.Access
                     }
                     else
                     {
-                        await _display.AlertAsync("Error", result.ErrorMessage);
+                        await _display.AlertAsync("Error!", result.ErrorMessage);
                         //mostrar mensaje de error
                     }
                 }
