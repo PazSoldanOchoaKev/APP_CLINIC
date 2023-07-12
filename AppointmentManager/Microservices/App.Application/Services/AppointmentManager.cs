@@ -48,7 +48,7 @@ namespace App.Application.Services
                 .Include(a => a.Pets)
                 .Include(a => a.Doctor)
                 .Include(a => a.Doctor.ProcedureTypes)
-                .Where(a => a.Pets.UserId == userId && a.Status == status)
+                .Where(a => (a.Pets.UserId == userId || userId == "") && a.Status == status)
                 .OrderByDescending(a => a.DateAppointment)
                 .Select(a => new AppointmentModel
                 {

@@ -34,6 +34,12 @@ namespace App.Service.Controllers
             return _appointmentManager.GetAppointmentByUser(userId, status);
         }
 
+        [HttpGet]
+        public Result GetAppointment([FromQuery] AppoinmentStatus status)
+        {
+            return _appointmentManager.GetAppointmentByUser("", AppoinmentStatus.PENDING);
+        }
+
         [HttpPost("edit")]
         public Task<Result> EditAppointment([FromBody] AppointmentModel model)
         {
