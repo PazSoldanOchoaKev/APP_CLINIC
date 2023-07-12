@@ -7,5 +7,8 @@ namespace App.Domain.Models
 {
     public class AppointmentModel : Appointment
     {
+        public string TypeProcedureName { get; set; }
+        public string DoctorName { get; set; }
+        public string ClientName { get; set; }
     }
 }

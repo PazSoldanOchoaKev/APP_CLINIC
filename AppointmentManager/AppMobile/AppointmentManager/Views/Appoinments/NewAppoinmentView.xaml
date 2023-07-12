@@ -16,9 +16,6 @@
                         SelectedItem="{Binding Pet, Mode=TwoWay}"
                         ItemsSource="{Binding Pets}"
                         vd:Validate.ErrorProperty="Pet"/>
-        <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"
-                              vd:Validate.ErrorProperty="DateAppointment"
-                              StyleClass="Text"/>
         <input:ComboBox Hint="Tipo de Procedimientos" StyleClass="Combo"
                         DisplayMemberPath="Type"
                         vd:Validate.ErrorProperty="TypeProcedure"
@@ -30,8 +27,12 @@
                         ItemsSource="{Binding  Doctors}"
                         vd:Validate.ErrorProperty="Doctor"/>
         <!--<input:TimePicker Hint="Hora" Time="{Binding  Hour, Mode=TwoWay}"/>-->
+        <input:DatePicker Hint="Fechas disponibles" Date="{Binding DateAppointment, Mode=TwoWay}"
+                              vd:Validate.ErrorProperty="DateAppointment"
+                              StyleClass="Text"/>
         <input:ComboBox Hint="Hora" StyleClass="Combo"
                             SelectedItem="{Binding Hour, Mode=TwoWay}"
+                            DisplayMemberPath="HourFormat"
                             vd:Validate.ErrorProperty="Hour"
                             ItemsSource="{Binding Hours}"/>
     </vd:ValidationForm>

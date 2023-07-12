@@ -43,6 +43,14 @@ namespace App.Infraestructure.Data.Seed
                     StartHour = 14,
                     CountHour = 4
                 },
+                new Doctors
+                {
+                    Id = "efe5fe3c-22fc-45a4-9c05-0e526923abbd",
+                    Name = "Dr. Vasquez 1",
+                    ProcedureTypeId = "265fcbbd-5548-475c-92d1-e99caa6d54bf",
+                    StartHour = 18,
+                    CountHour = 4
+                },
             };
         }
     }

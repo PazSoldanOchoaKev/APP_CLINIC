@@ -76,9 +76,9 @@ namespace App.Service.Controllers
         }
 
         [HttpGet("{doctorId}/avaibalehours")]
-        public Result GetAvailableHours(string doctorId, [FromQuery] DateTime date)
+        public Result GetAvailableHours(string doctorId, [FromQuery] DateTime date, [FromQuery] string zone)
         {
-            return _appointmentManager.GetAvailableHours(doctorId, date);
+            return _appointmentManager.GetAvailableHours(doctorId, date, zone);
         }
     }
 }

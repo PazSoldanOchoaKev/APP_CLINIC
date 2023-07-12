@@ -16,17 +16,17 @@ using Xamarin.Essentials;
 
 namespace AppointmentManager.ViewModels.Register
 {
-    public class NewAppoinmentViewModel : ViewModelBase, INavigated, INotify<NewApointmentModel>
+    public class NewAppoinmentViewModel : ViewModelBase, INotify, INotify<NewApointmentModel>
     {
         private ObservableCollection<TypeProceduresModel> typeProceduresModels;
         private TypeProceduresModel typeProcedure;
         private ObservableCollection<DoctorsModel> doctors;
         private DoctorsModel doctor;
-        private string hour;
+        private HourModel hour;
         private DateTime dateAppointment;
         private ObservableCollection<AnimalInformationModel> pets;
         private AnimalInformationModel pet;
-        private ObservableCollection<string> hours;
+        private ObservableCollection<HourModel> hours;
         private int selectIndex;
         private readonly ILoadingFactory _loadingFactory;
         private readonly IApiClientFactory _apiClientFactory;
@@ -58,14 +58,18 @@ namespace AppointmentManager.ViewModels.Register
         public ObservableCollection<TypeProceduresModel> TypeProceduresModels { get => typeProceduresModels; set => SetProperty(ref typeProceduresModels, value); }
         public TypeProceduresModel TypeProcedure { get => typeProcedure; set => SetProperty(ref typeProcedure, value, onChanged: OnProcedureChanged); }
         public DateTime DateAppointment { get => dateAppointment; set => SetProperty(ref dateAppointment, value, onChanged: OnDateChanged); }
-        public string Hour { get => hour; set => SetProperty(ref hour, value); }
-        public ObservableCollection<string> Hours { get => hours; set => SetProperty(ref hours, value); }
+        public HourModel Hour { get => hour; set => SetProperty(ref hour, value); }
+        public ObservableCollection<HourModel> Hours { get => hours; set => SetProperty(ref hours, value); }
         public ObservableCollection<DoctorsModel> Doctors { get => doctors; set => SetProperty(ref doctors, value); }
-        public DoctorsModel Doctor { get => doctor; set => SetProperty(ref doctor, value); }
+        public DoctorsModel Doctor { get => doctor; set => SetProperty(ref doctor, value, onChanged: OnDoctorChanged); }
+
         public int SelectIndex { get => selectIndex; set => SetProperty(ref selectIndex, value); }
         public bool IsEdit { get; set; }
+        public bool IsEditLoad { get; set; }
         public string Id { get; set; }
         public TaskCompletionSource<bool> tcs;
+        public TaskCompletionSource<bool> tcsDoctors;
+        public TaskCompletionSource<bool> tcsHours;
         #endregion
 
         #region Commands
@@ -76,49 +80,67 @@ namespace AppointmentManager.ViewModels.Register
 
         #region Methodos
 
-        public async void OnNavigated()
+        public async void OnNotify()
         {
-            tcs = new TaskCompletionSource<bool>();
-            //TypeProceduresModels = new ObservableCollection<TypeProceduresModel>(new TypeProceduresModel[] {
-            //    new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_MEDICADO, Name = "CARDIOLOGIA" },
-            //    new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.BAÑO_Y_CORTE, Name = "NEUROLOGIA" },
-            //    new TypeProceduresModel { Type = AppointmentManager.TypeProcedures.CORTE_DE_UÑAS, Name = "DERMATOLOGIA" }
-            //});
-
-
-            //ListSizes = new ObservableCollection<ListSizesModel>(new ListSizesModel[]
-            //{
-            //    new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_PEQUEÑO_30, Name= "Dr. Ramirez"},
-            //    new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_MEDIANOS_40, Name= "Dr. Royer" },
-            //    new ListSizesModel{ Type = AppointmentManager.ListSizes.ANIMAL_GRANDES_45, Name= "Dr. Vasquez" }
-
-            //});
-
-            var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
             using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los datos"))
             {
-                using (var client = _apiClientFactory.CreateClient())
-                {
-                    var result = await client
-                        .AppendPath($"pets/{user.Id}")
-                        .GetAsAsync<List<AnimalInformationModel>>();
-                    if (result)
-                    {
-                        Pets = new ObservableCollection<AnimalInformationModel>(result.Value);
-                    }
-                }
-                //await GetAvailableHoursAsync(DateTime.Now);
+                await GetClients();
                 await GetProcedureTypes();
             }
-            tcs.SetResult(true);
+        }
+
+        private async Task GetClients()
+        {
+            var user = await _storage.GetValueAsync<UserModel>(MainViewModel.user);
+            using (var client = _apiClientFactory.CreateClient())
+            {
+                var result = await client
+                    .AppendPath($"pets/{user.Id}")
+                    .GetAsAsync<List<AnimalInformationModel>>();
+                if (result)
+                {
+                    Pets = new ObservableCollection<AnimalInformationModel>(result.Value);
+                }
+            }
         }
 
         private async void OnDateChanged(DateTime date)
         {
-            Hour = null;
-            using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los horarios disponibles!"))
+            if (!IsEditLoad)
             {
-                await GetAvailableHoursAsync(Doctor.Id, date);
+                Hour = null;
+                Hours = null;
+                using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estamos obteniendo los horarios disponibles!"))
+                {
+                    await GetAvailableHoursAsync(Doctor?.Id ?? "", date);
+                }
+                tcsHours.SetResult(true);
+            }
+        }
+
+        private async void OnDoctorChanged(DoctorsModel model)
+        {
+            if (!IsEditLoad)
+            {
+                Hour = null;
+                using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estamos obteniendo los horarios disponibles!"))
+                {
+                    await GetAvailableHoursAsync(model?.Id ?? "", DateAppointment);
+                }
+            }
+        }
+
+        private async void OnProcedureChanged(TypeProceduresModel model)
+        {
+            if (!IsEditLoad)
+            {
+                Doctor = null;
+                Hours = null;
+                hour = null;
+                using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los doctores!"))
+                {
+                    await GetDoctorsByProcedureType(model.Id);
+                }
             }
         }
 
@@ -131,11 +153,16 @@ namespace AppointmentManager.ViewModels.Register
                     .AppendPath(doctorId)
                     .AppendPath("avaibalehours")
                     .AddQueryParameter("date", date.ToString("MM/dd/yyyy"))
-                    .GetAsAsync<List<string>>();
+                    .AddQueryParameter("zone", TimeZoneInfo.Local.Id)
+                    .GetAsAsync<List<int>>();
                 if (result)
-                    Hours = new ObservableCollection<string>(result.Value);
+                    Hours = new ObservableCollection<HourModel>(result.Value.Select(h => new HourModel
+                    {
+                        HourFormat = DateTime.MinValue.AddHours(h).ToString("hh:mm tt"),
+                        Hour = TimeSpan.FromHours(h)
+                    }));
                 else
-                    await _display.AlertAsync("Listando datos", "Ocurrio un problema al obtener los horarios");
+                    Hours = null;
             }
         }
 
@@ -170,15 +197,6 @@ namespace AppointmentManager.ViewModels.Register
             }
         }
 
-        private async void OnProcedureChanged(TypeProceduresModel model)
-        {
-            using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los doctores!"))
-            {
-                Doctor = null;
-                await GetDoctorsByProcedureType(model.Id);
-            }
-        }
-
         private bool Validate()
         {
             return _validationFactory.Create<NewAppoinmentViewModel>("NewAppoinmentForm")
@@ -206,10 +224,10 @@ namespace AppointmentManager.ViewModels.Register
             if (Validate())
             {
                 var model = new NewApointmentModel();
-                model.Hour = DateTime.ParseExact(Hour, "hh:mm tt", CultureInfo.InvariantCulture).TimeOfDay;
-                //model.ListSizes = Size.Type;
+                model.Hour = Hour.Hour;
+                model.TypeProcedureId = TypeProcedure.Id;
                 model.PetId = Pet.Id;
-                //model.TypeProcedures = TypeProcedure.Id;
+                model.DoctorId = Doctor.Id;
                 model.DateAppointment = DateAppointment;
                 model.Status = AppointmentStatus.PENDING;
 
@@ -241,15 +259,21 @@ namespace AppointmentManager.ViewModels.Register
         public async void OnNotify(NewApointmentModel newApointment)
         {
             IsEdit = true;
-            await tcs.Task;
-            Pet = Pets.FirstOrDefault(p => p.Id == newApointment.PetId);
-            //TypeProcedure = TypeProceduresModels.FirstOrDefault(p => p.Type == newApointment.TypeProcedures);
-            DateAppointment = dateAppointment;
-            var hour = DateTime.MinValue.Add(newApointment.Hour).ToString("hh:mm tt");
-            Hours.Add(hour);
-            Hour = hour;
-            //Size = ListSizes.FirstOrDefault(s => s.Type == newApointment.ListSizes);
-            Id = newApointment.Id;
+            IsEditLoad = true;
+            using (await _loadingFactory.ShowAsync("Listando datos", "Espere un momento estmos obteniendo los datos"))
+            {
+                await GetClients();
+                Pet = Pets.FirstOrDefault(p => p.Id == newApointment.PetId);
+                await GetProcedureTypes();
+                TypeProcedure = TypeProceduresModels.FirstOrDefault(tp => tp.Id == newApointment.TypeProcedureId);
+                await GetDoctorsByProcedureType(TypeProcedure.Id);
+                Doctor = Doctors.FirstOrDefault(d => d.Id == newApointment.DoctorId);
+                DateAppointment = newApointment.DateAppointment;
+                await GetAvailableHoursAsync(Doctor.Id, DateAppointment);
+                Hour = Hours.FirstOrDefault(h => h.Hour == newApointment.Hour);
+                Id = newApointment.Id;
+            }
+            IsEditLoad = false;
         }
         #endregion
     }

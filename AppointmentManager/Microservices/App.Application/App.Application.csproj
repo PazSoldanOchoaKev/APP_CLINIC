@@ -11,6 +11,7 @@
     <PackageReference Include="Netcos.Security.Cryptography" Version="3.0.0-preview-20220524.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.16" />
     <PackageReference Include="Netcos.Drawing" Version="3.0.0-preview-20220705.1" />
+    <PackageReference Include="Netcos.Runtime.TimeZone" Version="3.0.0-preview-20230711.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Domain\App.Domain.csproj" />

@@ -38,7 +38,9 @@ namespace AppointmentManager.ViewModels
         public async void NewAppoinment()
         {
             IsFlyoutOpen = false;
-            await _navigation.NavigateToAsync<NewAppoinmentView>();
+            await _navigation
+                .NavigateToAsync<NewAppoinmentView>()
+                .NotifyAsync();
         }
 
         #endregion

@@ -71,13 +71,22 @@
                                     </Image.Clip>
                                 </Image>
                                 <StackLayout Grid.Column="1" Spacing="10">
-                                    <Label Text="{Binding Pets.PetName}" StyleClass="Label"/>
+                                    <Label Text="{Binding ClientName}" StyleClass="Label"/>
                                     <Label StyleClass="Small">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Procedimiento: " FontSize="{StaticResource SmallSize}"
                                                       FontAttributes="Bold"/>
-                                                <Span Text="{Binding TypeProcedure}"/>
+                                                <Span Text="{Binding TypeProcedureName}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label StyleClass="Small">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Doctor: " FontSize="{StaticResource SmallSize}"
+                                                      FontAttributes="Bold"/>
+                                                <Span Text="{Binding DoctorName}"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -88,7 +97,7 @@
                                                       FontAttributes="Bold"/>
                                                 <Span Text="{Binding DateAppointment, StringFormat='{0:dd MMM yyyy}'}"/>
                                                 <Span Text=" "/>
-                                                <Span Text="{Binding Hour, StringFormat='{0:hh:mm tt}'}"/>
+                                                <Span Text="{Binding HourFormat}"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
