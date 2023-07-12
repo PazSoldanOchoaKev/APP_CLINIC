@@ -25,7 +25,7 @@ namespace App.Application.Services
             var result = await _pets.AddAsync(model);
             if (!result)
             {
-                return Fail("Error al crear");
+                return Fail("Error al crear mascota");
             }
             return result;
         }
@@ -35,7 +35,7 @@ namespace App.Application.Services
             var result = await _pets.UpdateAsync(model);
             if (!result)
             {
-                return Fail("Error al editar ");
+                return Fail("Error al editar la mascota");
             }
             return result;
         }
@@ -45,7 +45,7 @@ namespace App.Application.Services
             var result = await _pets.DeleteAsync(model);
             if (!result)
             {
-                return Fail("Error al eliminar ");
+                return Fail("Error al eliminar la mascota");
             }
             return result;
         }

@@ -68,7 +68,7 @@ namespace AppointmentManager.ViewModels.Access
                     .NotEmpty()
                     .WithMessage("Ingresa tu correo electronico")
                     .EmailAddress()
-                    .WithMessage("Inhgresa un correo correcto"))
+                    .WithMessage("Ingresa un correo correcto"))
                 .AddRule(p => p.Password, p => p
                     .NotEmpty()
                     .WithMessage("Ingresa tu contraseña"))
