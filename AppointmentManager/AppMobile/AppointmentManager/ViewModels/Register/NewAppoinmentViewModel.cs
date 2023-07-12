@@ -114,7 +114,6 @@ namespace AppointmentManager.ViewModels.Register
                 {
                     await GetAvailableHoursAsync(Doctor?.Id ?? "", date);
                 }
-                tcsHours.SetResult(true);
             }
         }
 

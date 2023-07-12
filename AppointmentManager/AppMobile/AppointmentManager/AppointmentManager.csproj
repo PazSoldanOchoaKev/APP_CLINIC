@@ -17,14 +17,14 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Netcos.Extensions.Http" Version="3.0.0-preview-20230206.1" />
-		<PackageReference Include="Netcos.IO" Version="3.0.0-preview-20230206.5" />
+		<PackageReference Include="Netcos.IO" Version="3.0.0-preview-20230711.1" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
 		<PackageReference Include="Netcos.Xamarin.Forms" Version="3.0.0-preview-20230403.2" />
 		<PackageReference Include="Netcos.Xamarin.Forms.Icons.MaterialDesignIcons" Version="3.0.0-preview-20230403.2" />
 		<PackageReference Include="Netcos.Xamarin.Forms.InputLayout" Version="3.0.0-preview-20230403.2" />
 		<PackageReference Include="Netcos.Xamarin.Forms.Validations" Version="3.0.0-preview-20230403.2" />
-		<PackageReference Include="Netcos.Net.Http" Version="3.0.0-preview-20230206.5" />
+		<PackageReference Include="Netcos.Net.Http" Version="3.0.0-preview-20230711.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Remove="Views\" />

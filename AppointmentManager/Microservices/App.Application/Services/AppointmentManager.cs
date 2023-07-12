@@ -60,6 +60,7 @@ namespace App.Application.Services
                     PetId = a.PetId,
                     ClientName = a.Pets.PetName,
                     Status = a.Status,
+                    Pets = a.Pets,
                     TypeProcedureId = a.TypeProcedureId,
                     TypeProcedureName = a.Doctor.ProcedureTypes.Type,
                 })
